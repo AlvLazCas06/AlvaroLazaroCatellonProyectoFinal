@@ -60,7 +60,8 @@
 		</section>
 		<section class="container">
 			<div class="row" th:each="game : ${juegos}">
-				<div class="col-6 col-md-4">
+				<div class="col-6 col-md-4 text-light">
+					<img src="#" alt="Juego" th:src="${game.rutaImagen}" th:alt="${game.nombre}" class="d-block">
 					<h1 th:text="${game.nombre}"></h1>
 					<h2 th:text="${#numbers.formatDecimal(game.precio, 1, 2)}"></h2>
 				</div>

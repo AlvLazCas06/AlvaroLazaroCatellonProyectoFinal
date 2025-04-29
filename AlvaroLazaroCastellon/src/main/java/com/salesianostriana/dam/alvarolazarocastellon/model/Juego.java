@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Juego {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private Long id;
 
     private String nombre;
@@ -43,5 +43,7 @@ public class Juego {
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate llegadaAlMercado;
+
+    private String rutaImagen;
 
 }

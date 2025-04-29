@@ -4,8 +4,6 @@ import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,12 +12,24 @@ public class ServiceJuego {
     @Autowired
     private RepositoryJuego repositoryJuego;
 
-    public void addGames(Juego j) {
+    public void addGame(Juego j) {
         repositoryJuego.save(j);
     }
 
     public List<Juego> getList() {
         return repositoryJuego.findAll();
+    }
+
+    public Juego getJuego(Long id) {
+        return repositoryJuego.findById(id).get();
+    }
+
+    public void editGame(Juego j) {
+        repositoryJuego.save(j);
+    }
+
+    public void removeGame(Long id) {
+        repositoryJuego.deleteById(id);
     }
 
 }
