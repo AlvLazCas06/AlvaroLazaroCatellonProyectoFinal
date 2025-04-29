@@ -20,7 +20,6 @@ public class ControllerJuego {
 
         Juego juego = new Juego();
         model.addAttribute("juego", juego);
-        model.addAttribute("juegos", serviceJuego.getList());
 
         return "addgames";
     }

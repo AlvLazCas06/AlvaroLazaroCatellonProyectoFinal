@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Juego {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long id;
 
     private String nombre;
