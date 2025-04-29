@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Juegos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
+</head>
+<body>
+    <main>
+        <button><a href="../templates/addgames.html" th:href="@{/añadirjuego}">Agregar Juego</a></button>
+        <h1>Lista de Juegos</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Ventas</th>
+                <th>Nuevo</th>
+                <th>Genero</th>
+                <th>Número de Jug.</th>
+                <th>Plataforma</th>
+                <th>Fecha de Lanzamiento</th>
+                <th>Llegada a tienda</th>
+            </tr>
+            <tr th:each="game : ${juego}">
+                <td th:text="${game.id}"></td>
+                <td th:text="${game.nombre}"></td>
+                <td th:text="${game.description}"></td>
+                <td th:text="${game.precio}"></td>
+                <td th:text="${game.cantidad}"></td>
+                <td th:text="${game.ventas}"></td>
+                <td th:text="${game.nuevo}"></td>
+                <td th:text="${game.genero}"></td>
+                <td th:text="${game.numJugadores}"></td>
+                <td th:text="${game.plataforma}"></td>
+                <td th:text="${game.fechaLanzamiento}"></td>
+                <td th:text="${game.llegadaAlMercado}"></td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

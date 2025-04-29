@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Title</title>
+</head>
+<body>
+<header th:fragment="header">
+	<nav class="navbar navbar-expand-sm bg-danger navbar-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="../main.html" th:href="@{/}">Inicio</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mynavbar">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="javascript:void(0)">Novedades</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="catalogo.html" th:href="@{/catalogo}">Cátalogo</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="javascript:void(0)">Próximamente</a>
+					</li>
+				</ul>
+				<form class="d-flex">
+					<input class="form-control me-2" type="text" placeholder="Search">
+					<button class="btn btn-primary" type="button">Search</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+</header>
+</body>
+</html>

@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Delfino';
+    src: url('../font/Delfino.ttf');
+}
+
+* {
+    font-family: 'Delfino';
+}

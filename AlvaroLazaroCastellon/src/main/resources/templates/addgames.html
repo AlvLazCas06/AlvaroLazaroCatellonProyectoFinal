@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
+</head>
+<body>
+    <h1>Agregar Juego</h1>
+    <form action="#" method="POST" th:action="@{/mostrarjuego}" th:object="${juego}">
+        <fieldset>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" th:field="*{nombre}">
+            </div>
+            <div>
+                <label for="description">Descripción</label><br />
+                <textarea th:field="*{description}" cols="30" rows="10"></textarea><br />
+            </div>
+            <div>
+                <label for="precio">Precio</label>
+                <input type="number" th:field="*{precio}" step="0.01"><br />
+            </div>
+            <div>
+                <label for="cantidad">Cantidad</label>
+                <input type="number" th:field="*{cantidad}"><br />
+            </div>
+            <label for="ventas">Ventas</label>
+            <input type="number" th:field="*{ventas}"><br />
+            <label for="nuevo">Nuevo</label>
+            <input type="checkbox" th:field="*{nuevo}"><br />
+            <label for="genero">Genero</label>
+            <input type="text" th:field="*{genero}"><br />
+            <label for="numJugadores">Número de jugadores</label>
+            <input type="number" th:field="*{numJugadores}" min="1" th:min="1" max="4" th:max="4"><br />
+            <label for="plataforma">Plataforma</label>
+            <select th:field="*{plataforma}">
+                <option value="Wii">Wii</option>
+                <option value="PS3">Play Station 3</option>
+                <option value="XBOX360">XBOX 360</option>
+                <option value="NDS">Nintendo DS</option>
+                <option value="PSP">Play Station Portable</option>
+            </select><br />
+            <label for="fechaLanzamiento">Fecha de lanzamiento</label>
+            <input type="date" th:field="*{fechaLanzamiento}"><br />
+            <label for="llegadaAlMercado">Llegada a tienda</label>
+            <input type="date" th:field="*{llegadaAlMercado}"><br />
+
+            <button type="submit">Enviar</button>
+        </fieldset>
+    </form>
+</body>
+</html>

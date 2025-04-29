@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Retro's Games</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+	      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+	        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+	        crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
+</head>
+<body class="bg-dark">
+	<header th:replace="~{fragments/header::header}"></header>
+	<main class="container-fluid text-light">
+		<section>
+			<div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+				<img src="../static/img/Logo/Logo_proyecto.png" th:src="@{img/Logo/Logo_proyecto.png}" alt="Retro's Games" class="img-fluid">
+				<h1>Bienvenido a Retro's Games</h1>
+			</div>
+		</section>
+		<section class="container">
+			<div class="row justify-content-center align-items-center">
+				<div class="col-12 col-md-4 text-center justify-content-center align-items-center">
+					<h1>Juego más vendido</h1>
+					<div>
+						<img src="../static/img/Consolas/Wii.png" th:src="@{img/Consolas/Wii.png}" alt="Wii" class="mb-2 img-fluid rounded-circle" style="max-width: 80px;">
+					</div>
+					<h1 th:text="${masvendido.nombre}"></h1>
+					<h2>Nº de ventas <span th:text="${masvendido.ventas}"></span></h2>
+				</div>
+				<div class="col-12 col-md-8 d-flex justify-content-center align-items-center flex-column">
+					<h1>Juegos más vendidos</h1>
+					<div id="demo" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+							<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+							<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+						</div>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="https://art.gametdb.com/ds/box/JA/BEEJ.png?1486144513" th:src="@{https://art.gametdb.com/ds/box/JA/BEEJ.png?1486144513}" alt="Inazuma Eleven 2" class="d-block">
+							</div>
+							<div class="carousel-item">
+								<img src="https://art.gametdb.com/wii/cover3D/JA/S5SJHI.png?1674124506" th:src="@{https://art.gametdb.com/wii/cover3D/JA/S5SJHI.png?1674124506}" alt="Inazuma Eleven Go Strikers 2013" class="d-block">
+							</div>
+							<div class="carousel-item">
+								<img src="https://art.gametdb.com/wii/cover3D/US/RMCE01.png?1317736144" th:src="@{https://art.gametdb.com/wii/cover3D/US/RMCE01.png?1317736144}" alt="Mario Kart Wii" class="d-block">
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon"></span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+							<span class="carousel-control-next-icon"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="container">
+			<div class="row justify-content-center align-items-center">
+
+			</div>
+		</section>
+	</main>
+	<footer th:replace="~{fragments/footer::footer}"></footer>
+</body>
+</html>
