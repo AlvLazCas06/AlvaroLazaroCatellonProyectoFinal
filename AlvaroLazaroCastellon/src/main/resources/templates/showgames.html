@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
 
@@ -53,7 +54,7 @@
                     <td th:text="${game.ventas}" class="text-light"></td>
                     <td th:text="${game.nuevo}" class="text-light"></td>
                     <td th:text="${game.genero}" class="text-light"></td>
-                    <td th:text="${game.numJugadores}" class="text-light"></td>
+                    <td th:text="${game.numJugadores} == 4 ? '1-4'" class="text-light"></td>
                     <td th:text="${game.plataforma}" class="text-light"></td>
                     <td th:text="${game.fechaLanzamiento}" class="text-light"></td>
                     <td th:text="${game.llegadaAlMercado}" class="text-light"></td>

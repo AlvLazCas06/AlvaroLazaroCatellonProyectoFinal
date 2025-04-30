@@ -9,6 +9,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
 	        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
 	        crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
 <body class="bg-dark">
@@ -60,10 +61,10 @@
 		</section>
 		<section class="container">
 			<div class="row" th:each="game : ${juegos}">
-				<div class="col-6 col-md-4 text-light">
+				<div class="col-6 col-md-3 text-light d-flex justify-content-center align-items-center flex-column">
 					<img src="#" alt="Juego" th:src="${game.rutaImagen}" th:alt="${game.nombre}" class="d-block">
-					<h1 th:text="${game.nombre}"></h1>
-					<h2 th:text="${#numbers.formatDecimal(game.precio, 1, 2)}"></h2>
+					<h2 th:text="${game.nombre}" class="text-center"></h2>
+					<h3 class="text-center" th:text="${game.cantidad > 0 ? #numbers.formatDecimal(game.precio, 1, 2) + '€' : 'Agotado'}"></h3>
 				</div>
 			</div>
 		</section>

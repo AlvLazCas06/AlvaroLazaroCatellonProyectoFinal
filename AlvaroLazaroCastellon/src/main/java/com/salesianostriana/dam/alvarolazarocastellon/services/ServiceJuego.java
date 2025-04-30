@@ -17,7 +17,7 @@ public class ServiceJuego {
     }
 
     public List<Juego> getList() {
-        return repositoryJuego.findAll();
+        return repositoryJuego.findAll().stream().toList();
     }
 
     public Juego getJuego(Long id) {
