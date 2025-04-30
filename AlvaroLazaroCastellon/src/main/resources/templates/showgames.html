@@ -54,7 +54,7 @@
                     <td th:text="${game.ventas}" class="text-light"></td>
                     <td th:text="${game.nuevo}" class="text-light"></td>
                     <td th:text="${game.genero}" class="text-light"></td>
-                    <td th:text="${game.numJugadores} == 4 ? '1-4'" class="text-light"></td>
+                    <td th:text="${game.numJugadores == 4 ? '1-4' : (game.numJugadores == 2 ? '1-2' : '1')}" class="text-light"></td>
                     <td th:text="${game.plataforma}" class="text-light"></td>
                     <td th:text="${game.fechaLanzamiento}" class="text-light"></td>
                     <td th:text="${game.llegadaAlMercado}" class="text-light"></td>
