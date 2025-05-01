@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
+import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,36 +17,40 @@ public class ControllerJuego {
     @Autowired
     private ServiceJuego serviceJuego;
 
+    @Autowired
+    private ServiceConsola serviceConsola;
+
     @GetMapping("/añadirjuego")
     public String showGames(Model model) {
 
         Juego juego = new Juego();
         model.addAttribute("juego", juego);
-
+        model.addAttribute("consolas", serviceConsola.findAll());
         return "addgames";
     }
 
     @PostMapping("/mostrarjuego")
     public String addGame(Model model, @ModelAttribute("juego") Juego juego) {
-        serviceJuego.addGame(juego);
+        serviceJuego.save(juego);
         return "redirect:/mostrarjuego";
     }
 
     @GetMapping("/mostrarjuego")
     public String showGame(Model model) {
-        model.addAttribute("juego", serviceJuego.getList());
+        model.addAttribute("juego", serviceJuego.findAll());
         return "showgames";
     }
 
     @GetMapping("/mostrarjuego/editar/{id}")
     public String showEditGame(Model model, @PathVariable Long id) {
-        model.addAttribute("juego", serviceJuego.getJuego(id));
+        model.addAttribute("juego", serviceJuego.findById(id));
+        model.addAttribute("consolas", serviceConsola.findAll());
         return "editgame";
     }
 
     @PostMapping("/mostrarjuego/{id}")
     public String editGame(Model model, @PathVariable Long id, @ModelAttribute("juego") Juego j) {
-        Juego juego = serviceJuego.getJuego(id);
+        Juego juego = serviceJuego.findById(id);
         juego.setId(id);
         juego.setNombre(j.getNombre());
         juego.setDescription(j.getDescription());
@@ -55,23 +60,23 @@ public class ControllerJuego {
         juego.setNuevo(j.isNuevo());
         juego.setGenero(j.getGenero());
         juego.setNumJugadores(j.getNumJugadores());
-        juego.setPlataforma(j.getPlataforma());
+        juego.setConsola(j.getConsola());
         juego.setFechaLanzamiento(j.getFechaLanzamiento());
         juego.setLlegadaAlMercado(j.getLlegadaAlMercado());
         juego.setRutaImagen(j.getRutaImagen());
-        serviceJuego.editGame(juego);
+        serviceJuego.edit(juego);
         return "redirect:/mostrarjuego";
     }
 
     @GetMapping("/mostrarjuego/{id}")
     public String deleteGame(Model model, @PathVariable Long id) {
-        serviceJuego.removeGame(id);
+        serviceJuego.deleteById(id);
         return "redirect:/mostrarjuego";
     }
 
     @GetMapping("/catalogo")
     public String showCatalogo(Model model) {
-        model.addAttribute("juegos", serviceJuego.getList());
+        model.addAttribute("juegos", serviceJuego.findAll());
         return "catalogo";
     }
 

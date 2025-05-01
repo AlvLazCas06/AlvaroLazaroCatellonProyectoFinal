@@ -15,6 +15,7 @@
 </head>
 
 <body class="bg-dark text-light">
+    <header th:replace="~{fragments/headerconfiguracion::header}"></header>
     <main>
         <a href="../templates/addgames.html" th:href="@{/añadirjuego}" class="btn btn-outline-primary my-4">Agregar
             Juego</a>
@@ -55,7 +56,7 @@
                     <td th:text="${game.nuevo}" class="text-light"></td>
                     <td th:text="${game.genero}" class="text-light"></td>
                     <td th:text="${game.numJugadores == 4 ? '1-4' : (game.numJugadores == 2 ? '1-2' : '1')}" class="text-light"></td>
-                    <td th:text="${game.plataforma}" class="text-light"></td>
+                    <td th:text="${game.consola.nombre}" class="text-light"></td>
                     <td th:text="${game.fechaLanzamiento}" class="text-light"></td>
                     <td th:text="${game.llegadaAlMercado}" class="text-light"></td>
                     <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"

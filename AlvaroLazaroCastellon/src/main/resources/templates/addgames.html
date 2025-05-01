@@ -52,13 +52,14 @@
                     <input type="number" th:field="*{numJugadores}" min="1" th:min="1" max="4" th:max="4" class="form-control" required>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="plataforma">Plataforma</label>
-                    <select th:field="*{plataforma}" class="form-control" required>
-                        <option value="Wii">Wii</option>
-                        <option value="PS3">Play Station 3</option>
-                        <option value="XBOX360">XBOX 360</option>
-                        <option value="NDS">Nintendo DS</option>
-                        <option value="PSP">Play Station Portable</option>
+                    <label for="consola">Plataforma</label>
+                    <select th:field="*{consola}" class="form-control" required>
+                        <th:block th:each="consola : ${consolas}">
+                            <option th:value="*{id}"
+                                    th:text="*{nombre}"
+                                    th:selected="${juego.consola != null} ? *{id} == *{consola.id} : false">
+                            </option>
+                        </th:block>
                     </select>
                 </div>
                 <div class="form-group mb-3">
