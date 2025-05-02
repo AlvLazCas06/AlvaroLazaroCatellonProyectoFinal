@@ -11,6 +11,8 @@
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
 
@@ -37,7 +39,6 @@
                     <th class="text-light">Precio</th>
                     <th class="text-light">Cantidad</th>
                     <th class="text-light">Ventas</th>
-                    <th class="text-light">Nuevo</th>
                     <th class="text-light">Genero</th>
                     <th class="text-light">Número de Jug.</th>
                     <th class="text-light">Plataforma</th>
@@ -53,7 +54,6 @@
                     <td th:text="${game.precio}" class="text-light"></td>
                     <td th:text="${game.cantidad}" class="text-light"></td>
                     <td th:text="${game.ventas}" class="text-light"></td>
-                    <td th:text="${game.nuevo}" class="text-light"></td>
                     <td th:text="${game.genero}" class="text-light"></td>
                     <td th:text="${game.numJugadores == 4 ? '1-4' : (game.numJugadores == 2 ? '1-2' : '1')}" class="text-light"></td>
                     <td th:text="${game.consola.nombre}" class="text-light"></td>
@@ -71,6 +71,9 @@
             </table>
         </div>
     </main>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

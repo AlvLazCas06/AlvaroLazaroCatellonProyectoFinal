@@ -24,9 +24,17 @@ public class Consola {
 
     private String nombre;
 
+    private String modelo;
+
     private String description;
 
     private String fabricante;
+
+    private double precio;
+
+    private int cantidad;
+
+    private int ventas;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate fechaLanzamiento;

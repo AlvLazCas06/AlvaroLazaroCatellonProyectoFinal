@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +16,10 @@
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../templates/showgames.html" th:href="@{/mostrarjuego}">Juegos</a>
+                        <a class="nav-link" href="../showgames.html" th:href="@{/mostrarjuego}">Juegos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Próximamente</a>
+                        <a class="nav-link" href="../showconsoles.html" th:href="@{/mostrarconsolas}">Consolas</a>
                     </li>
                 </ul>
             </div>

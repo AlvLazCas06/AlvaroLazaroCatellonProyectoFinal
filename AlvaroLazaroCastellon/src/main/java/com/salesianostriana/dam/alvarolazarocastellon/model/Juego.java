@@ -34,8 +34,6 @@ public class Juego {
 
     private int ventas;
 
-    private boolean nuevo;
-
     private String genero;
 
     private int numJugadores;

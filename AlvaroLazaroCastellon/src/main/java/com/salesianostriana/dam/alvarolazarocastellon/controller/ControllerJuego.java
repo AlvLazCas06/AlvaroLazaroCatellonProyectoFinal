@@ -57,7 +57,6 @@ public class ControllerJuego {
         juego.setPrecio(j.getPrecio());
         juego.setCantidad(j.getCantidad());
         juego.setVentas(j.getVentas());
-        juego.setNuevo(j.isNuevo());
         juego.setGenero(j.getGenero());
         juego.setNumJugadores(j.getNumJugadores());
         juego.setConsola(j.getConsola());
