@@ -2403,3 +2403,7 @@ INSERT INTO juego (id, nombre, description, precio, cantidad, ventas, nuevo, gen
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
 	at com.salesianostriana.dam.alvarolazarocastellon.AlvaroLazaroCastellonApplication.main(AlvaroLazaroCastellonApplication.java:10)
+2025-05-02 10:12:55.043273+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "Select * From [*]*"; se esperaba "identifier"
+Syntax error in SQL statement "Select * From [*]*"; expected "identifier"; SQL statement:
+Select * From * [42001-232]
