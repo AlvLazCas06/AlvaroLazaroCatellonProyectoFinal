@@ -17,7 +17,7 @@ public class ControllerConsola {
     @Autowired
     private ServiceConsola serviceConsola;
 
-    @GetMapping("/añadirconsola")
+    @GetMapping("/mostrarconsolas/añadirconsola")
     public String showGames(Model model) {
         model.addAttribute("consola", new Consola());
         return "addconsole";

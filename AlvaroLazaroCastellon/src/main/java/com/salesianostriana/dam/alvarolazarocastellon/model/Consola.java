@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.alvarolazarocastellon.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -26,6 +27,7 @@ public class Consola {
 
     private String modelo;
 
+    @Column(length = 3000)
     private String description;
 
     private String fabricante;

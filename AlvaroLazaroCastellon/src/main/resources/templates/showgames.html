@@ -19,18 +19,20 @@
 <body class="bg-dark text-light">
     <header th:replace="~{fragments/headerconfiguracion::header}"></header>
     <main>
-        <a href="../templates/addgames.html" th:href="@{/añadirjuego}" class="btn btn-outline-primary my-4">Agregar
-            Juego</a>
-        <h1 class="text-light mb-4">Lista de Juegos</h1>
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <section class="container-fluid">
+            <a href="../templates/addgames.html" th:href="@{/mostrarjuego/añadirjuego}" class="btn btn-outline-primary my-4">Agregar
+                Juego</a>
+            <h1 class="text-light mb-4">Lista de Juegos</h1>
+        </section>
+        <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
             <div class="d-flex align-items-center">
                 <div class="d-flex align-items-center">
                     <input type="text" class="form-control" placeholder="Buscar...">
                     <button class="btn btn-outline-light ms-2" type="button">Buscar</button>
                 </div>
             </div>
-        </div>
-        <div class="table-responsive">
+        </section>
+        <section class="table-responsive container-fluid">
             <table class="table table-dark table-striped table-hover">
                 <tr>
                     <th class="text-light">Id</th>
@@ -47,7 +49,7 @@
                     <th class="text-light">Carátula</th>
                     <th colspan="2" class="text-light">Acciones</th>
                 </tr>
-                <tr th:each="game : ${juego}">
+                <tr th:each="game : ${juego}" class="align-middle">
                     <td th:text="${game.id}" class="text-light"></td>
                     <td th:text="${game.nombre}" class="text-light"></td>
                     <td th:text="${game.description}" class="text-light"></td>
@@ -69,7 +71,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        </section>
     </main>
     <script>
         AOS.init();

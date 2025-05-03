@@ -18,7 +18,7 @@
 	<header th:replace="~{fragments/headerconfiguracion::header}"></header>
 	<main class="container-fluid">
 		<section class="container">
-			<a href="../templates/addconsole.html" th:href="@{/añadirconsola}" class="btn btn-outline-primary my-4">Agregar Consola</a>
+			<a href="../templates/addconsole.html" th:href="@{/mostrarconsolas/añadirconsola}" class="btn btn-outline-primary my-4">Agregar Consola</a>
 			<h1 class="text-light mb-4">Lista de Consolas</h1>
 		</section>
 		<section class="container d-flex justify-content-between align-items-center mb-4">
@@ -37,16 +37,18 @@
 					<th class="text-light">Descripción</th>
 					<th class="text-light">Fabricante</th>
 					<th class="text-light">Precio</th>
+					<th class="text-light">Cantidad</th>
 					<th class="text-light">Ventas</th>
 					<th class="text-light">Fecha de Lanzamiento</th>
 					<th class="text-light">Llegada a tienda</th>
 					<th class="text-light">Carátula</th>
 					<th colspan="2" class="text-light">Acciones</th>
 				</tr>
-				<tr th:each="console : ${consolas}">
+				<tr th:each="console : ${consolas}" class="align-middle">
 					<td th:text="${console.console_id}" class="text-light"></td>
 					<td th:text="${console.nombre}" class="text-light"></td>
 					<td th:text="${console.description}" class="text-light"></td>
+					<td th:text="${console.fabricante}" class="text-light"></td>
 					<td th:text="${console.precio}" class="text-light"></td>
 					<td th:text="${console.cantidad}" class="text-light"></td>
 					<td th:text="${console.ventas}" class="text-light"></td>

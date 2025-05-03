@@ -20,9 +20,8 @@ public class ControllerJuego {
     @Autowired
     private ServiceConsola serviceConsola;
 
-    @GetMapping("/añadirjuego")
+    @GetMapping("/mostrarjuego/añadirjuego")
     public String showGames(Model model) {
-
         Juego juego = new Juego();
         model.addAttribute("juego", juego);
         model.addAttribute("consolas", serviceConsola.findAll());

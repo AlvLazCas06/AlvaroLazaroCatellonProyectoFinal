@@ -1,10 +1,6 @@
 package com.salesianostriana.dam.alvarolazarocastellon.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +22,7 @@ public class Juego {
 
     private String nombre;
 
+    @Column(length = 3000)
     private String description;
 
     private double precio;

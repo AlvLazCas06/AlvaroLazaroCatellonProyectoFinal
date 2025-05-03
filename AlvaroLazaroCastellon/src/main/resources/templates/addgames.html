@@ -43,10 +43,6 @@
                     <label for="ventas">Ventas</label>
                     <input type="number" th:field="*{ventas}" class="form-control" required>
                 </div>
-                <div class="form-check mb-3">
-                    <label for="nuevo">Nuevo</label>
-                    <input type="checkbox" th:field="*{nuevo}" class="form-check-input" required>
-                </div>
                 <div class="form-group mb-3">
                     <label for="genero">Genero</label>
                     <input type="text" th:field="*{genero}" class="form-control" placeholder="Genero del juego" required>
@@ -58,10 +54,11 @@
                 <div class="form-group mb-3">
                     <label for="consola">Plataforma</label>
                     <select th:field="*{consola}" class="form-control" required>
-                        <th:block th:each="consola : ${consolas}">
-                            <option th:value="*{id}"
-                                    th:text="*{nombre}"
-                                    th:selected="${juego.consola != null} ? *{id} == *{consola.id} : false">
+                        <th:block th:each="consola, iterStat : ${consolas}">
+                            <option th:if="${iterStat.index} < 5"
+                                    th:value="${consola.console_id}"
+                                    th:text="${consola.nombre}"
+                                    th:selected="${juego.consola != null} ? *{id} == *{consola.console_id} : false">
                             </option>
                         </th:block>
                     </select>
