@@ -4,12 +4,15 @@ import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class ControllerJuego {
@@ -73,8 +76,10 @@ public class ControllerJuego {
     }
 
     @GetMapping("/catalogo")
-    public String showCatalogo(Model model) {
-        model.addAttribute("juegos", serviceJuego.findAll());
+    public String showCatalogo(Model model, @Param("palabraClave") String palabraClave) {
+        List<Juego> juegos = serviceJuego.listAll(palabraClave);
+        model.addAttribute("juegos", juegos);
+        model.addAttribute("palabraClave", palabraClave);
         return "catalogo";
     }
 
