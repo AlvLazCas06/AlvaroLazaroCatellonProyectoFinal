@@ -42,7 +42,18 @@ public class Consola {
 
     private String imagen;
 
-    @OneToMany
+    @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER)
+    @Builder.Default
     private List<Juego> juegos = new ArrayList<Juego>();
+
+    public void addJuego(Juego juego) {
+        juegos.add(juego);
+        juego.setConsola(this);
+    }
+
+    public void removeJuego(Juego juego) {
+        juegos.remove(juego);
+        juego.setConsola(null);
+    }
 
 }

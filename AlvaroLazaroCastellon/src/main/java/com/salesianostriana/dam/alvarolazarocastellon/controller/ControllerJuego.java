@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
+import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
@@ -33,6 +34,10 @@ public class ControllerJuego {
 
     @PostMapping("/mostrarjuego")
     public String addGame(Model model, @ModelAttribute("juego") Juego juego) {
+        if (juego.getConsola() != null) {
+            Consola consola = serviceConsola.findById(juego.getConsola().getId());
+            juego.setConsola(consola);
+        }
         serviceJuego.save(juego);
         return "redirect:/mostrarjuego";
     }
@@ -81,6 +86,20 @@ public class ControllerJuego {
         model.addAttribute("juegos", juegos);
         model.addAttribute("palabraClave", palabraClave);
         return "catalogo";
+    }
+
+    @GetMapping("/próximamente")
+    public String showNextRelease(Model model) {
+        List<Juego> juegosProximos = serviceJuego.findNotSell();
+        model.addAttribute("juegosProximos", juegosProximos);
+        return "proximamente";
+    }
+
+    @GetMapping("/novedades")
+    public String showNovedades(Model model) {
+
+        model.addAttribute("novedades", serviceJuego.findNewGames());
+        return "novedades";
     }
 
 }

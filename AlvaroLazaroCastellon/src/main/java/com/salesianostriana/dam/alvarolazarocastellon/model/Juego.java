@@ -48,4 +48,14 @@ public class Juego {
     @Column(length = 3000)
     private String rutaImagen;
 
+    public void setConsola(Consola consola) {
+        if (this.consola != null) {
+            this.consola.getJuegos().remove(this);
+        }
+        this.consola = consola;
+        if (consola != null) {
+            consola.getJuegos().add(this);
+        }
+    }
+
 }

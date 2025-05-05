@@ -4,6 +4,7 @@ import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,14 @@ public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
 
     public List<Juego> orderByName() {
         return repository.findAll().stream().sorted((j1, j2) -> j1.getNombre().compareToIgnoreCase(j2.getNombre())).toList();
+    }
+
+    public List<Juego> findNotSell() {
+        return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now())).toList();
+    }
+
+    public List<Juego> findNewGames() {
+        return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now())).toList();
     }
 
 }
