@@ -44,7 +44,7 @@ public class ControllerConsola {
     @PostMapping("/mostrarconsolas/{id}")
     public String editConsole(Model model, @PathVariable Long id, @ModelAttribute("consola") Consola c) {
         Consola consola = serviceConsola.findById(id);
-        consola.setConsole_id(id);
+        consola.setId(id);
         consola.setNombre(c.getNombre());
         consola.setDescription(c.getDescription());
         consola.setPrecio(c.getPrecio());

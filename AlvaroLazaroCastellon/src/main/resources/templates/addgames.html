@@ -56,9 +56,9 @@
                     <select th:field="*{consola}" class="form-control" required>
                         <th:block th:each="consola, iterStat : ${consolas}">
                             <option th:if="${iterStat.index} < 5"
-                                    th:value="${consola.console_id}"
+                                    th:value="${consola.id}"
                                     th:text="${consola.nombre}"
-                                    th:selected="${juego.consola != null} ? *{id} == *{consola.console_id} : false">
+                                    th:selected="${juego.consola != null} ? *{id} == *{consola.id} : false">
                             </option>
                         </th:block>
                     </select>

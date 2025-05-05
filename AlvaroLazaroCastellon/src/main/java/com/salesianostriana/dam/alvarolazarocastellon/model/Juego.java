@@ -45,6 +45,7 @@ public class Juego {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate llegadaAlMercado;
 
+    @Column(length = 3000)
     private String rutaImagen;
 
 }

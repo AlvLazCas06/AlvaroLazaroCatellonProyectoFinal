@@ -5,6 +5,7 @@ import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
@@ -14,6 +15,14 @@ public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
             return repository.findAll(S).stream().toList();
         }
         return repository.findAll().stream().toList();
+    }
+
+    public Optional<Juego> findMaxSell() {
+       return repository.findAll().stream().max((j1, j2) -> j1.getVentas() > j2.getVentas() ? 1 : -1);
+    }
+
+    public List<Juego> orderByName() {
+        return repository.findAll().stream().sorted((j1, j2) -> j1.getNombre().compareToIgnoreCase(j2.getNombre())).toList();
     }
 
 }

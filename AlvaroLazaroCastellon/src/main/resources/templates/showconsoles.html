@@ -31,7 +31,7 @@
 		</section>
 		<section class="container table-responsive">
 			<table class="table table-bordered table-dark table-striped table-hover">
-				<tr>
+				<tr class="align-middle text-center">
 					<th class="text-light">Id</th>
 					<th class="text-light">Nombre</th>
 					<th class="text-light">Descripción</th>
@@ -41,11 +41,12 @@
 					<th class="text-light">Ventas</th>
 					<th class="text-light">Fecha de Lanzamiento</th>
 					<th class="text-light">Llegada a tienda</th>
-					<th class="text-light">Carátula</th>
-					<th colspan="2" class="text-light">Acciones</th>
+					<th class="text-light">Consola</th>
+					<th class="text-light">Juegos</th>
+					<th class="text-light">Acciones</th>
 				</tr>
-				<tr th:each="console : ${consolas}" class="align-middle">
-					<td th:text="${console.console_id}" class="text-light"></td>
+				<tr th:each="console : ${consolas}" class="align-middle text-center">
+					<td th:text="${console.id}" class="text-light"></td>
 					<td th:text="${console.nombre}" class="text-light"></td>
 					<td th:text="${console.description}" class="text-light"></td>
 					<td th:text="${console.fabricante}" class="text-light"></td>
@@ -56,10 +57,13 @@
 					<td th:text="${console.llegadaAlMercado}" class="text-light"></td>
 					<td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
 					         th:src="${console.imagen}" alt="Cáratula"></td>
+					<td th:each="juego : ${console.juegos}">
+						<p th:text="${juego.nombre}"></p>
+					</td>
 					<td>
-						<a href="../templates/editgame.html" th:href="@{/mostrarconsolas/editar/{id}(id=${console.console_id})}"
+						<a href="../templates/editgame.html" th:href="@{/mostrarconsolas/editar/{id}(id=${console.id})}"
 						   class="btn btn-outline-success">Editar</a>
-						<a href="../templates/deletegame.html" th:href="@{/mostrarconsolas/{id}(id=${console.console_id})}"
+						<a href="../templates/deletegame.html" th:href="@{/mostrarconsolas/{id}(id=${console.id})}"
 						   class="btn btn-outline-danger">Eliminar</a>
 					</td>
 				</tr>

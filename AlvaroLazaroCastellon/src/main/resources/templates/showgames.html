@@ -34,7 +34,7 @@
         </section>
         <section class="table-responsive container-fluid">
             <table class="table table-dark table-striped table-hover">
-                <tr>
+                <tr class="align-middle text-center">
                     <th class="text-light">Id</th>
                     <th class="text-light">Nombre</th>
                     <th class="text-light">Descripción</th>
@@ -49,7 +49,7 @@
                     <th class="text-light">Carátula</th>
                     <th colspan="2" class="text-light">Acciones</th>
                 </tr>
-                <tr th:each="game : ${juego}" class="align-middle">
+                <tr th:each="game : ${juego}" class="align-middle text-center">
                     <td th:text="${game.id}" class="text-light"></td>
                     <td th:text="${game.nombre}" class="text-light"></td>
                     <td th:text="${game.description}" class="text-light"></td>

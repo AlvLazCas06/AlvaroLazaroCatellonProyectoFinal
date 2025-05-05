@@ -19,7 +19,7 @@
 	<main class="container-fluid text-light">
 		<section>
 			<div class="container-fluid d-flex justify-content-center align-items-center flex-column">
-				<img src="../static/img/Logo/Logo_proyecto.png" th:src="@{img/Logo/Logo_proyecto.png}" alt="Retro's Games" class="img-fluid">
+				<img src="../static/img/Logo/Logo_proyecto.png" th:src="@{img/Logo/New_Retros_Games_Logo.png}" alt="Retro's Games" class="rounded-circle" width="256px" data-aos="fade-up">
 				<h1>Bienvenido a Retro's Games</h1>
 			</div>
 		</section>
@@ -28,7 +28,7 @@
 				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right">
 					<h1>Juego más vendido</h1>
 					<div>
-						<img src="../static/img/Consolas/Wii.png" th:src="@{img/Consolas/Wii.png}" alt="Wii" class="mb-2 img-fluid rounded-circle" style="max-width: 80px;">
+						<img src="../static/img/Consolas/Wii.png" th:src="${masvendido.rutaImagen}" alt="mas vendido" th:alt="${masvendido.nombre}" class="mb-2 img-fluid">
 					</div>
 					<h1 th:text="${masvendido.nombre}"></h1>
 					<h2>Nº de ventas <span th:text="${masvendido.ventas}"></span></h2>

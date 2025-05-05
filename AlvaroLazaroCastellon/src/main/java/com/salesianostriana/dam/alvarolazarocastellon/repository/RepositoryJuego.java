@@ -15,6 +15,6 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
         from Juego J
             where concat(J.nombre, J.precio) ilike %?1%
     """)
-    public List<Juego> findAll(String palabraClave);
+    List<Juego> findAll(String palabraClave);
 
 }
