@@ -3324,3 +3324,67 @@ ALTER SEQUENCE consola_juegos_seq RESTART WITH 1000 [90036-232]
 org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "RUTA_IMAGEN CHARACTER VARYING(255)": "'https://th.bing.com/th/id/R.32d5405028d894ec5c9897972915a14a?rik=GWHxsRbATw%2bg... (266)"
 Value too long for column "RUTA_IMAGEN CHARACTER VARYING(255)": "'https://th.bing.com/th/id/R.32d5405028d894ec5c9897972915a14a?rik=GWHxsRbATw%2bg... (266)"; SQL statement:
 INSERT INTO juego (id, nombre, description, precio, cantidad, ventas, genero, num_jugadores, console_id, fecha_lanzamiento, llegada_al_mercado, ruta_imagen) VALUES (4, 'Cars', 'Únete a Rayo McQueen y corre contra nuevos personajes para hacerte con el trofeo de Race-O-Rama. Conduce y personaliza a Rayo McQueen, estrella de la película animada Cars. Enfréntate a nuevos personajes en una serie de pistas emocionantes. Corre contra un amigo en el vertiginoso modo multijugador.', 39.99, 2, 0, 'Carreras', 1, 4, '2009-11-30', '2021-12-08','https://th.bing.com/th/id/R.32d5405028d894ec5c9897972915a14a?rik=GWHxsRbATw%2bgFQ&riu=http%3a%2f%2fxbox360media.ign.com%2fxbox360%2fimage%2fobject%2f826%2f826836%2fdisneypixarcars_xbox360box.jpg&ehk=JIieU3wI2ylM8ffWJAJ4NRq5nb6uVB1vYHBg7qy5ls0%3d&risl=&pid=ImgRaw&r=0') [22001-232]
+2025-05-05 12:19:04.110568+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 1, 1 ) [42102-232]
+2025-05-05 12:19:04.118517+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 2, 2 ) [42102-232]
+2025-05-05 12:19:04.120512+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 3, 3 ) [42102-232]
+2025-05-05 12:19:04.122507+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 4, 4 ) [42102-232]
+2025-05-05 12:20:39.428958+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 1, 1 ) [42102-232]
+2025-05-05 12:20:39.435939+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 2, 2 ) [42102-232]
+2025-05-05 12:20:39.435939+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 3, 3 ) [42102-232]
+2025-05-05 12:20:39.437934+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 4, 4 ) [42102-232]
+2025-05-05 12:21:37.966839+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 1, 1 ) [42102-232]
+2025-05-05 12:21:37.972823+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 2, 2 ) [42102-232]
+2025-05-05 12:21:37.973838+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 3, 3 ) [42102-232]
+2025-05-05 12:21:37.974818+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 4, 4 ) [42102-232]
+2025-05-05 12:22:05.453202+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 1, 1 ) [42102-232]
+2025-05-05 12:22:05.460156+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 2, 2 ) [42102-232]
+2025-05-05 12:22:05.462151+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 3, 3 ) [42102-232]
+2025-05-05 12:22:05.464145+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "CONSOLA_JUEGOS" no encontrada
+Table "CONSOLA_JUEGOS" not found; SQL statement:
+INSERT INTO consola_juegos (consola_id, juegos_id) VALUES ( 4, 4 ) [42102-232]
