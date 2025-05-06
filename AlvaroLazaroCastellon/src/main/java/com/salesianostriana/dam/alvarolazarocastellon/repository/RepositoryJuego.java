@@ -17,4 +17,11 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
     """)
     List<Juego> findAll(String palabraClave);
 
+    @Query("""
+        select J
+        from Juego J
+            where concat(J.nombre, J.precio, J.numJugadores, J.cantidad, J.consola.nombre, J.ventas, J.genero, J.id) ilike %?1%
+    """)
+    List<Juego> findAll2(String palabraClave);
+
 }
