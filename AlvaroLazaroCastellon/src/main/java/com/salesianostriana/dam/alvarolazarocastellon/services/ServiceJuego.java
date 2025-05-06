@@ -13,7 +13,14 @@ public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
 
     public List<Juego> listAll(String S) {
         if (S != null) {
-            return repository.findAll(S).stream().toList();
+            return repository.findAll(S).stream().filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1))).toList();
+        }
+        return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1))).toList();
+    }
+
+    public List<Juego> listAll2(String S) {
+        if (S != null) {
+            return repository.findAll2(S).stream().toList();
         }
         return repository.findAll().stream().toList();
     }
