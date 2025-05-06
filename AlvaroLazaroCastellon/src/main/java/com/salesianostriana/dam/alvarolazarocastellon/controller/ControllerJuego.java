@@ -43,8 +43,10 @@ public class ControllerJuego {
     }
 
     @GetMapping("/mostrarjuego")
-    public String showGame(Model model) {
-        model.addAttribute("juego", serviceJuego.findAll());
+    public String showGame(Model model, @ModelAttribute("palabraClave") String palabraClave) {
+        List<Juego> juegos = serviceJuego.listAll2(palabraClave);
+        model.addAttribute("juego", juegos);
+        model.addAttribute("palabraClave", palabraClave);
         return "showgames";
     }
 

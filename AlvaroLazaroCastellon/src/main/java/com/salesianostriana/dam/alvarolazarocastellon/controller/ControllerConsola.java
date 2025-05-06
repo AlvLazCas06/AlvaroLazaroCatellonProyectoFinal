@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class ControllerConsola {
 
@@ -61,5 +63,27 @@ public class ControllerConsola {
     public String deleteConsole(Model model, @PathVariable Long id) {
         serviceConsola.deleteById(id);
         return "redirect:/mostrarconsolas";
+    }
+
+    @GetMapping("/catalogoconsolas")
+    public String showCatalogo(Model model, @ModelAttribute("palabraClave") String palabraClave) {
+        List<Consola> consolas = serviceConsola.listAll(palabraClave);
+        model.addAttribute("consolas", consolas);
+        model.addAttribute("palabraClave", palabraClave);
+        return "catalogoconsola";
+    }
+
+    @GetMapping("/proximamenteconsolas")
+    public String showNextRelease(Model model) {
+        List<Consola> consolasProximas = serviceConsola.findNotSell();
+        model.addAttribute("consolasProximas", consolasProximas);
+        return "proximamenteconsolas";
+    }
+
+    @GetMapping("/novedadesconsolas")
+    public String showNovedades(Model model) {
+        List<Consola> consolasNovedades = serviceConsola.findNewConsoles();
+        model.addAttribute("consolasNovedades", consolasNovedades);
+        return "novedadesconsolas";
     }
 }
