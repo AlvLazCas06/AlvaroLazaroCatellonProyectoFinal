@@ -16,9 +16,9 @@
     <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
 
-<body class="bg-dark">
-    <header>
-        <h1 class="text-light">Agregar Juego</h1>
+<body class="bg-dark h-100 mx-auto">
+    <header class="container mt-2">
+        <h1 class="bg-light rounded text-center align-middle">Agregar Juego</h1>
     </header>
     <main class="container text-light">
         <form action="#" method="POST" th:action="@{/mostrarjuego}" th:object="${juego}">
@@ -29,46 +29,54 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="description">Descripción</label><br />
-                    <textarea th:field="*{description}" cols="30" rows="10" class="form-control" required></textarea><br />
+                    <textarea th:field="*{description}" rows="10" class="form-control" required></textarea><br />
                 </div>
-                <div class="form-group mb-3">
-                    <label for="precio">Precio</label>
-                    <input type="number" th:field="*{precio}" step="0.01" class="form-control" required>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="precio">Precio</label>
+                            <input type="number" th:field="*{precio}" step="0.01" class="form-control" required>
+                        </div>
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" th:field="*{cantidad}" class="form-control" required>
+                        </div>
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="ventas">Ventas</label>
+                            <input type="number" th:field="*{ventas}" class="form-control" required>
+                        </div>
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="genero">Genero</label>
+                            <input type="text" th:field="*{genero}" class="form-control" placeholder="Genero del juego" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" th:field="*{cantidad}" class="form-control" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="ventas">Ventas</label>
-                    <input type="number" th:field="*{ventas}" class="form-control" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="genero">Genero</label>
-                    <input type="text" th:field="*{genero}" class="form-control" placeholder="Genero del juego" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="numJugadores">Número de jugadores</label>
-                    <input type="number" th:field="*{numJugadores}" min="1" th:min="1" max="4" th:max="4" class="form-control" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="consola">Plataforma</label>
-                    <select th:field="*{consola}" class="form-control" required>
-                        <th:block th:each="consola, iterStat : ${consolas}">
-                            <option th:if="${iterStat.index} < 5"
-                                    th:value="${consola.id}"
-                                    th:text="${consola.nombre}">
-                            </option>
-                        </th:block>
-                    </select>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="fechaLanzamiento">Fecha de lanzamiento</label>
-                    <input type="date" th:field="*{fechaLanzamiento}" class="form-control" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="llegadaAlMercado">Llegada a tienda</label>
-                    <input type="date" th:field="*{llegadaAlMercado}" class="form-control" required>
+                <div class="container align-middle">
+                    <div class="row">
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="numJugadores">Número de jugadores</label>
+                            <input type="number" th:field="*{numJugadores}" min="1" th:min="1" max="4" th:max="4" class="form-control" required>
+                        </div>
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="consola">Plataforma</label>
+                            <select th:field="*{consola}" class="form-control" required>
+                                <th:block th:each="consola, iterStat : ${consolas}">
+                                    <option th:if="${iterStat.index} < 5"
+                                            th:value="${consola.id}"
+                                            th:text="${consola.nombre}">
+                                    </option>
+                                </th:block>
+                            </select>
+                        </div>
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="fechaLanzamiento">Fecha de lanzamiento</label>
+                            <input type="date" th:field="*{fechaLanzamiento}" class="form-control" required>
+                        </div>
+                        <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
+                            <label for="llegadaAlMercado">Llegada a tienda</label>
+                            <input type="date" th:field="*{llegadaAlMercado}" class="form-control" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group mb-3">
                     <label for="rutaImagen">Ruta de Carátula</label>

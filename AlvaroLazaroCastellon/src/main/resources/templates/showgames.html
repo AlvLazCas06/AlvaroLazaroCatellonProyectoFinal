@@ -25,12 +25,15 @@
             <h1 class="text-light mb-4">Lista de Juegos</h1>
         </section>
         <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
-            <div class="d-flex align-items-center">
+            <form action="#" th:action="@{/mostrarjuego}">
                 <div class="d-flex align-items-center">
-                    <input type="text" class="form-control" placeholder="Buscar...">
-                    <button class="btn btn-outline-light ms-2" type="button">Buscar</button>
+                    <div class="d-flex align-items-center">
+                        <input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
+                        <input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
+                        <input type="button" class="btn btn-outline-secondary ms-2" value="Limpiar" onclick="limpiar()">
+                    </div>
                 </div>
-            </div>
+            </form>
         </section>
         <section class="table-responsive container-fluid">
             <table class="table table-dark table-striped table-hover">
@@ -75,6 +78,11 @@
     </main>
     <script>
         AOS.init();
+    </script>
+    <script type="text/javascript">
+        function limpiar() {
+            window.location='/mostrarjuego'
+        }
     </script>
 </body>
 
