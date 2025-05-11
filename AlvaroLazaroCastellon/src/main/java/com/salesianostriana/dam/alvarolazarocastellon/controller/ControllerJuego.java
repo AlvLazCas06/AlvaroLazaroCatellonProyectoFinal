@@ -68,11 +68,13 @@ public class ControllerJuego {
         juego.setVentas(j.getVentas());
         juego.setGenero(j.getGenero());
         juego.setNumJugadores(j.getNumJugadores());
-        juego.setConsola(j.getConsola());
         juego.setFechaLanzamiento(j.getFechaLanzamiento());
         juego.setLlegadaAlMercado(j.getLlegadaAlMercado());
         juego.setRutaImagen(j.getRutaImagen());
+        juego.setConsola(j.getConsola());
+
         serviceJuego.edit(juego);
+
         return "redirect:/mostrarjuego";
     }
 
