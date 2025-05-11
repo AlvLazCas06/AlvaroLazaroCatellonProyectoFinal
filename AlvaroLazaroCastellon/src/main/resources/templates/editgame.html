@@ -60,12 +60,12 @@
                 <div class="form-group mb-3">
                     <label for="consola">Consola</label>
                     <select th:field="*{consola.id}" class="form-control" required>
-                        <option value="">-- Selecciona una consola --</option>
-                        <option th:each="consola : ${consolas}"
-                                th:value="${consola.id}"
-                                th:text="${consola.nombre}"
-                                th:selected="${juego.consola != null and juego.consola.id == consola.id}">
-                        </option>
+                        <th:block th:each="consola, iterStat : ${consolas}">
+                            <option th:if="${iterStat.index} < 5"
+                                    th:value="${consola.id}"
+                                    th:text="${consola.nombre}">
+                            </option>
+                        </th:block>
                     </select>
                 </div>
                 <div class="form-group mb-3">
