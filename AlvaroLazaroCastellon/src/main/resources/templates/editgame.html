@@ -62,7 +62,7 @@
                     <select th:field="*{consola.id}" class="form-control" required>
                         <option value="">-- Selecciona una consola --</option>
                         <option th:each="consola : ${consolas}"
-                                th:value="${consola}"
+                                th:value="${consola.id}"
                                 th:text="${consola.nombre}"
                                 th:selected="${juego.consola != null and juego.consola.id == consola.id}">
                         </option>
