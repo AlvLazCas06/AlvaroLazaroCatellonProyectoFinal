@@ -56,4 +56,10 @@ public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
         return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now())).toList();
     }
 
+    /*
+    public List<Juego> showOffers() {
+        return repository.findAll().stream().filter(j -> j.getConsola().getId() == 1).toList();
+    }
+    */
+
 }
