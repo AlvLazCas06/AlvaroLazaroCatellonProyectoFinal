@@ -29,8 +29,23 @@ public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
        return repository.findAll().stream().max((j1, j2) -> j1.getVentas() > j2.getVentas() ? 1 : -1);
     }
 
-    public List<Juego> orderByName() {
-        return repository.findAll().stream().sorted((j1, j2) -> j1.getNombre().compareToIgnoreCase(j2.getNombre())).toList();
+    public List<Juego> orderByName(String palabraClave) {
+        if (palabraClave != null) {
+            return repository.findAll(palabraClave).stream()
+                    .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .sorted((j1, j2) -> j1.getNombre().compareToIgnoreCase(j2.getNombre()))
+                    .toList();
+        }
+        return repository.findAll().stream()
+                .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .sorted((j1, j2) -> j1.getNombre().compareToIgnoreCase(j2.getNombre()))
+                .toList();
+    }
+
+    public List<Juego> findByConsole(String consola) {
+        return repository.findAll().stream()
+                .filter(j -> j.getConsola() != null && j.getConsola().getNombre().equalsIgnoreCase(consola))
+                .toList();
     }
 
     public List<Juego> findNotSell() {

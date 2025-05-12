@@ -85,10 +85,21 @@ public class ControllerJuego {
     }
 
     @GetMapping("/catalogo")
-    public String showCatalogo(Model model, @Param("palabraClave") String palabraClave) {
+    public String showCatalogo(Model model, @Param("palabraClave") String palabraClave, @Param("orden") String orden, @Param("consola") String consola) {
         List<Juego> juegos = serviceJuego.listAll(palabraClave);
+
+        if (consola != null && !consola.isEmpty()) {
+            juegos = serviceJuego.findByConsole(consola);
+        }
+
+        if ("nombre".equalsIgnoreCase(orden)) {
+            juegos = serviceJuego.orderByName(palabraClave);
+        }
+
         model.addAttribute("juegos", juegos);
         model.addAttribute("palabraClave", palabraClave);
+        model.addAttribute("orden", orden);
+        model.addAttribute("consola", consola);
         return "catalogo";
     }
 
