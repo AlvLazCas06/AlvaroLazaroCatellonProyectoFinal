@@ -21,9 +21,11 @@
         <h1 class="bg-light rounded text-center align-middle">Agregar Juego</h1>
     </header>
     <main class="container text-light">
-        <form action="#" method="POST" th:action="@{/mostrarjuego}" th:object="${juego}">
+        <form action="#" method="POST" th:action="${juego.id != 0} ? @{/mostrarjuego} : @{/mostrarjuego/editar/submit}" th:object="${juego}">
             <fieldset>
                 <div class="form-group mb-3">
+                    <label for="id">Id</label>
+                    <input th:if="${juego.id != 0}" type="hidden" th:field="*{id}" class="form-control" readonly>
                     <label for="nombre">Nombre</label>
                     <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre del juego" required>
                 </div>
@@ -59,8 +61,7 @@
                         </div>
                         <div class="col-6 col-sm-3 col-lg-3 form-group mb-3">
                             <label for="consola">Plataforma</label>
-                            <select th:field="*{consola}" class="form-control" required>
-                                <option>Elige una consola</option>
+                            <select th:field="*{consola.id}" class="form-control" required>
                                 <th:block th:each="consola, iterStat : ${consolas}">
                                     <option th:if="${iterStat.index} < 5"
                                             th:value="${consola.id}"
