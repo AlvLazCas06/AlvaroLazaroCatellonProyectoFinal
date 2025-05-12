@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ControllerConsola {
@@ -43,19 +44,9 @@ public class ControllerConsola {
         return "editconsole";
     }
 
-    @PostMapping("/mostrarconsolas/{id}")
-    public String editConsole(Model model, @PathVariable Long id, @ModelAttribute("consola") Consola c) {
-        Consola consola = serviceConsola.findById(id);
-        consola.setId(id);
-        consola.setNombre(c.getNombre());
-        consola.setDescription(c.getDescription());
-        consola.setPrecio(c.getPrecio());
-        consola.setCantidad(c.getCantidad());
-        consola.setVentas(c.getVentas());
-        consola.setFechaLanzamiento(c.getFechaLanzamiento());
-        consola.setLlegadaAlMercado(c.getLlegadaAlMercado());
-        consola.setImagen(c.getImagen());
-        serviceConsola.edit(consola);
+    @PostMapping("/mostrarconsolas/editar/submit")
+    public String editConsole(@ModelAttribute("consola") Consola c) {
+        serviceConsola.edit(c);
         return "redirect:/mostrarconsolas";
     }
 

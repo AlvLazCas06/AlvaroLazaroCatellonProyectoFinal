@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ControllerJuego {
@@ -33,7 +34,7 @@ public class ControllerJuego {
     }
 
     @PostMapping("/mostrarjuego")
-    public String addGame(Model model, @ModelAttribute("juego") Juego juego) {
+    public String addGame(@ModelAttribute("juego") Juego juego) {
         if (juego.getConsola() != null) {
             Consola consola = serviceConsola.findById(juego.getConsola().getId());
             juego.setConsola(consola);
@@ -54,32 +55,19 @@ public class ControllerJuego {
     public String showEditGame(Model model, @PathVariable Long id) {
         model.addAttribute("juego", serviceJuego.findById(id));
         model.addAttribute("consolas", serviceConsola.findAll());
-        return "editgame";
+        return "addgame";
     }
 
-    @PostMapping("/mostrarjuego/{id}")
-    public String editGame(Model model, @PathVariable Long id, @ModelAttribute("juego") Juego j) {
-        Juego juego = serviceJuego.findById(id);
-        juego.setId(id);
-        juego.setNombre(j.getNombre());
-        juego.setDescription(j.getDescription());
-        juego.setPrecio(j.getPrecio());
-        juego.setCantidad(j.getCantidad());
-        juego.setVentas(j.getVentas());
-        juego.setGenero(j.getGenero());
-        juego.setNumJugadores(j.getNumJugadores());
-        juego.setFechaLanzamiento(j.getFechaLanzamiento());
-        juego.setLlegadaAlMercado(j.getLlegadaAlMercado());
-        juego.setRutaImagen(j.getRutaImagen());
-        juego.setConsola(j.getConsola());
+    @PostMapping("/mostrarjuego/editar/submit")
+    public String editGame(@ModelAttribute("juego") Juego j) {
 
-        serviceJuego.edit(juego);
+        serviceJuego.edit(j);
 
         return "redirect:/mostrarjuego";
     }
 
     @GetMapping("/mostrarjuego/{id}")
-    public String deleteGame(Model model, @PathVariable Long id) {
+    public String deleteGame(@PathVariable Long id) {
         serviceJuego.deleteById(id);
         return "redirect:/mostrarjuego";
     }
