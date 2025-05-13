@@ -77,7 +77,7 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
     /*
     public List<Juego> showOffers() {
-        Random id = new Random(System.nanoTime());
+        Random idrandom = new Random(System.nanoTime());
         return repository.findAll().stream().filter(j -> j.getConsola().getId() == id.nextLong(repository.findAll().size() - 0 + 1)).filter().toList();
     }
     */

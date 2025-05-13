@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ControllerJuego {
@@ -93,14 +92,12 @@ public class ControllerJuego {
 
     @GetMapping("/próximamente")
     public String showNextRelease(Model model) {
-        List<Juego> juegosProximos = serviceJuego.findNotSell();
-        model.addAttribute("juegosProximos", juegosProximos);
+        model.addAttribute("juegosProximos", serviceJuego.findNotSell());
         return "proximamente";
     }
 
     @GetMapping("/novedades")
     public String showNovedades(Model model) {
-
         model.addAttribute("novedades", serviceJuego.findNewGames());
         return "novedades";
     }
