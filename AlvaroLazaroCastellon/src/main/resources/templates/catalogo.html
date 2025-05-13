@@ -112,6 +112,7 @@
 					<h3 class="text-center"
 					    th:text="${game.cantidad > 0 ? #numbers.formatDecimal(game.precio, 1, 2) + '€' : 'Agotado'}">
 					</h3>
+					<a th:href="@{/catalogo/venta/{id} (id=${game.id})}" class="btn btn-primary">Ver más</a>
 				</div>
 			</div>
 		</section>

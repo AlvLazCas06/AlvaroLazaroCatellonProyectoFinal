@@ -105,4 +105,10 @@ public class ControllerJuego {
         return "novedades";
     }
 
+    @GetMapping("/catalogo/venta/{id}")
+    public String showSale(Model model, @PathVariable Long id) {
+        model.addAttribute("juegoAVender", serviceJuego.findById(id));
+        return "ventajuego";
+    }
+
 }
