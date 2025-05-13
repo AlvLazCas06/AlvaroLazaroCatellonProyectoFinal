@@ -2,14 +2,16 @@ package com.salesianostriana.dam.alvarolazarocastellon.services;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
+import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
-public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
+public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
     public List<Juego> listAll(String S) {
         if (S != null) {
@@ -58,7 +60,8 @@ public class ServiceJuego extends BaseService<Juego, Long, RepositoryJuego> {
 
     /*
     public List<Juego> showOffers() {
-        return repository.findAll().stream().filter(j -> j.getConsola().getId() == 1).toList();
+        Random id = new Random(System.nanoTime());
+        return repository.findAll().stream().filter(j -> j.getConsola().getId() == id.nextLong(repository.findAll().size() - 0 + 1)).filter().toList();
     }
     */
 

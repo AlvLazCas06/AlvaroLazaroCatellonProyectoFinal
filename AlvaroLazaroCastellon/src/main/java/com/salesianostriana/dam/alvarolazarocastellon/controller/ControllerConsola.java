@@ -52,8 +52,14 @@ public class ControllerConsola {
 
     @GetMapping("/mostrarconsolas/{id}")
     public String deleteConsole(Model model, @PathVariable Long id) {
-        serviceConsola.deleteById(id);
-        return "redirect:/mostrarconsolas";
+        if (serviceConsola.deleteConsole(id)) {
+            return "redirect:/mostrarconsolas";
+        } else {
+            model.addAttribute("error", "No se puede eliminar la consola porque tiene juegos asociados.");
+            model.addAttribute("consolas", serviceConsola.findAll());
+            return "showconsoles";
+        }
+
     }
 
     @GetMapping("/catalogoconsolas")

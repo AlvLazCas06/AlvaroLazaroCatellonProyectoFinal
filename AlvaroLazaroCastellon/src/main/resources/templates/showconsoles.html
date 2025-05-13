@@ -29,6 +29,11 @@
 				</div>
 			</div>
 		</section>
+		<section class="container">
+			<div th:if="${error}" class="alert alert-danger" role="alert">
+				<p th:text="${error}"></p>
+			</div>
+		</section>
 		<section class="container table-responsive">
 			<table class="table table-bordered table-dark table-striped table-hover">
 				<tr class="align-middle text-center">

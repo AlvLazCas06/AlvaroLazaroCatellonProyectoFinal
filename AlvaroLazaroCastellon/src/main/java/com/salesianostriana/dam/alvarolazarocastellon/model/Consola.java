@@ -23,7 +23,7 @@ public class Consola {
 
     private String modelo;
 
-    @Column(length = 3000)
+    @Column(length = 5000)
     private String description;
 
     private String fabricante;
@@ -42,7 +42,7 @@ public class Consola {
 
     private String imagen;
 
-    @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Builder.Default
     private List<Juego> juegos = new ArrayList<Juego>();
 

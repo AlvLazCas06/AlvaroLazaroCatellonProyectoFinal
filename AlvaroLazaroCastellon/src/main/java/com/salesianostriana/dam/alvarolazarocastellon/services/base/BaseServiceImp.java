@@ -1,11 +1,11 @@
-package com.salesianostriana.dam.alvarolazarocastellon.services;
+package com.salesianostriana.dam.alvarolazarocastellon.services.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public abstract class BaseService<T, ID, R extends JpaRepository<T, ID>> {
+public abstract class BaseServiceImp<T, ID, R extends JpaRepository<T, ID>> implements BaseService<T, ID> {
 
     @Autowired
     protected R repository;
