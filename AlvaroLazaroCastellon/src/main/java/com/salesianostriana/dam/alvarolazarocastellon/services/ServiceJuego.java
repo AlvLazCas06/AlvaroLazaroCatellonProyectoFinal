@@ -15,20 +15,32 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
     public List<Juego> listAll(String S) {
         if (S != null) {
-            return repository.findAll(S).stream().filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1))).toList();
+            return repository.findAll(S)
+                    .stream()
+                    .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .toList();
         }
-        return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1))).toList();
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .toList();
     }
 
     public List<Juego> listAll2(String S) {
         if (S != null) {
-            return repository.findAll2(S).stream().toList();
+            return repository.findAll2(S)
+                    .stream()
+                    .toList();
         }
-        return repository.findAll().stream().toList();
+        return repository.findAll()
+                .stream()
+                .toList();
     }
 
     public Optional<Juego> findMaxSell() {
-       return repository.findAll().stream().max((j1, j2) -> j1.getVentas() > j2.getVentas() ? 1 : -1);
+       return repository.findAll()
+               .stream()
+               .max((j1, j2) -> Integer.compare(j1.getVentas(), j2.getVentas()));
     }
 
     public List<Juego> orderByName(String palabraClave) {
@@ -51,11 +63,16 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     public List<Juego> findNotSell() {
-        return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now())).toList();
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now())).toList();
     }
 
     public List<Juego> findNewGames() {
-        return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now())).toList();
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
     }
 
     /*

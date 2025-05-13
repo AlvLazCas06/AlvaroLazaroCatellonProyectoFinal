@@ -55,7 +55,7 @@ public class ControllerJuego {
     public String showEditGame(Model model, @PathVariable Long id) {
         model.addAttribute("juego", serviceJuego.findById(id));
         model.addAttribute("consolas", serviceConsola.findAll());
-        return "addgame";
+        return "addgames";
     }
 
     @PostMapping("/mostrarjuego/editar/submit")

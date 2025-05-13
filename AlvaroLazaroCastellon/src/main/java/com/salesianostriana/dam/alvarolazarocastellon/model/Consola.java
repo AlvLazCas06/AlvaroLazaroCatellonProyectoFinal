@@ -42,7 +42,7 @@ public class Consola {
 
     private String imagen;
 
-    @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER)
     @Builder.Default
     private List<Juego> juegos = new ArrayList<Juego>();
 
