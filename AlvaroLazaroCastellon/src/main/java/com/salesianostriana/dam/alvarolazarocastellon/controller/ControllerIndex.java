@@ -16,6 +16,7 @@ public class ControllerIndex {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("masvendido", serviceJuego.findMaxSell().orElse(new Juego()));
+        model.addAttribute("threeMaxSell", serviceJuego.findThreeMaxSell());
         return "main";
     }
 

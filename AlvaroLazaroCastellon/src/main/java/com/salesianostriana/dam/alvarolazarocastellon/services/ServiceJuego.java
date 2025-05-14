@@ -75,6 +75,14 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .toList();
     }
 
+    public List<Juego> findThreeMaxSell() {
+        return repository.findAll()
+                .stream()
+                .sorted((j1, j2) -> Integer.compare(j2.getVentas(), j1.getVentas()))
+                .limit(3)
+                .toList();
+    }
+
     /*
     public List<Juego> showOffers() {
         Random idrandom = new Random(System.nanoTime());

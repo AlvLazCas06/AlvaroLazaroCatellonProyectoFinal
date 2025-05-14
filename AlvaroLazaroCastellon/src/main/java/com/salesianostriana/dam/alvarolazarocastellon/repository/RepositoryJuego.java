@@ -24,4 +24,6 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
     """)
     List<Juego> findAll2(String palabraClave);
 
+    List<Juego> findAllById(Long id);
+
 }
