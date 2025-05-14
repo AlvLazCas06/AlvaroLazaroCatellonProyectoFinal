@@ -63,8 +63,8 @@
 							<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
 							<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
 						</div>
-						<div class="carousel-inner" th:each="game : ${threeMaxSell}">
-							<div class="carousel-item active">
+						<div class="carousel-inner">
+							<div class="carousel-item active" th:each="game : ${threeMaxSell}">
 								<img src="https://art.gametdb.com/ds/box/JA/BEEJ.png?1486144513" th:src="${game.rutaImagen}" alt="Carátula" th:alt="${game.nombre}" class="d-block">
 							</div>
 						</div>
