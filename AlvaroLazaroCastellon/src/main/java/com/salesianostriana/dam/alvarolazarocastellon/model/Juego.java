@@ -22,7 +22,7 @@ public class Juego {
 
     private String nombre;
 
-    @Column(length = 3000)
+    @Lob
     private String description;
 
     private double precio;

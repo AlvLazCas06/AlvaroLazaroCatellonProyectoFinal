@@ -38,42 +38,46 @@
         </section>
         <section class="table-responsive container-fluid">
             <table class="table table-dark table-striped table-hover">
-                <tr class="align-middle text-center">
-                    <th class="text-light">Id</th>
-                    <th class="text-light">Nombre</th>
-                    <th class="text-light">Descripción</th>
-                    <th class="text-light">Precio</th>
-                    <th class="text-light">Cantidad</th>
-                    <th class="text-light">Ventas</th>
-                    <th class="text-light">Genero</th>
-                    <th class="text-light">Número de Jug.</th>
-                    <th class="text-light">Plataforma</th>
-                    <th class="text-light">Fecha de Lanzamiento</th>
-                    <th class="text-light">Llegada a tienda</th>
-                    <th class="text-light">Carátula</th>
-                    <th colspan="2" class="text-light">Acciones</th>
-                </tr>
-                <tr th:each="game : ${juego}" class="align-middle text-center">
-                    <td th:text="${game.id}" class="text-light"></td>
-                    <td th:text="${game.nombre}" class="text-light"></td>
-                    <td th:text="${game.description}" class="text-light"></td>
-                    <td th:text="${game.precio}" class="text-light"></td>
-                    <td th:text="${game.cantidad}" class="text-light"></td>
-                    <td th:text="${game.ventas}" class="text-light"></td>
-                    <td th:text="${game.genero}" class="text-light"></td>
-                    <td th:text="${game.numJugadores == 4 ? '1-4' : (game.numJugadores == 2 ? '1-2' : '1')}" class="text-light"></td>
-                    <td th:text="${game.consola.nombre}" class="text-light"></td>
-                    <td th:text="${game.fechaLanzamiento}" class="text-light"></td>
-                    <td th:text="${game.llegadaAlMercado}" class="text-light"></td>
-                    <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
-                            th:src="${game.rutaImagen}" alt="Cáratula"></td>
-                    <td>
-                        <a href="../templates/editgame.html" th:href="@{/mostrarjuego/editar/{id}(id=${game.id})}"
-                            class="btn btn-outline-success">Editar</a>
-                        <a href="#" th:href="@{/mostrarjuego/{id}(id=${game.id})}"
-                            class="btn btn-outline-danger">Eliminar</a>
-                    </td>
-                </tr>
+                <thead>
+                    <tr class="align-middle text-center">
+                        <th class="text-light">Id</th>
+                        <th class="text-light">Nombre</th>
+                        <th class="text-light">Descripción</th>
+                        <th class="text-light">Precio</th>
+                        <th class="text-light">Cantidad</th>
+                        <th class="text-light">Ventas</th>
+                        <th class="text-light">Genero</th>
+                        <th class="text-light">Número de Jug.</th>
+                        <th class="text-light">Plataforma</th>
+                        <th class="text-light">Fecha de Lanzamiento</th>
+                        <th class="text-light">Llegada a tienda</th>
+                        <th class="text-light">Carátula</th>
+                        <th colspan="2" class="text-light">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="game : ${juego}" class="align-middle text-center">
+                        <td th:text="${game.id}" class="text-light"></td>
+                        <td th:text="${game.nombre}" class="text-light"></td>
+                        <td th:text="${game.description}" class="text-light"></td>
+                        <td th:text="${game.precio}" class="text-light"></td>
+                        <td th:text="${game.cantidad}" class="text-light"></td>
+                        <td th:text="${game.ventas}" class="text-light"></td>
+                        <td th:text="${game.genero}" class="text-light"></td>
+                        <td th:text="${game.numJugadores == 4 ? '1-4' : (game.numJugadores == 2 ? '1-2' : '1')}" class="text-light"></td>
+                        <td th:text="${game.consola.nombre}" class="text-light"></td>
+                        <td th:text="${game.fechaLanzamiento}" class="text-light"></td>
+                        <td th:text="${game.llegadaAlMercado}" class="text-light"></td>
+                        <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
+                                 th:src="${game.rutaImagen}" alt="Cáratula"></td>
+                        <td>
+                            <a href="../templates/editgame.html" th:href="@{/mostrarjuego/editar/{id}(id=${game.id})}"
+                               class="btn btn-outline-success">Editar</a>
+                            <a href="#" th:href="@{/mostrarjuego/{id}(id=${game.id})}"
+                               class="btn btn-outline-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </section>
     </main>
