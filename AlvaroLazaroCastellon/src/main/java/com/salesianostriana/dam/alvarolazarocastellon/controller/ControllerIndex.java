@@ -23,22 +23,4 @@ public class ControllerIndex {
         return "main";
     }
 
-    @PostMapping("/carrito/agregar/{id}")
-    public String addGameToCart(@PathVariable Long id, @RequestParam int cantidad, Model model) {
-        Juego juego = serviceJuego.findById(id);
-        juego.setCantidad(cantidad);
-        if (juego != null) {
-            model.addAttribute("juego", juego);
-            return "redirect:/";
-        } else {
-            return "error";
-        }
-    }
-
-    @GetMapping("/carrito")
-    public String showCarrito() {
-        List<Juego> juegos = new ArrayList<Juego>();
-        return "carrito";
-    }
-
 }

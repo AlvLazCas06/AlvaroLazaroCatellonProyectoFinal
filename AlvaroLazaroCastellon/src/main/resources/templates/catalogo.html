@@ -22,7 +22,7 @@
 		  <div class="row row-cols-2 row-cols-md-5 g-3">
 			  <div class="col d-flex">
 				  <form action="#" th:action="@{/catalogo}" method="get" class="w-100">
-					  <input type="hidden" name="consola" value="Wii">
+					  <input type="hidden" name="consola" th:value="${consolas[0].nombre}">
 					  <input type="hidden" name="palabraClave" th:value="${palabraClave}">
 					  <input type="hidden" name="orden" th:value="${orden}">
 					  <button type="submit" class="card flex-fill text-center bg-danger text-light border-0 w-100">
@@ -35,7 +35,7 @@
 			  </div>
 			<div class="col d-flex">
 				<form action="#" th:action="@{/catalogo}" method="get" class="w-100">
-					<input type="hidden" name="consola" value="Play Station 3">
+					<input type="hidden" name="consola" th:value="${consolas[1].nombre}">
 					<input type="hidden" name="palabraClave" th:value="${palabraClave}">
 					<input type="hidden" name="orden" th:value="${orden}">
 					<button type="submit" class="card flex-fill text-center bg-primary text-light border-0 w-100">
@@ -48,7 +48,7 @@
 			</div>
 			<div class="col d-flex">
 				<form action="#" th:action="@{/catalogo}" method="get" class="w-100">
-					<input type="hidden" name="consola" value="XBOX 360">
+					<input type="hidden" name="consola" th:value="${consolas[2].nombre}">
 					<input type="hidden" name="palabraClave" th:value="${palabraClave}">
 					<input type="hidden" name="orden" th:value="${orden}">
 					<button type="submit" class="card flex-fill text-center bg-success text-light border-0 w-100">
@@ -61,7 +61,7 @@
 			</div>
 			<div class="col d-flex">
 				<form action="#" th:action="@{/catalogo}" method="get" class="w-100">
-					<input type="hidden" name="consola" value="Nintendo DS">
+					<input type="hidden" name="consola" th:value="${consolas[3].nombre}">
 					<input type="hidden" name="palabraClave" th:value="${palabraClave}">
 					<input type="hidden" name="orden" th:value="${orden}">
 					<button type="submit" class="card flex-fill text-center bg-danger text-light border-0 w-100">
@@ -74,7 +74,7 @@
 			</div>
 			<div class="col d-flex">
 				<form action="#" th:action="@{/catalogo}" method="get" class="w-100">
-					<input type="hidden" name="consola" value="PSP">
+					<input type="hidden" name="consola" th:value="${consolas[4].nombre}">
 					<input type="hidden" name="palabraClave" th:value="${palabraClave}">
 					<input type="hidden" name="orden" th:value="${orden}">
 					<button type="submit" class="card flex-fill text-center bg-primary text-light border-0 w-100">

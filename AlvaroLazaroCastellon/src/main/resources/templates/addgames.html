@@ -25,7 +25,7 @@
         <form action="#" method="POST" th:action="${juego.id != 0} ? @{/mostrarjuego} : @{/mostrarjuego/editar/submit}" th:object="${juego}">
             <fieldset>
                 <div class="form-group mb-3">
-                    <label for="id">Id</label>
+                    <label for="id" hidden="hidden">Id</label>
                     <input th:if="${juego.id != 0}" type="hidden" th:field="*{id}" class="form-control" readonly>
                     <label for="nombre">Nombre</label>
                     <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre del juego" required>
