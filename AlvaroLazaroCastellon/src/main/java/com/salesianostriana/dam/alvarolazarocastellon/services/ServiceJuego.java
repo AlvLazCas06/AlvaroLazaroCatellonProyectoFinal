@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Service
 public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
@@ -81,6 +80,19 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .sorted((j1, j2) -> Integer.compare(j2.getVentas(), j1.getVentas()))
                 .limit(3)
                 .toList();
+    }
+
+    public double applyDiscountByYear(Long id) {
+        return repository.findById(id)
+                .stream()
+                .mapToDouble(Juego::getPrecio)
+                .sum()
+                -
+                repository.findById(id)
+                .stream()
+                .filter(j -> j.getFechaLanzamiento().getYear() < 2010)
+                .mapToDouble(Juego::getPrecio)
+                .sum() * 0.10;
     }
 
     /*

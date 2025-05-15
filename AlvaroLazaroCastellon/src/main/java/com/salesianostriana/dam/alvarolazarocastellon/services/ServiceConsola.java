@@ -36,4 +36,17 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
         }
     }
 
+    public double applyDiscount(Long id) {
+        return repository.findById(id)
+                .stream()
+                .filter(c -> c.getFabricante().equals("Nintendo"))
+                .mapToDouble(Consola::getPrecio)
+                .sum()
+                - repository.findById(id)
+                .stream()
+                .filter(c -> c.getFabricante().equals("Nintendo"))
+                .mapToDouble(Consola::getPrecio)
+                .sum() * 0.1;
+    }
+
 }

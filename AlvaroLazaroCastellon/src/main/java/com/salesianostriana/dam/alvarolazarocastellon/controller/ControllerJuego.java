@@ -87,6 +87,7 @@ public class ControllerJuego {
         model.addAttribute("palabraClave", palabraClave);
         model.addAttribute("orden", orden);
         model.addAttribute("consola", consola);
+        model.addAttribute("consolas", serviceConsola.findAll());
         return "catalogo";
     }
 
@@ -102,9 +103,10 @@ public class ControllerJuego {
         return "novedades";
     }
 
-    @GetMapping("/catalogo/venta/{id}")
+    @GetMapping({"/catalogo/venta/{id}", "/novedades/venta/{id}"})
     public String showSale(Model model, @PathVariable Long id) {
         model.addAttribute("juegoAVender", serviceJuego.findById(id));
+        model.addAttribute("descuento", serviceJuego.applyDiscountByYear(id));
         return "ventajuego";
     }
 

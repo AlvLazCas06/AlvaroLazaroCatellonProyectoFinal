@@ -39,14 +39,11 @@
 				</div>
 
 				<div class="col-12 col-lg-4 d-flex flex-column align-items-center">
-					<h1 class="text-center fw-bold" th:text="${juegoAVender.cantidad > 0 ? #numbers.formatDecimal(juegoAVender.precio, 1, 2) + '€' : 'Agotado'}"></h1>
-					<form action="#" th:action="@{/carrito/agregar/{id} (id=${juegoAVender.id})}" method="post">
-						<div>
-							<label for="cantidad" class="form-label">Cantidad</label>
-							<input type="number" name="cantidad" id="cantidad" min="1" th:max="${juegoAVender.cantidad}" th:value="${juegoAVender.cantidad}" class="form-control" th:disabled="${juegoAVender.cantidad == 0}">
-						</div>
-						<input type="submit" class="btn btn-primary mt-3" th:if="${juegoAVender.cantidad > 0}" value="Añadir al carrito">
-					</form>
+					<h1 th:if="${juegoAVender.cantidad > 0}">Precio:</h1>
+					<h1 class="text-center fw-bold">
+						<span th:if="${descuento != juegoAVender.precio}" class="text-danger text-decoration-line-through" th:text="${#numbers.formatDecimal(juegoAVender.precio, 1, 2) + '€'}"></span>
+						<span th:text="${#numbers.formatDecimal(descuento, 1, 2) + '€'}"></span>
+					</h1>
 				</div>
 			</div>
 		</section>
