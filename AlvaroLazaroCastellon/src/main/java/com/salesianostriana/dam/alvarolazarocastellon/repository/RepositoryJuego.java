@@ -24,6 +24,34 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
             """)
     List<Juego> findAll2(String palabraClave);
 
+    @Query("""
+                SELECT J
+                FROM Juego J
+                    ORDER BY J.precio ASC
+            """)
+    List<Juego> orderByPrecioASC();
+
+    @Query("""
+                SELECT J
+                FROM Juego J
+                    ORDER BY J.precio DESC
+            """)
+    List<Juego> orderByPrecioDESC();
+
+    @Query("""
+            select J
+            from Juego J
+                order by J.nombre ASC
+            """)
+    List<Juego> orderByNombreASC();
+
+    @Query("""
+            select J
+            from Juego J
+                order by J.nombre desc
+            """)
+    List<Juego> orderByNombreDESC();
+
     // List<Juego> findAllById(Long id);
 
 }

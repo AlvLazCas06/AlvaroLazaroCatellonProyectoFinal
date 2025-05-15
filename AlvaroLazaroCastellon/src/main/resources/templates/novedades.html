@@ -20,11 +20,13 @@
     <main>
         <section class="container">
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-light d-flex justify-content-center align-items-center flex-column" th:each="game : ${novedades}">
-                    <img src="#" alt="Juego" th:src="${game.rutaImagen}" th:alt="${game.nombre}" class="d-block">
-                    <h2 th:text="${game.nombre}" class="text-center"></h2>
-                    <h3 class="text-center" th:text="${#numbers.formatDecimal(game.precio, 1, 2) + '€'}">
-                    </h3>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-light" th:each="game : ${novedades}">
+                    <a th:href="@{/novedades/venta/{id} (id=${game.id})}" class="btn btn-light d-flex justify-content-center align-items-center flex-column">
+                        <img src="#" alt="Juego" th:src="${game.rutaImagen}" th:alt="${game.nombre}" class="d-block">
+                        <h2 th:text="${game.nombre}" class="text-center"></h2>
+                        <h3 class="text-center" th:text="${#numbers.formatDecimal(game.precio, 1, 2) + '€'}">
+                        </h3>
+                    </a>
                 </div>
             </div>
         </section>

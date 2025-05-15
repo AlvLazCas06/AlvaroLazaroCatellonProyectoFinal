@@ -82,6 +82,50 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .toList();
     }
 
+    public List<Juego> sortGames(String sort, String palabraClave) {
+        List<Juego> juegos;
+        if (palabraClave != null) {
+            juegos = repository.findAll(palabraClave).stream()
+                    .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .toList();
+        }
+
+        if (sort == null) {
+            juegos = repository.findAll().stream()
+                    .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .toList();
+        }
+
+        switch (sort) {
+            case "priceASC" -> {
+                juegos = repository.orderByPrecioASC().stream()
+                        .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                        .toList();
+            }
+            case "priceDESC" -> {
+                juegos = repository.orderByPrecioDESC().stream()
+                        .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                        .toList();
+            }
+            case "A-Z" -> {
+                juegos = repository.orderByNombreASC().stream()
+                        .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                        .toList();
+            }
+            case "Z-A" -> {
+                juegos = repository.orderByNombreDESC().stream()
+                        .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                        .toList();
+            }
+            default -> {
+                juegos = repository.findAll().stream()
+                        .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                        .toList();
+            }
+        }
+        return juegos;
+    }
+
     public double applyDiscountByYear(Long id) {
         return repository.findById(id)
                 .stream()

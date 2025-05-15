@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -72,20 +70,16 @@ public class ControllerJuego {
     }
 
     @GetMapping("/catalogo")
-    public String showCatalogo(Model model, @Param("palabraClave") String palabraClave, @Param("orden") String orden, @Param("consola") String consola) {
-        List<Juego> juegos = serviceJuego.listAll(palabraClave);
+    public String showCatalogo(Model model, @Param("palabraClave") String palabraClave, @RequestParam(required = false)String sort, @Param("consola") String consola) {
+        List<Juego> juegos = serviceJuego.sortGames(palabraClave, sort);
 
         if (consola != null && !consola.isEmpty()) {
             juegos = serviceJuego.findByConsole(consola);
         }
 
-        if ("nombre".equalsIgnoreCase(orden)) {
-            juegos = serviceJuego.orderByName(palabraClave);
-        }
-
         model.addAttribute("juegos", juegos);
         model.addAttribute("palabraClave", palabraClave);
-        model.addAttribute("orden", orden);
+        model.addAttribute("orden", sort);
         model.addAttribute("consola", consola);
         model.addAttribute("consolas", serviceConsola.findAll());
         return "catalogo";
@@ -98,7 +92,7 @@ public class ControllerJuego {
     }
 
     @GetMapping("/novedades")
-    public String showNovedades(Model model) {
+    public String showNewGames(Model model) {
         model.addAttribute("novedades", serviceJuego.findNewGames());
         return "novedades";
     }
@@ -108,6 +102,12 @@ public class ControllerJuego {
         model.addAttribute("juegoAVender", serviceJuego.findById(id));
         model.addAttribute("descuento", serviceJuego.applyDiscountByYear(id));
         return "ventajuego";
+    }
+
+    @GetMapping("/sort")
+    public String sendSort(@RequestParam String sort, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("sort", sort);
+        return "redirect:/catalogo";
     }
 
 }
