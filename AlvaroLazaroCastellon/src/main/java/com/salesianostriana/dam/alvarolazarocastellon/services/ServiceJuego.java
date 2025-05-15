@@ -6,6 +6,7 @@ import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceI
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +38,9 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     public Optional<Juego> findMaxSell() {
-       return repository.findAll()
-               .stream()
-               .max((j1, j2) -> Integer.compare(j1.getVentas(), j2.getVentas()));
+        return repository.findAll()
+                .stream()
+                .max((j1, j2) -> Integer.compare(j1.getVentas(), j2.getVentas()));
     }
 
     public List<Juego> orderByName(String palabraClave) {
@@ -85,13 +86,8 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     public List<Juego> sortGames(String sort, String palabraClave) {
         List<Juego> juegos;
         if (palabraClave != null) {
-            juegos = repository.findAll(palabraClave).stream()
-                    .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
-                    .toList();
-        }
-
-        if (sort == null) {
-            juegos = repository.findAll().stream()
+            juegos = repository.findAll(palabraClave)
+                    .stream()
                     .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                     .toList();
         }
@@ -123,6 +119,7 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                         .toList();
             }
         }
+
         return juegos;
     }
 
@@ -133,10 +130,10 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .sum()
                 -
                 repository.findById(id)
-                .stream()
-                .filter(j -> j.getFechaLanzamiento().getYear() < 2010)
-                .mapToDouble(Juego::getPrecio)
-                .sum() * 0.10;
+                        .stream()
+                        .filter(j -> j.getFechaLanzamiento().getYear() < 2010)
+                        .mapToDouble(Juego::getPrecio)
+                        .sum() * 0.10;
     }
 
     /*

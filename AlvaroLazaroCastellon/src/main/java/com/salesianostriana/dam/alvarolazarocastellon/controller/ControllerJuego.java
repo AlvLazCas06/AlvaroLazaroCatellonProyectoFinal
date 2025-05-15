@@ -70,7 +70,7 @@ public class ControllerJuego {
     }
 
     @GetMapping("/catalogo")
-    public String showCatalogo(Model model, @Param("palabraClave") String palabraClave, @RequestParam(required = false)String sort, @Param("consola") String consola) {
+    public String showCatalogo(Model model, @ModelAttribute String palabraClave, @ModelAttribute String sort, @Param("consola") String consola) {
         List<Juego> juegos = serviceJuego.sortGames(palabraClave, sort);
 
         if (consola != null && !consola.isEmpty()) {
@@ -105,8 +105,9 @@ public class ControllerJuego {
     }
 
     @GetMapping("/sort")
-    public String sendSort(@RequestParam String sort, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addAttribute("sort", sort);
+    public String sendSort(@RequestParam(required = false, name = "orden") String sort, @RequestParam(required = false) String palabraClave, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addAttribute("orden", sort);
+        redirectAttributes.addAttribute("palabraClave", palabraClave);
         return "redirect:/catalogo";
     }
 
