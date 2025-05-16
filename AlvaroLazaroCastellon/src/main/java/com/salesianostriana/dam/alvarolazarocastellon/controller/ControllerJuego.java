@@ -70,18 +70,32 @@ public class ControllerJuego {
     }
 
     @GetMapping("/catalogo")
-    public String showCatalogo(Model model, @ModelAttribute String palabraClave, @ModelAttribute String sort, @Param("consola") String consola) {
-        List<Juego> juegos = serviceJuego.sortGames(palabraClave, sort);
+    public String showCatalogo(Model model,
+                               @RequestParam(required = false, name = "orden") String sort,
+                               @RequestParam(required = false) String consola, @RequestParam(required = false) String palabraClave) {
+        List<Juego> juegos;
 
-        if (consola != null && !consola.isEmpty()) {
-            juegos = serviceJuego.findByConsole(consola);
+        if (sort == null || sort.isEmpty()) {
+            juegos = serviceJuego.listAll(palabraClave); // Obtener todos los juegos si no hay orden
+        } else {
+            juegos = serviceJuego.sortGames(sort); // Ordenar según el parámetro
         }
 
+        // Filtrar por consola si se proporciona
+        if (consola != null && !consola.isEmpty()) {
+            juegos = juegos.stream()
+                    .filter(j -> j.getConsola() != null &&
+                            consola.equalsIgnoreCase(j.getConsola().getNombre()))
+                    .toList();
+        }
+
+        // Agregar atributos al modelo
         model.addAttribute("juegos", juegos);
-        model.addAttribute("palabraClave", palabraClave);
         model.addAttribute("orden", sort);
         model.addAttribute("consola", consola);
+        model.addAttribute("palabraClave", palabraClave);
         model.addAttribute("consolas", serviceConsola.findAll());
+
         return "catalogo";
     }
 
@@ -105,7 +119,7 @@ public class ControllerJuego {
     }
 
     @GetMapping("/sort")
-    public String sendSort(@RequestParam(required = false, name = "orden") String sort, @RequestParam(required = false) String palabraClave, RedirectAttributes redirectAttributes) {
+    public String sendSort(@RequestParam(name = "orden") String sort, @RequestParam(required = false) String palabraClave, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("orden", sort);
         redirectAttributes.addAttribute("palabraClave", palabraClave);
         return "redirect:/catalogo";

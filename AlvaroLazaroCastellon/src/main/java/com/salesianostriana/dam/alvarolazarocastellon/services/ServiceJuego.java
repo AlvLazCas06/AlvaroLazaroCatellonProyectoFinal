@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,38 +84,37 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .toList();
     }
 
-    public List<Juego> sortGames(String sort, String palabraClave) {
+    public List<Juego> sortGames(String sort) {
         List<Juego> juegos;
-        if (palabraClave != null) {
-            juegos = repository.findAll(palabraClave)
-                    .stream()
-                    .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
-                    .toList();
-        }
 
         switch (sort) {
             case "priceASC" -> {
-                juegos = repository.orderByPrecioASC().stream()
+                juegos = repository.orderByPrecioASC()
+                        .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
-                        .toList();
+                        .toList();;
             }
             case "priceDESC" -> {
-                juegos = repository.orderByPrecioDESC().stream()
+                juegos = repository.orderByPrecioDESC()
+                        .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
-                        .toList();
+                        .toList();;
             }
             case "A-Z" -> {
-                juegos = repository.orderByNombreASC().stream()
+                juegos = repository.orderByNombreASC()
+                        .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                         .toList();
             }
             case "Z-A" -> {
-                juegos = repository.orderByNombreDESC().stream()
+                juegos = repository.orderByNombreDESC()
+                        .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                         .toList();
             }
             default -> {
-                juegos = repository.findAll().stream()
+                juegos = repository.findAll()
+                        .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                         .toList();
             }

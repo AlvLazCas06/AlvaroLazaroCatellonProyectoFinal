@@ -17,11 +17,10 @@
     <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
 
-<body class="bg-dark d-flex flex-column justify-content-center align-items-center vh-100">
-    <header class="container mt-2">
-        <h1 class="bg-light rounded text-center align-middle">Agregar Juego</h1>
-    </header>
-    <main class="container text-light">
+<body class="bg-dark">
+    <header th:replace="~{fragments/headerconfiguracion::header}"></header>
+    <main class="container text-light d-flex flex-column justify-content-center align-items-center vh-100">
+        <h1 class="p-2 bg-light text-dark rounded text-center">Agregar | Editar Juego</h1>
         <form action="#" method="POST" th:action="${juego.id != 0} ? @{/mostrarjuego} : @{/mostrarjuego/editar/submit}" th:object="${juego}">
             <fieldset>
                 <div class="form-group mb-3">
@@ -89,6 +88,7 @@
             </fieldset>
         </form>
     </main>
+    <footer th:replace="~{fragments/footer::footer}"></footer>
     <script>
         AOS.init();
     </script>
