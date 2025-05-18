@@ -15,8 +15,9 @@
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
-<body class="bg-dark d-flex flex-column justify-content-center align-items-center vh-100">
-	<main>
+<body class="bg-dark">
+	<header th:replace="~{fragments/header::header}"></header>
+	<main class="d-flex flex-column justify-content-center align-items-center vh-100">
 
 		<section class="container-fluid py-3">
 			<a href="#" th:href="@{/catalogo}" class="text-light fs-3">

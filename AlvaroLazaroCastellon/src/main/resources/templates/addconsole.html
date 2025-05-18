@@ -13,10 +13,9 @@
 	<title>Añadir consola</title>
 </head>
 <body class="bg-dark text-light">
-	<header class="container">
-		<h1>Añadir Consola</h1>
-	</header>
-	<main class="container text-light">
+	<header th:replace="~{fragments/headerconfiguracion::header}"></header>
+	<main class="container d-flex flex-column justify-content-center align-items-center vh-100">
+		<h1 class="p-2 bg-light text-dark rounded text-center">Agregar | Editar Consola</h1>
 		<form action="#" method="POST" th:action="@{/mostrarconsolas}" th:object="${consola}">
 			<fieldset>
 				<div class="form-group mb-3">
@@ -67,5 +66,6 @@
 			</fieldset>
 		</form>
 	</main>
+	<footer th:replace="~{fragments/footer::footer}"></footer>
 </body>
 </html>

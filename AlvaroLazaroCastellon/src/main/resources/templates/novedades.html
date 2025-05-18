@@ -17,9 +17,10 @@
 </head>
 <body class="bg-dark">
     <header th:replace="~{fragments/header::header}"></header>
-    <main>
+    <main class="container d-flex flex-column justify-content-center align-items-center vh-100">
         <section class="container">
-            <div class="row">
+            <article class="row">
+                <h1 th:if="${novedades.isEmpty()}" class="col-12 text-danger">No ha llegado ningún juego hoy a tienda</h1>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-light" th:each="game : ${novedades}">
                     <a th:href="@{/novedades/venta/{id} (id=${game.id})}" class="btn btn-light d-flex justify-content-center align-items-center flex-column">
                         <img src="#" alt="Juego" th:src="${game.rutaImagen}" th:alt="${game.nombre}" class="d-block">
@@ -28,7 +29,7 @@
                         </h3>
                     </a>
                 </div>
-            </div>
+            </article>
         </section>
     </main>
     <footer th:replace="~{fragments/footer::footer}"></footer>
