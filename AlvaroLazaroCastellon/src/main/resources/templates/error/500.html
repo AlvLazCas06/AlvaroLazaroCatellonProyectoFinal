@@ -15,9 +15,14 @@
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
-<body>
-    <main>
-	    <h1>No se puede realizar la acción deseada</h1>
+<body class="bg-dark text-danger">
+	<header th:replace="~{fragments/header::header}"></header>
+	<main class="d-flex flex-column justify-content-center align-items-center vh-100">
+	    <section>
+		    <article>
+			    <h1 class="">No se puede realizar la acción deseada</h1>
+		    </article>
+	    </section>
     </main>
 	<footer th:replace="~{fragments/footer::footer}"></footer>
 </body>
