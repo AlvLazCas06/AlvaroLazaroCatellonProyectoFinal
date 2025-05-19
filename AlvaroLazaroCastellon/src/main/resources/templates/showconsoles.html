@@ -62,16 +62,16 @@
 					<td th:text="${console.fechaLanzamiento}" class="text-light"></td>
 					<td th:text="${console.llegadaAlMercado}" class="text-light"></td>
 					<td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
-					         th:src="${console.imagen}" alt="Cáratula"></td>
+					         th:src="${console.imagen}" alt="Cáratula" width="100px" height="100px"></td>
 					<td>
 						<div th:each="juego : ${console.juegos}">
 							<p th:text="${juego.nombre}"></p>
 						</div>
 					</td>
 					<td>
-						<a href="../templates/editgame.html" th:href="@{/mostrarconsolas/editar/{id}(id=${console.id})}"
+						<a href="#" th:href="@{/mostrarconsolas/editar/{id}(id=${console.id})}"
 						   class="btn btn-outline-success">Editar</a>
-						<a href="../templates/deletegame.html" th:href="@{/mostrarconsolas/{id}(id=${console.id})}"
+						<a href="#" th:href="@{/mostrarconsolas/{id}(id=${console.id})}"
 						   class="btn btn-outline-danger">Eliminar</a>
 					</td>
 				</tr>

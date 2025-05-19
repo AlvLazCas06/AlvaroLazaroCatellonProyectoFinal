@@ -69,9 +69,9 @@
                         <td th:text="${game.fechaLanzamiento}" class="text-light"></td>
                         <td th:text="${game.llegadaAlMercado}" class="text-light"></td>
                         <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
-                                 th:src="${game.rutaImagen}" alt="Cáratula"></td>
+                                 th:src="${game.rutaImagen}" alt="Cáratula" width="100px" height="100px"></td>
                         <td>
-                            <a href="../templates/editgame.html" th:href="@{/mostrarjuego/editar/{id}(id=${game.id})}"
+                            <a href="#" th:href="@{/mostrarjuego/editar/{id}(id=${game.id})}"
                                class="btn btn-outline-success">Editar</a>
                             <a href="#" th:href="@{/mostrarjuego/{id}(id=${game.id})}"
                                class="btn btn-outline-danger">Eliminar</a>

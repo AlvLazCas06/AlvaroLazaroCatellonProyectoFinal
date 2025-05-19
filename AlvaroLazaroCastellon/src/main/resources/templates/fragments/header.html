@@ -9,7 +9,9 @@
 <header th:fragment="header">
 	<nav class="navbar navbar-expand-sm bg-danger navbar-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="../main.html" th:href="@{/}">Inicio</a>
+			<a class="navbar-brand" href="../main.html" th:href="@{/}">
+				<img src="../static/img/Logo/New_Retros_Games_Logo.png" th:src="@{/img/Logo/New_Retros_Games_Logo.png}" alt="Logo" class="rounded" width="50px">
+			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -35,7 +37,11 @@
 					</li>
 				</ul>
 				<ul class="navbar-nav me-auto">
-					<a href="#" th:href="@{/mostrarjuego}" class="nav-link"><i class="bi bi-gear-fill"></i></a>
+					<li class="nav-link">
+						<a href="#" th:href="@{/mostrarjuego}">
+							<i class="bi bi-gear-fill"></i>
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>

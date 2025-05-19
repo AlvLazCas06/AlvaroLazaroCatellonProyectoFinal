@@ -70,9 +70,10 @@ public class ControllerJuego {
     }
 
     @GetMapping("/catalogo")
-    public String showCatalogo(Model model,
-                               @RequestParam(required = false, name = "orden") String sort,
-                               @RequestParam(required = false) String consola, @RequestParam(required = false) String palabraClave) {
+    public String showCatalogue(Model model,
+                                @RequestParam(required = false, name = "orden") String sort,
+                                @RequestParam(required = false) String consola,
+                                @RequestParam(required = false) String palabraClave) {
         List<Juego> juegos;
 
         if (sort == null || sort.isEmpty()) {
@@ -83,13 +84,9 @@ public class ControllerJuego {
 
         // Filtrar por consola si se proporciona
         if (consola != null && !consola.isEmpty()) {
-            juegos = juegos.stream()
-                    .filter(j -> j.getConsola() != null &&
-                            consola.equalsIgnoreCase(j.getConsola().getNombre()))
-                    .toList();
+            juegos = serviceJuego.findByConsole(consola, palabraClave);
         }
 
-        // Agregar atributos al modelo
         model.addAttribute("juegos", juegos);
         model.addAttribute("orden", sort);
         model.addAttribute("consola", consola);

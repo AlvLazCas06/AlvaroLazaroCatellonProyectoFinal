@@ -43,7 +43,8 @@
 		</section>
 		<section class="container">
 			<article class="row justify-content-center align-items-center">
-				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right" th:object="${masvendido}">
+				<h1 class="d-flex justify-content-center align-items-center" data-aos="fade-left" th:if="${threeMaxSell.isEmpty() and masvendido.ventas == 0}">No se ha vendido ningún Juego todavía</h1>
+				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right" th:object="${masvendido}" th:if="${masvendido.ventas != 0}">
 					<h1>Juego más vendido</h1>
 					<div>
 						<img src="../static/img/Consolas/Wii.png" th:src="*{rutaImagen}" alt="mas vendido" th:alt="*{nombre}" class="mb-2 img-fluid">
@@ -55,13 +56,14 @@
 					</button>
 
 				</div>
-				<div class="col-12 col-md-8 d-flex justify-content-center align-items-center flex-column" data-aos="fade-left">
+
+				<div class="col-12 col-md-8 d-flex justify-content-center align-items-center flex-column" data-aos="fade-left" th:unless="${threeMaxSell.isEmpty()}">
 					<h1 th:text="${threeMaxSell.size() < 3} ? 'Top ' + ${threeMaxSell.size()} + ' Ventas' : 'Top 3 Ventas'"></h1>
 					<div id="demo" class="carousel slide" data-bs-ride="carousel">
 						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-							<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-							<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+							<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" th:if="${threeMaxSell.size() >= 1}"></button>
+							<button type="button" data-bs-target="#demo" data-bs-slide-to="1" th:if="${threeMaxSell.size() >= 2}"></button>
+							<button type="button" data-bs-target="#demo" data-bs-slide-to="2" th:if="${threeMaxSell.size() == 3}"></button>
 						</div>
 						<div class="carousel-inner">
 							<div class="carousel-item active" th:each="game : ${threeMaxSell}" th:if="${game.ventas > 0}">

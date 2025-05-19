@@ -18,11 +18,14 @@
 		<section class="container">
 			<article class="row">
 				<h1 th:if="${consolasNovedades.isEmpty()}" class="col-12 text-danger">No ha llegado ninguna consola hoy a tienda</h1>
-				<div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column" th:each="consola : ${consolasNovedades}">
-					<img src="#" alt="Juego" th:src="${consola.imagen}" th:alt="${consola.nombre}" class="d-block">
-					<h2 th:text="${consola.nombre}" class="text-center"></h2>
-					<h3 class="text-center" th:text="${#numbers.formatDecimal(consola.precio, 1, 2) + '€'}">
-					</h3>
+				<div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column" th:each="console : ${consolasNovedades}">
+					<a th:href="@{/novedadesconsolas/venta/{id} (id=${console.id})}" class="btn btn-light d-flex flex-column justify-content-center align-items-center h-100 w-100">
+						<img src="#" alt="Juego" th:src="${console.imagen}" th:alt="${console.nombre}" class="d-block mb-2" width="250px" height="250px">
+						<h2 th:text="${console.nombre}" class="text-center"></h2>
+						<h3 class="text-center"
+						    th:text="${console.cantidad > 0 ? #numbers.formatDecimal(console.precio, 1, 2) + '€' : 'Agotado'}">
+						</h3>
+					</a>
 				</div>
 			</article>
 		</section>

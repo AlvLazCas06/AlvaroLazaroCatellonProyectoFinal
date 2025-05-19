@@ -18,25 +18,38 @@
 			<section class="container my-4">
 				<div class="row row-cols-2 row-cols-md-4 g-3 justify-content-center">
 					<div class="col d-flex">
-						<div class="card flex-fill text-center bg-danger text-light border-0">
-							<div class="card-body d-flex align-items-center justify-content-center">
-								<img src="../static/img/Consolas/Wii.png" th:src="@{https://th.bing.com/th/id/OIP.XZA16FwtVj9poOVXgnjffwAAAA?cb=iwp1&rs=1&pid=ImgDetMain}" alt="Nintendo" class="mb-2 img-fluid rounded-circle" width="80px">
+						<form action="#" th:action="@{/catalogoconsolas}" method="get" class="w-100">
+							<input type="hidden" name="fabricante" th:value="Nintendo">
+							<input type="hidden" name="palabraClave" th:value="${palabraClave}">
+							<div class="card flex-fill text-center bg-danger text-light border-0">
+								<div class="card-body d-flex align-items-center justify-content-center">
+									<input type="image" src="#" th:src="@{https://th.bing.com/th/id/OIP.XZA16FwtVj9poOVXgnjffwAAAA?cb=iwp1&rs=1&pid=ImgDetMain}" alt="Nintendo" th:alt="Nintendo" class="mb-2 img-fluid rounded-circle" width="80px">
+								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 					<div class="col d-flex">
-						<div class="card flex-fill text-center bg-primary text-light border-0">
-							<div class="card-body d-flex align-items-center justify-content-center">
-								<img src="../static/img/Consolas/PS3.png" th:src="@{https://th.bing.com/th/id/OIP.h5TEsp73Roz0wkNhsqiMdwAAAA?w=120&h=120&c=7&r=0&o=7&cb=iwp1&pid=1.7&rm=3}" alt="Sony" class="mb-2 img-fluid rounded-circle" width="80px">
+						<form action="#" th:action="@{/catalogoconsolas}" method="get" class="w-100">
+							<input type="hidden" name="fabricante" th:value="Sony">
+							<input type="hidden" name="palabraClave" th:value="${palabraClave}">
+							<div class="card flex-fill text-center bg-primary text-light border-0">
+								<div class="card-body d-flex align-items-center justify-content-center">
+									<input type="image" src="#" th:src="@{https://th.bing.com/th/id/OIP.h5TEsp73Roz0wkNhsqiMdwAAAA?w=120&h=120&c=7&r=0&o=7&cb=iwp1&pid=1.7&rm=3}" alt="Sony" th:alt="Sony" class="mb-2 img-fluid rounded-circle" width="80px">
+								</div>
 							</div>
-						</div>
+
+						</form>
 					</div>
 					<div class="col d-flex">
-						<div class="card flex-fill text-center bg-success text-light border-0">
-							<div class="card-body d-flex align-items-center justify-content-center">
-								<img src="../static/img/Consolas/XBOX360.png" th:src="@{https://th.bing.com/th/id/OIP.njjIpov-9r4u-CIaTK75GQAAAA?w=150&h=150&c=7&r=0&o=7&cb=iwp1&pid=1.7&rm=3}" alt="Microsoft" class="mb-2 img-fluid rounded-circle" width="80px">
+						<form action="#" th:action="@{/catalogoconsolas}" method="get" class="w-100">
+							<input type="hidden" name="fabricante" th:value="Microsoft">
+							<input type="hidden" name="palabraClave" th:value="${palabraClave}">
+							<div class="card flex-fill text-center bg-success text-light border-0">
+								<div class="card-body d-flex align-items-center justify-content-center">
+									<input type="image" src="#" th:src="@{https://th.bing.com/th/id/OIP.njjIpov-9r4u-CIaTK75GQAAAA?w=150&h=150&c=7&r=0&o=7&cb=iwp1&pid=1.7&rm=3}" alt="Microsoft" th:alt="Microsoft" class="mb-2 img-fluid rounded-circle" width="80px">
+								</div>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</section>
@@ -52,15 +65,17 @@
 				</form>
 			</section>
 			<section class="container">
-				<div class="row">
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-light d-flex justify-content-center align-items-center flex-column" th:each="consola : ${consolas}" data-aos="fade-right">
-						<img src="#" alt="Juego" th:src="${consola.imagen}" th:alt="${consola.nombre}" class="d-block">
-						<h2 th:text="${consola.nombre}" class="text-center"></h2>
-						<h3 class="text-center"
-						    th:text="${consola.cantidad > 0 ? #numbers.formatDecimal(consola.precio, 1, 2) + '€' : 'Agotado'}">
-						</h3>
+				<article class="row">
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-light mb-5" th:each="console : ${consolas}" data-aos="fade-right">
+						<a th:href="@{/catalogoconsolas/venta/{id} (id=${console.id})}" class="btn btn-light d-flex flex-column justify-content-center align-items-center h-100 w-100">
+							<img src="#" alt="Juego" th:src="${console.imagen}" th:alt="${console.nombre}" class="d-block mb-2" width="250px" height="250px">
+							<h2 th:text="${console.nombre}" class="text-center"></h2>
+							<h3 class="text-center"
+							    th:text="${console.cantidad > 0 ? #numbers.formatDecimal(console.precio, 1, 2) + '€' : 'Agotado'}">
+							</h3>
+						</a>
 					</div>
-				</div>
+				</article>
 			</section>
 		</main>
 		<footer th:replace="~{fragments/footer::footer}"></footer>
