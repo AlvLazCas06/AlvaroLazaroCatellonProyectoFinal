@@ -40,7 +40,8 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     public Optional<Juego> findMaxSell() {
         return repository.findAll()
                 .stream()
-                .filter(j -> j.getVentas() > 0)
+                .filter(j -> j.getVentas() > 0
+                        && j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                 .max((j1, j2) -> Integer.compare(j1.getVentas(), j2.getVentas()));
     }
 
@@ -62,7 +63,8 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     public List<Juego> findNotSell() {
         return repository.findAll()
                 .stream()
-                .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now())).toList();
+                .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                .toList();
     }
 
     public List<Juego> findNewGames() {
@@ -76,7 +78,8 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
         return repository.findAll()
                 .stream()
                 .sorted((j1, j2) -> Integer.compare(j2.getVentas(), j1.getVentas()))
-                .filter(j -> j.getVentas() > 0)
+                .filter(j -> j.getVentas() > 0
+                        && !j.equals(findMaxSell().get()))
                 .limit(3)
                 .toList();
     }

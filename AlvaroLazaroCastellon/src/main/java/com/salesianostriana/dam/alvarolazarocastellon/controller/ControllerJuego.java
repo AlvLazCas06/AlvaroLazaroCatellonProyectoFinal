@@ -77,12 +77,11 @@ public class ControllerJuego {
         List<Juego> juegos;
 
         if (sort == null || sort.isEmpty()) {
-            juegos = serviceJuego.listAll(palabraClave); // Obtener todos los juegos si no hay orden
+            juegos = serviceJuego.listAll(palabraClave);
         } else {
-            juegos = serviceJuego.sortGames(sort); // Ordenar según el parámetro
+            juegos = serviceJuego.sortGames(sort);
         }
 
-        // Filtrar por consola si se proporciona
         if (consola != null && !consola.isEmpty()) {
             juegos = serviceJuego.findByConsole(consola, palabraClave);
         }
@@ -108,7 +107,7 @@ public class ControllerJuego {
         return "novedades";
     }
 
-    @GetMapping({"/catalogo/venta/{id}", "/novedades/venta/{id}"})
+    @GetMapping({"/catalogo/venta/{id}", "/novedades/venta/{id}", "/proximamente/reserva/{id}"})
     public String showSale(Model model, @PathVariable Long id) {
         model.addAttribute("juegoAVender", serviceJuego.findById(id));
         model.addAttribute("descuento", serviceJuego.applyDiscountByYear(id));
