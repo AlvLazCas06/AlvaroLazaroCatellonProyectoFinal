@@ -3,6 +3,7 @@ package com.salesianostriana.dam.alvarolazarocastellon.services;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -39,12 +40,22 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     public Optional<Juego> findMaxSell() {
         return repository.findAll()
                 .stream()
+                .filter(j -> j.getVentas() > 0)
                 .max((j1, j2) -> Integer.compare(j1.getVentas(), j2.getVentas()));
     }
 
-    public List<Juego> findByConsole(String consola) {
+    public List<Juego> findByConsole(String consola, String palabraClave) {
+        if (palabraClave != null){
+            return repository.findAll(palabraClave).stream()
+                    .filter(j -> j.getConsola() != null
+                            && j.getConsola().getNombre().equalsIgnoreCase(consola)
+                            && j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .toList();
+        }
         return repository.findAll().stream()
-                .filter(j -> j.getConsola() != null && j.getConsola().getNombre().equalsIgnoreCase(consola))
+                .filter(j -> j.getConsola() != null
+                        && j.getConsola().getNombre().equalsIgnoreCase(consola)
+                        && j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                 .toList();
     }
 
@@ -110,8 +121,10 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     public double applyDiscountByYear(Long id) {
+        double descuentoNormal = 10, descuentoLlegada2010 = 20, descuentoLlegadaHoy = 15;
 
-        if (repository.findById(id).get().getLlegadaAlMercado().isEqual(LocalDate.now())) {
+        if (repository.findById(id).get().getLlegadaAlMercado().isEqual(LocalDate.now())
+                && repository.findById(id).get().getFechaLanzamiento().getYear() < 2010) {
             return repository.findById(id)
                     .stream()
                     .mapToDouble(Juego::getPrecio)
@@ -119,9 +132,21 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                     -
                     repository.findById(id)
                             .stream()
-                            .filter(j -> j.getFechaLanzamiento().getYear() < 2010)
                             .mapToDouble(Juego::getPrecio)
-                            .sum() * 0.20;
+                            .sum() * (descuentoLlegada2010 / 100);
+        }
+
+        if (repository.findById(id).get().getLlegadaAlMercado().isEqual(LocalDate.now())
+                && repository.findById(id).get().getFechaLanzamiento().getYear() >= 2010) {
+            return repository.findById(id)
+                    .stream()
+                    .mapToDouble(Juego::getPrecio)
+                    .sum()
+                    -
+                    repository.findById(id)
+                            .stream()
+                            .mapToDouble(Juego::getPrecio)
+                            .sum() * (descuentoLlegadaHoy / 100);
         }
 
         return repository.findById(id)
@@ -133,7 +158,7 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                         .stream()
                         .filter(j -> j.getFechaLanzamiento().getYear() < 2010)
                         .mapToDouble(Juego::getPrecio)
-                        .sum() * 0.10;
+                        .sum() * (descuentoNormal / 100);
     }
 
 }

@@ -13,40 +13,66 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
 
     public List<Consola> listAll(String S) {
         if (S != null) {
-            return repository.findAll(S).stream().filter(c -> c.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1))).toList();
+            return repository.findAll(S)
+                    .stream()
+                    .filter(c -> c.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .toList();
         }
-        return repository.findAll().stream().filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1))).toList();
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .toList();
     }
 
     public List<Consola> findNotSell() {
-        return repository.findAll().stream().filter(c -> c.getLlegadaAlMercado().isAfter(LocalDate.now())).toList();
+        return repository.findAll()
+                .stream()
+                .filter(c -> c.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                .toList();
     }
 
     public List<Consola> findNewConsoles() {
-        return repository.findAll().stream().filter(c -> c.getLlegadaAlMercado().isEqual(LocalDate.now())).toList();
+        return repository.findAll()
+                .stream()
+                .filter(c -> c.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
     }
 
     public boolean deleteConsole(Long id) {
         if (repository.findById(id).get().getJuegos().isEmpty()) {
             repository.deleteById(id);
             return true;
-
         } else {
             return false;
         }
     }
 
     public double applyDiscount(Long id) {
+        double descuento = 10;
+        String fabricante = "Nintendo";
         return repository.findById(id)
                 .stream()
-                .filter(c -> c.getFabricante().equals("Nintendo"))
                 .mapToDouble(Consola::getPrecio)
                 .sum()
                 - repository.findById(id)
                 .stream()
-                .filter(c -> c.getFabricante().equals("Nintendo"))
+                .filter(c -> c.getFabricante().equalsIgnoreCase(fabricante))
                 .mapToDouble(Consola::getPrecio)
-                .sum() * 0.1;
+                .sum() * (descuento / 100);
+    }
+
+    public List<Consola> findByFabricante(String fabricante, String palabraClave) {
+        if (palabraClave != null) {
+            return repository.findAll(palabraClave)
+                    .stream()
+                    .filter(c -> c.getFabricante().equalsIgnoreCase(fabricante))
+                    .toList();
+        }
+        return repository.findAll()
+                .stream()
+                .filter(c -> c.getFabricante().equalsIgnoreCase(fabricante)
+                        && c.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .toList();
     }
 
 }
