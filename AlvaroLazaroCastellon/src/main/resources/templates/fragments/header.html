@@ -17,28 +17,26 @@
 			</button>
 			<div class="collapse navbar-collapse" id="mynavbar">
 				<ul class="navbar-nav me-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="../novedades.html" th:href="@{/novedades}">Novedades de Juegos</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Juegos</a>
+						<ul class="dropdown-menu bg-danger">
+							<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/catalogo}">Catálogo</a></li>
+							<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/novedades}">Novedades</a></li>
+							<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/próximamente}">Próximamente</a></li>
+						</ul>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../catalogo.html" th:href="@{/catalogo}">Cátalogo de juegos</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../proximamente.html" th:href="@{/próximamente}">Próximamente en Juegos</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../novedadesconsolas.html" th:href="@{/novedadesconsolas}">Novedades de Consolas</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../catalogoconsola.html" th:href="@{/catalogoconsolas}">Catalogo de consolas</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="../proximamenteconsolas.html" th:href="@{/proximamenteconsolas}">Próximamente en Consolas</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Consolas</a>
+						<ul class="dropdown-menu bg-danger">
+							<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/catalogoconsolas}">Catálogo</a></li>
+							<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/novedadesconsolas}">Novedades</a></li>
+							<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/proximamenteconsolas}">Próximamente</a></li>
+						</ul>
 					</li>
 				</ul>
-				<ul class="navbar-nav me-auto">
+				<ul class="navbar-nav justify-content-end">
 					<li class="nav-link">
-						<a href="#" th:href="@{/mostrarjuego}">
+						<a href="#" th:href="@{/mostrarjuego}" class="btn btn-outline-light">
 							<i class="bi bi-gear-fill"></i>
 						</a>
 					</li>

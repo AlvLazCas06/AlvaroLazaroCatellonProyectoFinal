@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
@@ -60,18 +61,47 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .toList();
     }
 
-    public List<Juego> findNotSell() {
+    public List<Juego> findNotSell(String palabraClave) {
+
+        if (palabraClave != null) {
+            return repository.findAll(palabraClave)
+                    .stream()
+                    .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                    .toList();
+        }
+
         return repository.findAll()
                 .stream()
                 .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
                 .toList();
     }
 
-    public List<Juego> findNewGames() {
+    public List<Juego> findNewGames(String palabraClave) {
+
+        if (palabraClave != null) {
+            return repository.findAll(palabraClave)
+                    .stream()
+                    .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                    .toList();
+        }
+
         return repository.findAll()
                 .stream()
                 .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
                 .toList();
+    }
+
+    public Juego findNewGame() {
+        Random index = new Random(System.nanoTime());
+        List<Juego> juegos = repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
+
+        if (!juegos.isEmpty()) {
+            return juegos.get(index.nextInt(juegos.size()));
+        }
+        return null;
     }
 
     public List<Juego> findThreeMaxSell() {

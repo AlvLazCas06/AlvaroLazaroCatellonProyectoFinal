@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +61,7 @@ public class ControllerConsola {
     }
 
     @GetMapping("/catalogoconsolas")
-    public String showCatalogo(Model model, @ModelAttribute("palabraClave") String palabraClave, @Param("fabricante") String fabricante) {
+    public String showCatalogo(Model model, @ModelAttribute("palabraClave") String palabraClave, @RequestParam(value = "fabricante", required = false) String fabricante) {
         List<Consola> consolas = serviceConsola.listAll(palabraClave);
         if (fabricante != null) {
             consolas = serviceConsola.findByFabricante(fabricante, palabraClave);

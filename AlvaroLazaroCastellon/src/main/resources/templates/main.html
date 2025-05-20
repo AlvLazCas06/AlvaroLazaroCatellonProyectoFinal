@@ -82,9 +82,15 @@
 				</div>
 			</article>
 		</section>
-		<section class="container">
+		<section class="container" th:if="${newGame != null}" th:object="${newGame}">
 			<article class="row justify-content-center align-items-center">
-
+				<div class="col-12 col-md-4 text-center" data-aos="fade-right">
+					<h1>Novedad</h1>
+					<div>
+						<img src="../static/img/Consolas/Wii.png" th:src="*{rutaImagen}" alt="mas vendido" th:alt="*{nombre}" class="mb-2 img-fluid">
+					</div>
+					<h1 th:text="*{nombre}"></h1>
+				</div>
 			</article>
 		</section>
 		<section>

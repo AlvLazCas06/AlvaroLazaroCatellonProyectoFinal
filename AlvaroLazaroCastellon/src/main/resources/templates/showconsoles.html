@@ -57,7 +57,12 @@
 					<tr th:each="console : ${consolas}" class="align-middle text-center">
 						<td th:text="${console.id}" class="text-light"></td>
 						<td th:text="${console.nombre}" class="text-light"></td>
-						<td th:text="${console.description}" class="text-light"></td>
+						<td class="text-light">
+							<p class="collapse" th:text="${console.description}" th:id="'description_' + ${console.id}"></p>
+							<button type="button" class="btn btn-primary" data-bs-toggle="collapse" th:data-bs-target="'#description_' + ${console.id}">
+								Ver Descripción
+							</button>
+						</td>
 						<td th:text="${console.fabricante}" class="text-light"></td>
 						<td th:text="${console.precio}" class="text-light"></td>
 						<td th:text="${console.cantidad}" class="text-light"></td>
@@ -67,9 +72,12 @@
 						<td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
 						         th:src="${console.imagen}" alt="Cáratula" width="100px" height="100px"></td>
 						<td>
-							<div th:each="juego : ${console.juegos}">
+							<div class="collapse" th:each="juego : ${console.juegos}" th:id="'juegos_' + ${console.id}">
 								<p th:text="${juego.nombre}"></p>
 							</div>
+							<button type="button" class="btn btn-primary" data-bs-toggle="collapse" th:data-bs-target="'#juegos_' + ${console.id}">
+								Ver Juegos
+							</button>
 						</td>
 						<td>
 							<a href="#" th:href="@{/mostrarconsolas/editar/{id}(id=${console.id})}"

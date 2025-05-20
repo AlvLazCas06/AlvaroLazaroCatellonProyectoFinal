@@ -59,7 +59,12 @@
                     <tr th:each="game : ${juego}" class="align-middle text-center">
                         <td th:text="${game.id}" class="text-light"></td>
                         <td th:text="${game.nombre}" class="text-light"></td>
-                        <td th:text="${game.description}" class="text-light"></td>
+                        <td class="text-light">
+                            <p class="collapse" th:text="${game.description}" th:id="'description_' + ${game.id}"></p>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="collapse" th:data-bs-target="'#description_' + ${game.id}">
+                                Ver Descripción
+                            </button>
+                        </td>
                         <td th:text="${game.precio}" class="text-light"></td>
                         <td th:text="${game.cantidad}" class="text-light"></td>
                         <td th:text="${game.ventas}" class="text-light"></td>
@@ -73,8 +78,30 @@
                         <td>
                             <a href="#" th:href="@{/mostrarjuego/editar/{id}(id=${game.id})}"
                                class="btn btn-outline-success">Editar</a>
-                            <a href="#" th:href="@{/mostrarjuego/{id}(id=${game.id})}"
-                               class="btn btn-outline-danger">Eliminar</a>
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:data-bs-target="'#eliminar_' + ${game.id}">
+                                Eliminar
+                            </button>
+                            <div class="modal" th:id="'eliminar_' + ${game.id}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" th:text="${game.nombre}"></h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <h1>¿Estás seguro de que quieres eliminar este juego?</h1>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <a href="#" th:href="@{/mostrarjuego/{id}(id=${game.id})}"
+                                               class="btn btn-outline-danger">Sí</a>
+                                            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">No</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

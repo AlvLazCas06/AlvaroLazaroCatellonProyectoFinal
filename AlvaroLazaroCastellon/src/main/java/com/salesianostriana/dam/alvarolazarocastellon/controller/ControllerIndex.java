@@ -20,6 +20,7 @@ public class ControllerIndex {
     public String index(Model model) {
         model.addAttribute("masvendido", serviceJuego.findMaxSell().orElse(new Juego()));
         model.addAttribute("threeMaxSell", serviceJuego.findThreeMaxSell());
+        model.addAttribute("newGame", serviceJuego.findNewGame());
         return "main";
     }
 

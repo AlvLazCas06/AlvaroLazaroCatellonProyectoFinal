@@ -5,7 +5,6 @@ import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -96,14 +95,17 @@ public class ControllerJuego {
     }
 
     @GetMapping("/próximamente")
-    public String showNextRelease(Model model) {
-        model.addAttribute("juegosProximos", serviceJuego.findNotSell());
+    public String showNextRelease(Model model, @RequestParam(required = false) String palabraClave) {
+        model.addAttribute("juegosProximos", serviceJuego.findNotSell(palabraClave));
+        model.addAttribute("palabraClave", palabraClave);
         return "proximamente";
     }
 
     @GetMapping("/novedades")
-    public String showNewGames(Model model) {
-        model.addAttribute("novedades", serviceJuego.findNewGames());
+    public String showNewGames(Model model,
+                               @RequestParam(required = false) String palabraClave) {
+        model.addAttribute("novedades", serviceJuego.findNewGames(palabraClave));
+        model.addAttribute("palabraClave", palabraClave);
         return "novedades";
     }
 
