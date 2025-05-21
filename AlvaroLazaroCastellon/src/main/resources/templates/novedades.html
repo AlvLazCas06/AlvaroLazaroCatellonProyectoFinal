@@ -17,14 +17,115 @@
 </head>
 <body class="bg-dark">
     <header th:replace="~{fragments/header::header}"></header>
-    <main class="container d-flex flex-column justify-content-center align-items-center vh-100">
+    <main class="container d-flex flex-column justify-content-center align-items-center">
+        <section class="container my-4" th:if="${not novedades.isEmpty()}">
+            <article class="row row-cols-2 row-cols-md-5 g-3">
+                <div class="col d-flex">
+                    <form action="#" th:action="@{/novedades}" method="get" class="w-100">
+                        <input type="hidden" name="consola" th:value="${consolas[0].nombre}">
+                        <input type="hidden" name="palabraClave" th:value="${palabraClave}">
+                        <input type="hidden" name="sort" th:value="${sort}">
+                        <div class="card flex-fill text-center bg-danger text-light border-0 w-100">
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <input type="image" src="#" th:src="@{img/Consolas/Wii.png}" alt="Wii" th:alt="${consolas[0].nombre}" class="mb-2 img-fluid rounded-circle" width="80px">
+                                <p class="mx-2 d-none d-md-block">Wii</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col d-flex">
+                    <form action="#" th:action="@{/novedades}" method="get" class="w-100">
+                        <input type="hidden" name="consola" th:value="${consolas[2].nombre}">
+                        <input type="hidden" name="palabraClave" th:value="${palabraClave}">
+                        <input type="hidden" name="sort" th:value="${sort}">
+                        <div class="card flex-fill text-center bg-primary text-light border-0 w-100">
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <input type="image" src="#" th:src="@{img/Consolas/PS3.png}" alt="PS3" th:alt="${consolas[2].nombre}" class="mb-2 img-fluid rounded-circle" width="80px">
+                                <p class="mx-2 d-none d-md-block">PS3</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col d-flex">
+                    <form action="#" th:action="@{/novedades}" method="get" class="w-100">
+                        <input type="hidden" name="consola" th:value="${consolas[3].nombre}">
+                        <input type="hidden" name="palabraClave" th:value="${palabraClave}">
+                        <input type="hidden" name="sort" th:value="${sort}">
+                        <div class="card flex-fill text-center bg-success text-light border-0 w-100">
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <input type="image" src="#" th:src="@{img/Consolas/XBOX360.png}" alt="XBOX 360" th:alt="${consolas[3].nombre}" class="mb-2 img-fluid rounded-circle" width="80px">
+                                <p class="mx-2 d-none d-md-block">XBOX 360</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col d-flex">
+                    <form action="#" th:action="@{/novedades}" method="get" class="w-100">
+                        <input type="hidden" name="consola" th:value="${consolas[1].nombre}">
+                        <input type="hidden" name="palabraClave" th:value="${palabraClave}">
+                        <input type="hidden" name="sort" th:value="${sort}">
+                        <div class="card flex-fill text-center bg-danger text-light border-0 w-100">
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <input type="image" src="#" th:src="@{img/Consolas/NDS.jpg}" alt="PSP" th:alt="${consolas[1].nombre}" class="mb-2 img-fluid rounded-circle" width="80px">
+                                <p class="mx-2 d-none d-md-block">NDS</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col d-flex">
+                    <form action="#" th:action="@{/novedades}" method="get" class="w-100">
+                        <input type="hidden" name="consola" th:value="${consolas[4].nombre}">
+                        <input type="hidden" name="palabraClave" th:value="${palabraClave}">
+                        <input type="hidden" name="sort" th:value="${sort}">
+                        <div class="card flex-fill text-center bg-primary text-light border-0 w-100">
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <input type="image" src="#" th:src="@{img/Consolas/PSP.png}" alt="PSP" th:alt="${consolas[4].nombre}" class="mb-2 img-fluid rounded-circle" width="80px">
+                                <p class="mx-2 d-none d-md-block">PSP</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </section>
         <section class="container-fluid d-flex justify-content-between align-items-center mb-4" th:if="${not novedades.isEmpty()}">
             <form action="#" th:action="@{/novedades}" method="get">
-                <div class="d-flex">
+                <div class="d-flex justify-content-around align-items-center">
                     <div class="d-flex align-items-center flex-wrap">
                         <input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
                         <input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
                         <a href="#" th:href="@{/novedades}" class="btn btn-outline-secondary">Limpiar</a>
+                    </div>
+
+                    <div class="d-flex align-items-center ms-3">
+                        <label for="sort" class="text-light me-2">Ordenar por:</label>
+                        <select name="sort" id="sort" class="form-select" onchange="this.form.submit()">
+                            <option value="" th:selected="${sort == null}">---</option>
+                            <option th:value="A-Z" th:selected="${sort == 'A-Z'}">A-Z</option>
+                            <option th:value="Z-A" th:selected="${sort == 'Z-A'}">Z-A</option>
+                            <option th:value="priceASC" th:selected="${sort == 'priceASC'}">Precio ascendente</option>
+                            <option th:value="priceDESC" th:selected="${sort == 'priceDESC'}">Precio descendente</option>
+                        </select>
+                        <label for="genero" class="text-light">Buscar Genero</label>
+                        <select name="genero" id="genero" class="form-select" onchange="this.form.submit()">
+                            <option value="" th:selected="${genero == null}">---</option>
+                            <option th:value="Plataforma" th:selected="${genero == 'Plataforma'}">Plataforma</option>
+                            <option th:value="Acción" th:selected="${genero == 'Acción'}">Acción</option>
+                            <option th:value="Aventura" th:selected="${genero == 'Aventura'}">Aventura</option>
+                            <option th:value="Shooter" th:selected="${genero == 'Shooter'}">Shooter</option>
+                            <option th:value="RPG" th:selected="${genero == 'RPG'}">RPG</option>
+                            <option th:value="J-RPG" th:selected="${genero == 'J-RPG'}">J-RPG</option>
+                            <option th:value="Simulación" th:selected="${genero == 'Simulación'}">Simulación</option>
+                            <option th:value="Estrategia" th:selected="${genero == 'Estrategia'}">Estrategia</option>
+                            <option th:value="Deportes" th:selected="${genero == 'Deportes'}">Deportes</option>
+                            <option th:value="Carreras" th:selected="${genero == 'Carreras'}">Carreras</option>
+                            <option th:value="Lucha" th:selected="${genero == 'Lucha'}">Lucha</option>
+                            <option th:value="Musical" th:selected="${genero == 'Musical'}">Musical</option>
+                            <option th:value="Puzle" th:selected="${genero == 'Puzle'}">Puzle</option>
+                            <option th:value="Party" th:selected="${genero == 'Party'}">Party</option>
+                            <option th:value="Sandbox" th:selected="${genero == 'Sandbox'}">Sandbox</option>
+                            <option th:value="Metroidvania" th:selected="${genero == 'Metroidvania'}">Metroidvania</option>
+                            <option th:value="MMORPG" th:selected="${genero == 'MMORPG'}">MMORPG</option>
+                        </select>
                     </div>
                 </div>
             </form>

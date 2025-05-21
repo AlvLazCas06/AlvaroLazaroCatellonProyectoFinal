@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryConsola> {
@@ -24,15 +25,28 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
                 .toList();
     }
 
-    public List<Consola> findNotSell() {
+    public List<Consola> listAll2(String S) {
+        if (S != null) {
+            return repository.findAll2(S)
+                    .stream()
+                    .filter(c -> c.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .toList();
+        }
         return repository.findAll()
+                .stream()
+                .filter(c -> c.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .toList();
+    }
+
+    public List<Consola> findNotSell(String S) {
+        return repository.findAll(S)
                 .stream()
                 .filter(c -> c.getLlegadaAlMercado().isAfter(LocalDate.now()))
                 .toList();
     }
 
-    public List<Consola> findNewConsoles() {
-        return repository.findAll()
+    public List<Consola> findNewConsoles(String S) {
+        return repository.findAll(S)
                 .stream()
                 .filter(c -> c.getLlegadaAlMercado().isEqual(LocalDate.now()))
                 .toList();
@@ -61,17 +75,40 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
                 .sum() * (descuento / 100);
     }
 
-    public List<Consola> findByFabricante(String fabricante, String palabraClave) {
-        if (palabraClave != null) {
-            return repository.findAll(palabraClave)
-                    .stream()
-                    .filter(c -> c.getFabricante().equalsIgnoreCase(fabricante))
-                    .toList();
-        }
+    public List<Consola> findByFabricante(String fabricante) {
+        return repository.findConsolaByFabricanteIgnoreCase(fabricante)
+                .stream()
+                .filter(c -> c.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .toList();
+    }
+
+    public List<Consola> findByFabricanteOnNotSell(String fabricante) {
+        return repository.findConsolaByFabricanteIgnoreCase(fabricante)
+                .stream()
+                .filter(c -> c.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                .toList();
+    }
+
+    public List<Consola> findByFabricanteOnNewConsole(String fabricante) {
+        return repository.findConsolaByFabricanteIgnoreCase(fabricante)
+                .stream()
+                .filter(c -> c.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
+    }
+
+    public Optional<Consola> findMaxSell() {
         return repository.findAll()
                 .stream()
-                .filter(c -> c.getFabricante().equalsIgnoreCase(fabricante)
-                        && c.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .max((c1, c2) -> Integer.compare(c1.getVentas(), c2.getVentas()));
+    }
+
+    public List<Consola> findThreeMaxSell() {
+        return repository.findAll()
+                .stream()
+                .sorted((c1, c2) -> Integer.compare(c1.getVentas(), c2.getVentas()))
+                .filter(c -> c.getVentas() > 0
+                    && !c.equals(findMaxSell().get()))
+                .limit(3)
                 .toList();
     }
 

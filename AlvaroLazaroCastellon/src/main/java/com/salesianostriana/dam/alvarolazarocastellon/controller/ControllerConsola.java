@@ -31,8 +31,9 @@ public class ControllerConsola {
     }
 
     @GetMapping("/mostrarconsolas")
-    public String showConsoles(Model model) {
-        model.addAttribute("consolas", serviceConsola.findAll());
+    public String showConsoles(Model model, @RequestParam(value = "palabraClave", required = false) String palabraClave) {
+        model.addAttribute("consolas", serviceConsola.listAll2(palabraClave));
+        model.addAttribute("palabraClave", palabraClave);
         return "showconsoles";
     }
 
@@ -61,10 +62,12 @@ public class ControllerConsola {
     }
 
     @GetMapping("/catalogoconsolas")
-    public String showCatalogo(Model model, @ModelAttribute("palabraClave") String palabraClave, @RequestParam(value = "fabricante", required = false) String fabricante) {
+    public String showCatalogo(Model model,
+                               @ModelAttribute("palabraClave") String palabraClave,
+                               @RequestParam(value = "fabricante", required = false) String fabricante) {
         List<Consola> consolas = serviceConsola.listAll(palabraClave);
         if (fabricante != null) {
-            consolas = serviceConsola.findByFabricante(fabricante, palabraClave);
+            consolas = serviceConsola.findByFabricante(fabricante);
         }
         model.addAttribute("consolas", consolas);
         model.addAttribute("palabraClave", palabraClave);
@@ -73,16 +76,30 @@ public class ControllerConsola {
     }
 
     @GetMapping("/proximamenteconsolas")
-    public String showNextRelease(Model model) {
-        List<Consola> consolasProximas = serviceConsola.findNotSell();
+    public String showNextRelease(Model model,
+                                  @ModelAttribute("palabraClave") String palabraClave,
+                                  @RequestParam(value = "fabricante", required = false) String fabricante) {
+        List<Consola> consolasProximas = serviceConsola.findNotSell(palabraClave);
+        if (fabricante != null) {
+            consolasProximas = serviceConsola.findByFabricanteOnNotSell(fabricante);
+        }
         model.addAttribute("consolasProximas", consolasProximas);
+        model.addAttribute("palabraClave", palabraClave);
+        model.addAttribute("fabricante", fabricante);
         return "proximamenteconsolas";
     }
 
     @GetMapping("/novedadesconsolas")
-    public String showNovedades(Model model) {
-        List<Consola> consolasNovedades = serviceConsola.findNewConsoles();
+    public String showNovedades(Model model,
+                                @RequestParam(value = "palabraClave", required = false) String palabraClave,
+                                @RequestParam(value = "fabricante", required = false) String fabricante) {
+        List<Consola> consolasNovedades = serviceConsola.findNewConsoles(palabraClave);
+        if (fabricante != null) {
+            consolasNovedades = serviceConsola.findByFabricanteOnNewConsole(fabricante);
+        }
         model.addAttribute("consolasNovedades", consolasNovedades);
+        model.addAttribute("palabraClave", palabraClave);
+        model.addAttribute("fabricante", fabricante);
         return "novedadesconsolas";
     }
 

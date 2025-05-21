@@ -59,7 +59,7 @@
 						<div class="d-flex align-items-center">
 							<input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
 							<input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
-							<input type="button" class="btn btn-outline-secondary ms-2" value="Limpiar" onclick="limpiar()">
+							<a href="#" th:href="@{/catalogoconsolas}" class="btn btn-outline-secondary">Limpiar</a>
 						</div>
 					</div>
 				</form>
@@ -81,11 +81,6 @@
 		<footer th:replace="~{fragments/footer::footer}"></footer>
 		<script>
 	        AOS.init();
-		</script>
-		<script type="text/javascript">
-	        function limpiar() {
-	            window.location='/catalogoconsolas'
-	        }
 		</script>
 	</body>
 </html>

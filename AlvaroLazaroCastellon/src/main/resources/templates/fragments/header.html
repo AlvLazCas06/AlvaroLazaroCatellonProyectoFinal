@@ -12,7 +12,7 @@
 			<a class="navbar-brand" href="../main.html" th:href="@{/}">
 				<img src="../static/img/Logo/New_Retros_Games_Logo.png" th:src="@{/img/Logo/New_Retros_Games_Logo.png}" alt="Logo" class="rounded" width="50px">
 			</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral" aria-controls="menuLateral">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="mynavbar">
@@ -47,6 +47,39 @@
 			</div>
 		</div>
 	</nav>
+	<section class="offcanvas offcanvas-start text-bg-dark" id="menuLateral" tabindex="-1" aria-labelledby="menuLateralLabel">
+		<article class="offcanvas-header">
+			<h1 class="offcanvas-title">Menú</h1>
+			<button type="button" class="btn-close btn-outline-light text-reset text-bg-dark" data-bs-dismiss="offcanvas"><i class="bi bi-x"></i></button>
+			<hr />
+		</article>
+		<article class="offcanvas-body">
+			<div class="nav-item">
+				<a href="#" th:href="@{/quienessomos}" class="nav-link">¿Quiénes somos?</a>
+			</div>
+			<div class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Juegos</a>
+				<ul class="dropdown-menu bg-danger">
+					<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/catalogo}">Catálogo</a></li>
+					<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/novedades}">Novedades</a></li>
+					<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/próximamente}">Próximamente</a></li>
+				</ul>
+			</div>
+			<div class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Consolas</a>
+				<ul class="dropdown-menu bg-danger">
+					<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/catalogoconsolas}">Catálogo</a></li>
+					<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/novedadesconsolas}">Novedades</a></li>
+					<li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/proximamenteconsolas}">Próximamente</a></li>
+				</ul>
+			</div>
+			<div class="nav-link align-items-end">
+				<a href="#" th:href="@{/mostrarjuego}" class="btn btn-outline-light">
+					<i class="bi bi-gear-fill"></i>
+				</a>
+			</div>
+		</article>
+	</section>
 </header>
 </body>
 </html>

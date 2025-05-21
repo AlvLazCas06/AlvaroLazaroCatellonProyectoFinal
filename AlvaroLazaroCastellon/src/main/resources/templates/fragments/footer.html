@@ -5,21 +5,37 @@
 	<title>Title</title>
 </head>
 <body>
-<footer th:fragment="footer" class="container-fluid bg-dark text-light">
-	<div class="d-flex justify-content-between align-items-center sticky-bottom">
-		<p>
-			&copy; Todos los derechos reservados a Retro's Games
-			<br />
-			CEO: Álvaro Lázaro Castellón
-			<br />
-			Desarrollado por: Álvaro Lázaro Castellón
-		</p>
-		<p class="d-flex justify-content-around align-items-center">
-			<a href="https://www.instagram.com/" class="btn btn-danger"><i class="bi bi-instagram"></i></a>
-			<a href="https://www.facebook.com/" class="btn btn-primary"><i class="bi bi-facebook"></i></a>
-			<a href="https://www.x.com/" class="btn btn-light"><i class="bi bi-twitter-x"></i></a>
-		</p>
-	</div>
+<footer th:fragment="footer" class="bg-dark text-light pt-5 pb-4 mt-auto">
+	<section class="container d-flex justify-content-between align-items-center">
+		<article class="d-flex justify-content-between align-items-center flex-column">
+			<h2>Derechos</h2>
+			<p>
+				&copy; Todos los derechos reservados a Retro's Games
+				<br />
+				CEO: Álvaro Lázaro Castellón
+				<br />
+				Desarrollado por: Álvaro Lázaro Castellón
+			</p>
+		</article>
+		<article class="d-flex justify-content-around align-items-center flex-column">
+			<h2>Contactos</h2>
+			<p>
+				Email: lazaro.caalv24@triana.salesianos.edu
+				<br />
+				Teléfono: 699 83 09 17
+				<br />
+				Dirección: Calle Conde de Bustillo nº 17
+			</p>
+		</article>
+		<article class="d-flex justify-content-around align-items-center flex-column">
+			<h1>Redes</h1>
+			<div>
+				<a href="https://www.instagram.com/" class="btn btn-danger"><i class="bi bi-instagram"></i></a>
+				<a href="https://www.facebook.com/" class="btn btn-primary"><i class="bi bi-facebook"></i></a>
+				<a href="https://www.x.com/" class="btn btn-light"><i class="bi bi-twitter-x"></i></a>
+			</div>
+		</article>
+	</section>
 </footer>
 </body>
 </html>

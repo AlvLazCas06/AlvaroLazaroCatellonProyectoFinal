@@ -14,7 +14,56 @@
 </head>
 <body class="bg-dark text-light">
 	<header th:replace="~{fragments/header::header}"></header>
-	<main class="container d-flex flex-column justify-content-center align-items-center vh-100">
+	<main class="container d-flex flex-column justify-content-center align-items-center">
+		<section class="container my-4" th:if="${not consolasNovedades.isEmpty()}">
+			<div class="row row-cols-2 row-cols-md-4 g-3 justify-content-center">
+				<div class="col d-flex">
+					<form action="#" th:action="@{/novedadesconsolas}" method="get" class="w-100">
+						<input type="hidden" name="fabricante" th:value="Nintendo">
+						<input type="hidden" name="palabraClave" th:value="${palabraClave}">
+						<div class="card flex-fill text-center bg-danger text-light border-0">
+							<div class="card-body d-flex align-items-center justify-content-center">
+								<input type="image" src="#" th:src="@{https://th.bing.com/th/id/OIP.XZA16FwtVj9poOVXgnjffwAAAA?cb=iwp1&rs=1&pid=ImgDetMain}" alt="Nintendo" th:alt="Nintendo" class="mb-2 img-fluid rounded-circle" width="80px">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col d-flex">
+					<form action="#" th:action="@{/novedadesconsolas}" method="get" class="w-100">
+						<input type="hidden" name="fabricante" th:value="Sony">
+						<input type="hidden" name="palabraClave" th:value="${palabraClave}">
+						<div class="card flex-fill text-center bg-primary text-light border-0">
+							<div class="card-body d-flex align-items-center justify-content-center">
+								<input type="image" src="#" th:src="@{https://th.bing.com/th/id/OIP.h5TEsp73Roz0wkNhsqiMdwAAAA?w=120&h=120&c=7&r=0&o=7&cb=iwp1&pid=1.7&rm=3}" alt="Sony" th:alt="Sony" class="mb-2 img-fluid rounded-circle" width="80px">
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div class="col d-flex">
+					<form action="#" th:action="@{/novedadesconsolas}" method="get" class="w-100">
+						<input type="hidden" name="fabricante" th:value="Microsoft">
+						<input type="hidden" name="palabraClave" th:value="${palabraClave}">
+						<div class="card flex-fill text-center bg-success text-light border-0">
+							<div class="card-body d-flex align-items-center justify-content-center">
+								<input type="image" src="#" th:src="@{https://th.bing.com/th/id/OIP.njjIpov-9r4u-CIaTK75GQAAAA?w=150&h=150&c=7&r=0&o=7&cb=iwp1&pid=1.7&rm=3}" alt="Microsoft" th:alt="Microsoft" class="mb-2 img-fluid rounded-circle" width="80px">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		<section class="container-fluid d-flex justify-content-between align-items-center mb-4" th:if="${not consolasNovedades.isEmpty()}">
+			<form action="#" th:action="@{/novedadesconsolas}">
+				<div class="d-flex align-items-center">
+					<div class="d-flex align-items-center">
+						<input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
+						<input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
+						<a href="#" th:href="@{/novedadesconsolas}" class="btn btn-outline-secondary">Limpiar</a>
+					</div>
+				</div>
+			</form>
+		</section>
 		<section class="container">
 			<article class="row">
 				<h1 th:if="${consolasNovedades.isEmpty()}" class="col-12 text-danger">No ha llegado ninguna consola hoy a tienda</h1>

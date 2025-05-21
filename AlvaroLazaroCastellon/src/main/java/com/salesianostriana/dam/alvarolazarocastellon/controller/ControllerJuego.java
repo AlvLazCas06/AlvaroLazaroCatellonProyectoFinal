@@ -77,9 +77,9 @@ public class ControllerJuego {
         List<Juego> juegos;
 
         if (sort == null || sort.isEmpty()) {
-            juegos = serviceJuego.listAll(palabraClave);
+            juegos = serviceJuego.findNotSell(palabraClave);
         } else {
-            juegos = serviceJuego.sortGames(sort);
+            juegos = serviceJuego.sortGamesOnNotSell(sort);
         }
 
         if (genero != null && !genero.isEmpty()) {
@@ -101,17 +101,64 @@ public class ControllerJuego {
     }
 
     @GetMapping("/próximamente")
-    public String showNextRelease(Model model, @RequestParam(required = false) String palabraClave) {
-        model.addAttribute("juegosProximos", serviceJuego.findNotSell(palabraClave));
+    public String showNextRelease(Model model,
+                                  @RequestParam(required = false) String palabraClave,
+                                  @RequestParam(required = false) String consola,
+                                  @RequestParam(required = false) String sort,
+                                  @RequestParam(required = false) String genero) {
+        List<Juego> juegos;
+
+        if (sort == null || sort.isEmpty()) {
+            juegos = serviceJuego.findNotSell(palabraClave);
+        } else {
+            juegos = serviceJuego.sortGamesOnNotSell(sort);
+        }
+
+        if (genero != null && !genero.isEmpty()) {
+            juegos = serviceJuego.findByGenreOnNotSell(genero);
+        }
+
+        if (consola != null && !consola.isEmpty()) {
+            juegos = serviceJuego.findByConsoleOnNotSell(consola, palabraClave);
+        }
+
+        model.addAttribute("juegosProximos", juegos);
         model.addAttribute("palabraClave", palabraClave);
+        model.addAttribute("genero", genero);
+        model.addAttribute("sort", sort);
+        model.addAttribute("consolas", serviceConsola.findAll());
+        model.addAttribute("consola", consola);
         return "proximamente";
     }
 
     @GetMapping("/novedades")
     public String showNewGames(Model model,
-                               @RequestParam(required = false) String palabraClave) {
-        model.addAttribute("novedades", serviceJuego.findNewGames(palabraClave));
+                               @RequestParam(required = false) String palabraClave,
+                               @RequestParam(required = false) String sort,
+                               @RequestParam(required = false) String genero,
+                               @RequestParam(required = false) String consola) {
+        List<Juego> juegos;
+
+        if (sort == null || sort.isEmpty()) {
+            juegos = serviceJuego.findNewGames(palabraClave);
+        } else {
+            juegos = serviceJuego.sortGamesOnNews(sort);
+        }
+
+        if (genero != null && !genero.isEmpty()) {
+            juegos = serviceJuego.findByGenreOnNews(genero);
+        }
+
+        if (consola != null && !consola.isEmpty()) {
+            juegos = serviceJuego.findByConsoleOnNews(consola, palabraClave);
+        }
+
+        model.addAttribute("novedades", juegos);
         model.addAttribute("palabraClave", palabraClave);
+        model.addAttribute("genero", genero);
+        model.addAttribute("sort", sort);
+        model.addAttribute("consolas", serviceConsola.findAll());
+        model.addAttribute("consola", consola);
         return "novedades";
     }
 

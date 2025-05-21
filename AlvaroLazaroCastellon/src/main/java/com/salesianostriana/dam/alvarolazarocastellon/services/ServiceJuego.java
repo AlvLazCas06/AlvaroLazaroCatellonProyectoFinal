@@ -58,6 +58,32 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .toList();
     }
 
+    public List<Juego> findByGenreOnNews(String genero) {
+        if (genero != null) {
+            return repository.findJuegoByGeneroIgnoreCase(genero)
+                    .stream()
+                    .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                    .toList();
+        }
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
+    }
+
+    public List<Juego> findByGenreOnNotSell(String genero) {
+        if (genero != null) {
+            return repository.findJuegoByGeneroIgnoreCase(genero)
+                    .stream()
+                    .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                    .toList();
+        }
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                .toList();
+    }
+
     public List<Juego> findByConsole(String consola, String palabraClave) {
         if (palabraClave != null){
             return repository.findAll(palabraClave).stream()
@@ -73,12 +99,42 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .toList();
     }
 
+    public List<Juego> findByConsoleOnNews(String consola, String palabraClave) {
+        if (palabraClave != null){
+            return repository.findAll(palabraClave).stream()
+                    .filter(j -> j.getConsola() != null
+                            && j.getConsola().getNombre().equalsIgnoreCase(consola)
+                            && j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                    .toList();
+        }
+        return repository.findAll().stream()
+                .filter(j -> j.getConsola() != null
+                        && j.getConsola().getNombre().equalsIgnoreCase(consola)
+                        && j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
+    }
+
+    public List<Juego> findByConsoleOnNotSell(String consola, String palabraClave) {
+        if (palabraClave != null){
+            return repository.findAll(palabraClave).stream()
+                    .filter(j -> j.getConsola() != null
+                            && j.getConsola().getNombre().equalsIgnoreCase(consola)
+                            && j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                    .toList();
+        }
+        return repository.findAll().stream()
+                .filter(j -> j.getConsola() != null
+                        && j.getConsola().getNombre().equalsIgnoreCase(consola)
+                        && j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                .toList();
+    }
+
     public List<Juego> findNotSell(String palabraClave) {
 
         if (palabraClave != null) {
             return repository.findAll(palabraClave)
                     .stream()
-                    .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                    .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
                     .toList();
         }
 
@@ -109,7 +165,6 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .stream()
                 .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
                 .toList();
-
         if (!juegos.isEmpty()) {
             return juegos.get(index.nextInt(juegos.size()));
         }
@@ -158,6 +213,84 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 juegos = repository.findAll()
                         .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                        .toList();
+            }
+        }
+
+        return juegos;
+    }
+
+    public List<Juego> sortGamesOnNews(String sort) {
+        List<Juego> juegos;
+
+        switch (sort) {
+            case "priceASC" -> {
+                juegos = repository.ordenarPorPrecioASC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                        .toList();
+            }
+            case "priceDESC" -> {
+                juegos = repository.ordenarPorPrecioDESC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                        .toList();
+            }
+            case "A-Z" -> {
+                juegos = repository.ordenarPorNombreASC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                        .toList();
+            }
+            case "Z-A" -> {
+                juegos = repository.ordenarPorNombreDESC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                        .toList();
+            }
+            default -> {
+                juegos = repository.findAll()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                        .toList();
+            }
+        }
+
+        return juegos;
+    }
+
+    public List<Juego> sortGamesOnNotSell(String sort) {
+        List<Juego> juegos;
+
+        switch (sort) {
+            case "priceASC" -> {
+                juegos = repository.ordenarPorPrecioASC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                        .toList();
+            }
+            case "priceDESC" -> {
+                juegos = repository.ordenarPorPrecioDESC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                        .toList();
+            }
+            case "A-Z" -> {
+                juegos = repository.ordenarPorNombreASC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                        .toList();
+            }
+            case "Z-A" -> {
+                juegos = repository.ordenarPorNombreDESC()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                        .toList();
+            }
+            default -> {
+                juegos = repository.findAll()
+                        .stream()
+                        .filter(j -> j.getLlegadaAlMercado().isAfter(LocalDate.now()))
                         .toList();
             }
         }

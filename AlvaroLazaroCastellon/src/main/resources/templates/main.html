@@ -45,8 +45,8 @@
 		</section>
 		<section class="container">
 			<article class="row justify-content-center align-items-center">
-				<h1 class="d-flex justify-content-center align-items-center" data-aos="fade-left" th:if="${threeMaxSell.isEmpty() and masvendido.ventas == 0}">No se ha vendido ningún Juego todavía</h1>
-				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right" th:object="${masvendido}" th:if="${masvendido.ventas != 0}">
+				<h1 class="d-flex justify-content-center align-items-center" data-aos="fade-left" th:if="${threeMaxSell.isEmpty() and masVendido.ventas == 0}">No se ha vendido ningún Juego todavía</h1>
+				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right" th:object="${masVendido}" th:if="${masVendido.ventas != 0}">
 					<h1>Juego más vendido</h1>
 					<div>
 						<img src="../static/img/Consolas/Wii.png" th:src="*{rutaImagen}" alt="mas vendido" th:alt="*{nombre}" class="mb-2 img-fluid">
@@ -56,7 +56,6 @@
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#masVendido">
 						Ver Más
 					</button>
-
 				</div>
 
 				<div class="col-12 col-md-8 d-flex justify-content-center align-items-center flex-column" data-aos="fade-left" th:unless="${threeMaxSell.isEmpty()}">
@@ -98,10 +97,48 @@
 				</div>
 			</article>
 		</section>
+		<section class="container" th:if="${consolaMasVendida.ventas != 0}">
+			<article class="row justify-content-center align-items-center">
+				<h1 class="text-center">Consola más vendida</h1>
+				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right" th:object="${consolaMasVendida}">
+					<div>
+						<img src="../static/img/Consolas/Wii.png" th:src="*{imagen}" alt="mas vendido" th:alt="*{nombre}" class="mb-2 img-fluid">
+					</div>
+					<h1 th:text="*{nombre}"></h1>
+					<h2 th:text="|Nº de ventas *{ventas}|"></h2>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#topSellConsole">
+						Ver Más
+					</button>
+				</div>
+				<div class="col-12 col-md-8 d-flex justify-content-center align-items-center flex-column" data-aos="fade-left" th:unless="${threeMaxSellConsole.isEmpty()}">
+					<h1 th:text="${threeMaxSellConsole.size() < 3} ? 'Top ' + ${threeMaxSellConsole.size()} + ' Ventas' : 'Top 3 Ventas'"></h1>
+					<div id="console" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#console" data-bs-slide-to="0" class="active" th:if="${threeMaxSellConsole.size() >= 1}"></button>
+							<button type="button" data-bs-target="#console" data-bs-slide-to="1" th:if="${threeMaxSellConsole.size() >= 2}"></button>
+							<button type="button" data-bs-target="#console" data-bs-slide-to="2" th:if="${threeMaxSellConsole.size() == 3}"></button>
+						</div>
+						<div class="carousel-inner">
+							<div class="carousel-item" th:each="console, iterStat : ${threeMaxSellConsole}" th:classappend="${iterStat.index == 0} ? 'active'">
+								<div class="d-flex justify-content-center align-items-center w-100" style="height: 300px;">
+									<img th:src="${console.imagen}" th:alt="${console.nombre}" class="d-block">
+								</div>
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#console" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon"></span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#console" data-bs-slide="next">
+							<span class="carousel-control-next-icon"></span>
+						</button>
+					</div>
+				</div>
+			</article>
+		</section>
 		<section>
 			<article class="modal fade" id="masVendido">
 				<div class="modal-dialog modal-lg">
-					<div class="modal-content" th:object="${masvendido}">
+					<div class="modal-content" th:object="${masVendido}">
 
 						<div class="modal-header">
 							<h4 class="modal-title" th:text="*{nombre}"></h4>
@@ -112,10 +149,10 @@
 							<div class="d-flex justify-content-around align-items-center">
 								<div>
 									<img src="#" th:src="*{rutaImagen}" alt="Carátula" th:alt="*{nombre}" class="d-block">
-									<p th:text="|Nº de Jugadores ${masvendido.numJugadores == 4 ? '1-4' : (masvendido.numJugadores == 2 ? '1-2' : '1')}|"></p>
+									<p th:text="|Nº de Jugadores ${masVendido.numJugadores == 4 ? '1-4' : (masVendido.numJugadores == 2 ? '1-2' : '1')}|"></p>
 									<p th:text="|Genero: *{genero}|"></p>
 									<p th:text="|Plataforma: *{consola.nombre}|"></p>
-									<p th:text="${masvendido.cantidad > 0 ? 'Precio: ' + #numbers.formatDecimal(masvendido.precio, 1, 2) + '€' : 'Agotado'}"></p>
+									<p th:text="${masVendido.cantidad > 0 ? 'Precio: ' + #numbers.formatDecimal(masVendido.precio, 1, 2) + '€' : 'Agotado'}"></p>
 								</div>
 								<div class="d-flex flex-column justify-content-center align-items-center">
 									<h5>Descripción</h5>
@@ -123,7 +160,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</article>
@@ -156,7 +192,37 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</article>
+		</section>
+		<section>
+			<article class="modal fade" id="topSellConsole">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content" th:object="${consolaMasVendida}">
 
+						<div class="modal-header">
+							<h4 class="modal-title" th:text="*{nombre}"></h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+
+						<div class="modal-body">
+							<div class="d-flex justify-content-around align-items-center">
+								<div>
+									<img src="#" th:src="*{imagen}" alt="Carátula" th:alt="*{nombre}" class="d-block">
+									<p th:text="|Fabricante: *{fabricante}|"></p>
+									<p th:text="|Modelo: *{modelo}|"></p>
+									<p th:text="${consolaMasVendida.cantidad > 0 ? 'Precio: ' + #numbers.formatDecimal(consolaMasVendida.precio, 1, 2) + '€' : 'Agotado'}"></p>
+								</div>
+								<div class="d-flex flex-column justify-content-center align-items-center">
+									<h5>Descripción</h5>
+									<p th:text="*{description}" id="description2"></p>
+									<button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#description2">
+										Ver descripción
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</article>
