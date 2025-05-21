@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quienes Somos</title>
+	<link rel="icon" type="image/x-icon" href="../static/img/Logo/New_Retros_Games_Logo.ico" th:href="@{/img/Logo/New_Retros_Games_Logo.ico}">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+	      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+	        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+	        crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
+</head>
+<body class="bg-dark text-light">
+	<header th:replace="~{fragments/header::header}"></header>
+	<main class="container">
+		<section>
+			<article class="d-flex flex-column justify-content-center align-items-center">
+				<h1>¿Quiénes Somos?</h1>
+				<img src="../static/img/Logo/Logo_proyecto.png" th:src="@{img/Logo/New_Retros_Games_Logo.png}" alt="Retro's Games" class="rounded-circle d-block" width="256px" data-aos="fade-down">
+				<p>
+					<strong>Retro's Games</strong> es una tienda dedicada a mantener viva la esencia de una generación dorada de videojuegos. Nos especializamos en la venta de <strong>consolas y juegos de séptima generación</strong>, una época que marcó a millones de jugadores en todo el mundo.
+				</p>
+				<p>
+					Aquí encontrarás una cuidada selección de títulos y sistemas icónicos como <strong>Nintendo Wii, PlayStation 3, Xbox 360, PlayStation Portable (PSP) y Nintendo DS.</strong> Nuestro objetivo es ofrecerte una experiencia auténtica, ya sea que estés buscando revivir tus aventuras favoritas o descubrir por primera vez los clásicos que definieron una era.
+				</p>
+				<h2>
+					¿Qué nos diferencia?
+				</h2>
+				<p>
+					🎮 Productos originales y probados<br />
+					🕹️ Consolas restauradas y listas para jugar<br />
+					💾 Juegos con historia y mucha nostalgia<br />
+					💬 Atención personalizada y asesoramiento gamer
+				</p>
+				<p>
+					En <strong>Retro's Games</strong>, no solo vendemos videojuegos: compartimos una pasión. Creemos que jugar es volver a sentir, recordar y disfrutar, y por eso trabajamos para que cada cliente se lleve no solo un producto, sino una experiencia que lo conecte con lo mejor del gaming retro.
+				</p>
+				<p>
+					¡Bienvenido a tu zona de juego favorita del pasado!
+				</p>
+			</article>
+		</section>
+	</main>
+	<footer th:replace="~{fragments/footer::footer}"></footer>
+</body>
+</html>

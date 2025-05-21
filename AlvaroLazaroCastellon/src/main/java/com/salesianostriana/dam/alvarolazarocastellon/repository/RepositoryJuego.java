@@ -29,29 +29,29 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
                 FROM Juego J
                     ORDER BY J.precio ASC
             """)
-    List<Juego> orderByPrecioASC();
+    List<Juego> ordenarPorPrecioASC();
 
     @Query("""
                 SELECT J
                 FROM Juego J
                     ORDER BY J.precio DESC
             """)
-    List<Juego> orderByPrecioDESC();
+    List<Juego> ordenarPorPrecioDESC();
 
     @Query("""
             select J
             from Juego J
                 order by J.nombre ASC
             """)
-    List<Juego> orderByNombreASC();
+    List<Juego> ordenarPorNombreASC();
 
     @Query("""
             select J
             from Juego J
                 order by J.nombre desc
             """)
-    List<Juego> orderByNombreDESC();
+    List<Juego> ordenarPorNombreDESC();
 
-    // List<Juego> findAllById(Long id);
+    List<Juego> findJuegoByGeneroIgnoreCase(String genero);
 
 }

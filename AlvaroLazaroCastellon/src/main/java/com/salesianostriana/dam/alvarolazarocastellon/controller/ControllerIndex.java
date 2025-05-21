@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class ControllerIndex {
 
@@ -24,4 +21,8 @@ public class ControllerIndex {
         return "main";
     }
 
+    @GetMapping("/quienessomos")
+    public String ShowWhoAreWe(Model model) {
+        return "quienessomos";
+    }
 }

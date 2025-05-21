@@ -3,7 +3,6 @@ package com.salesianostriana.dam.alvarolazarocastellon.services;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -44,6 +43,19 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .filter(j -> j.getVentas() > 0
                         && j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                 .max((j1, j2) -> Integer.compare(j1.getVentas(), j2.getVentas()));
+    }
+
+    public List<Juego> findByGenre(String genero) {
+        if (genero != null) {
+            return repository.findJuegoByGeneroIgnoreCase(genero)
+                    .stream()
+                    .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                    .toList();
+        }
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
+                .toList();
     }
 
     public List<Juego> findByConsole(String consola, String palabraClave) {
@@ -119,25 +131,25 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
         switch (sort) {
             case "priceASC" -> {
-                juegos = repository.orderByPrecioASC()
+                juegos = repository.ordenarPorPrecioASC()
                         .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                         .toList();
             }
             case "priceDESC" -> {
-                juegos = repository.orderByPrecioDESC()
+                juegos = repository.ordenarPorPrecioDESC()
                         .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                         .toList();
             }
             case "A-Z" -> {
-                juegos = repository.orderByNombreASC()
+                juegos = repository.ordenarPorNombreASC()
                         .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                         .toList();
             }
             case "Z-A" -> {
-                juegos = repository.orderByNombreDESC()
+                juegos = repository.ordenarPorNombreDESC()
                         .stream()
                         .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                         .toList();

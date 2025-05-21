@@ -17,8 +17,8 @@
 </head>
 <body class="bg-dark">
     <header th:replace="~{fragments/header::header}"></header>
-    <main class="container d-flex flex-column justify-content-center align-items-center vh-100">
-        <section class="container-fluid d-flex justify-content-between align-items-center mb-4" th:if="${not juegosProximos.isEmpty()}">
+    <main class="container">
+        <section class="container-fluid d-flex justify-content-between align-items-center my-4" th:if="${not juegosProximos.isEmpty()}">
             <form action="#" th:action="@{/novedades}" method="get">
                 <div class="d-flex">
                     <div class="d-flex align-items-center flex-wrap">

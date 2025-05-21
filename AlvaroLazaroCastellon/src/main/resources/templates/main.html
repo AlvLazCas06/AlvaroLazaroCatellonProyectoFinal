@@ -19,27 +19,29 @@
 <body class="bg-dark">
 	<header th:replace="~{fragments/header::header}"></header>
 	<main class="container-fluid text-light">
-		<section class="container-fluid d-flex justify-content-center align-items-center flex-column">
-			<img src="../static/img/Logo/Logo_proyecto.png" th:src="@{img/Logo/New_Retros_Games_Logo.png}" alt="Retro's Games" class="rounded-circle" width="256px" data-aos="fade-down">
-			<h1>Bienvenido a Retro's Games</h1>
-			<p>
-				En <strong>Retro's Games</strong> creemos que los grandes momentos del gaming no pasan de moda. Somos una tienda especializada en videojuegos y consolas clásicas, dedicada a todos los que quieren revivir la emoción de jugar como antes.
-			</p>
-			<p>
-				Nos apasiona ofrecer una experiencia nostálgica auténtica, por eso contamos con un amplio catálogo de juegos para <strong>Wii</strong>, <strong>PlayStation 3</strong>, <strong>Xbox 360</strong>, <strong>Nintendo DS</strong> y <strong>PSP</strong>. Cada producto es cuidadosamente seleccionado para garantizarte calidad, funcionalidad y, sobre todo, diversión.
-			</p>
-			<h2>
-				¿Qué ofrecemos?
-			</h2>
-			<p>
-				🎮 Juegos originales para consolas retro<br />
-				🕹️ Consolas en excelente estado y totalmente funcionales<br />
-				📦 Atención personalizada y envíos seguros<br />
-				💬 Asesoramiento para coleccionistas o nuevos jugadores
-			</p>
-			<p>
-				Ya seas un gamer veterano o alguien que está descubriendo el mundo de los clásicos, en Retro's Games encontrarás un espacio donde el pasado sigue vivo… ¡y más divertido que nunca!
-			</p>
+		<section class="container-fluid">
+			<article class="d-flex justify-content-center align-items-center flex-column">
+				<img src="../static/img/Logo/Logo_proyecto.png" th:src="@{img/Logo/New_Retros_Games_Logo.png}" alt="Retro's Games" class="rounded-circle" width="256px" data-aos="fade-down">
+				<h1>Bienvenido a Retro's Games</h1>
+				<p>
+					En <strong>Retro's Games</strong> creemos que los grandes momentos del gaming no pasan de moda. Somos una tienda especializada en videojuegos y consolas clásicas, dedicada a todos los que quieren revivir la emoción de jugar como antes.
+				</p>
+				<p>
+					Nos apasiona ofrecer una experiencia nostálgica auténtica, por eso contamos con un amplio catálogo de juegos para <strong>Wii</strong>, <strong>PlayStation 3</strong>, <strong>Xbox 360</strong>, <strong>Nintendo DS</strong> y <strong>PSP</strong>. Cada producto es cuidadosamente seleccionado para garantizarte calidad, funcionalidad y, sobre todo, diversión.
+				</p>
+				<h2>
+					¿Qué ofrecemos?
+				</h2>
+				<p>
+					🎮 Juegos originales para consolas retro<br />
+					🕹️ Consolas en excelente estado y totalmente funcionales<br />
+					📦 Atención personalizada y envíos seguros<br />
+					💬 Asesoramiento para coleccionistas o nuevos jugadores
+				</p>
+				<p>
+					Ya seas un gamer veterano o alguien que está descubriendo el mundo de los clásicos, en Retro's Games encontrarás un espacio donde el pasado sigue vivo… ¡y más divertido que nunca!
+				</p>
+			</article>
 		</section>
 		<section class="container">
 			<article class="row justify-content-center align-items-center">
@@ -90,11 +92,14 @@
 						<img src="../static/img/Consolas/Wii.png" th:src="*{rutaImagen}" alt="mas vendido" th:alt="*{nombre}" class="mb-2 img-fluid">
 					</div>
 					<h1 th:text="*{nombre}"></h1>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGame">
+						Ver más
+					</button>
 				</div>
 			</article>
 		</section>
 		<section>
-			<div class="modal fade" id="masVendido">
+			<article class="modal fade" id="masVendido">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content" th:object="${masvendido}">
 
@@ -112,7 +117,7 @@
 									<p th:text="|Plataforma: *{consola.nombre}|"></p>
 									<p th:text="${masvendido.cantidad > 0 ? 'Precio: ' + #numbers.formatDecimal(masvendido.precio, 1, 2) + '€' : 'Agotado'}"></p>
 								</div>
-								<div>
+								<div class="d-flex flex-column justify-content-center align-items-center">
 									<h5>Descripción</h5>
 									<p th:text="*{description}"></p>
 								</div>
@@ -121,7 +126,40 @@
 
 					</div>
 				</div>
-			</div>
+			</article>
+		</section>
+		<section th:if="${newGame != null}" th:object="${newGame}">
+			<article class="modal" id="newGame">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<h4 class="modal-title" th:text="*{nombre}"></h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+
+						<div class="modal-body">
+							<div class="d-flex justify-content-around align-items-center">
+								<div>
+									<img src="#" th:src="*{rutaImagen}" alt="Carátula" th:alt="*{nombre}" class="d-block">
+									<p th:text="|Nº de Jugadores ${newGame.numJugadores == 4 ? '1-4' : (newGame.numJugadores == 2 ? '1-2' : '1')}|"></p>
+									<p th:text="|Genero: *{genero}|"></p>
+									<p th:text="|Plataforma: *{consola.nombre}|"></p>
+									<p th:text="${newGame.cantidad > 0 ? 'Precio: ' + #numbers.formatDecimal(newGame.precio, 1, 2) + '€' : 'Agotado'}"></p>
+								</div>
+								<div>
+									<h5>Descripción</h5>
+									<p th:text="*{description}" class="collapse" id="description"></p>
+									<button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#description">
+										Ver descripción
+									</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</article>
 		</section>
 	</main>
 	<footer th:replace="~{fragments/footer::footer}"></footer>

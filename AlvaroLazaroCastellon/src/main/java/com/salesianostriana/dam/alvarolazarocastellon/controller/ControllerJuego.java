@@ -72,6 +72,7 @@ public class ControllerJuego {
     public String showCatalogue(Model model,
                                 @RequestParam(required = false, name = "orden") String sort,
                                 @RequestParam(required = false) String consola,
+                                @RequestParam(required = false) String genero,
                                 @RequestParam(required = false) String palabraClave) {
         List<Juego> juegos;
 
@@ -81,12 +82,17 @@ public class ControllerJuego {
             juegos = serviceJuego.sortGames(sort);
         }
 
+        if (genero != null && !genero.isEmpty()) {
+            juegos = serviceJuego.findByGenre(genero);
+        }
+
         if (consola != null && !consola.isEmpty()) {
             juegos = serviceJuego.findByConsole(consola, palabraClave);
         }
 
         model.addAttribute("juegos", juegos);
         model.addAttribute("orden", sort);
+        model.addAttribute("genero", genero);
         model.addAttribute("consola", consola);
         model.addAttribute("palabraClave", palabraClave);
         model.addAttribute("consolas", serviceConsola.findAll());
@@ -117,9 +123,10 @@ public class ControllerJuego {
     }
 
     @GetMapping("/sort")
-    public String sendSort(@RequestParam(name = "orden") String sort, @RequestParam(required = false) String palabraClave, RedirectAttributes redirectAttributes) {
+    public String sendSort(@RequestParam(name = "orden") String sort, @RequestParam(required = false) String palabraClave, @RequestParam(required = false) String genero, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("orden", sort);
         redirectAttributes.addAttribute("palabraClave", palabraClave);
+        redirectAttributes.addAttribute("genero", genero);
         return "redirect:/catalogo";
     }
 
