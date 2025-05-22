@@ -164,7 +164,7 @@ public class ControllerJuego {
 
     @GetMapping({"/catalogo/venta/{id}", "/novedades/venta/{id}", "/proximamente/reserva/{id}"})
     public String showSale(Model model, @PathVariable Long id) {
-        model.addAttribute("juegoAVender", serviceJuego.findById(id));
+        model.addAttribute("juegoAVender", serviceJuego.getById(id));
         model.addAttribute("descuento", serviceJuego.applyDiscountByYear(id));
         return "ventajuego";
     }
