@@ -32,7 +32,7 @@ public class ControllerJuego {
     @PostMapping("/mostrarjuego")
     public String addGame(@ModelAttribute("juego") Juego juego) {
         if (juego.getConsola() != null) {
-            Consola consola = serviceConsola.findById(juego.getConsola().getId());
+            Consola consola = serviceConsola.getById(juego.getConsola().getId());
             juego.setConsola(consola);
         }
         serviceJuego.save(juego);
@@ -77,9 +77,9 @@ public class ControllerJuego {
         List<Juego> juegos;
 
         if (sort == null || sort.isEmpty()) {
-            juegos = serviceJuego.findNotSell(palabraClave);
+            juegos = serviceJuego.listAll(palabraClave);
         } else {
-            juegos = serviceJuego.sortGamesOnNotSell(sort);
+            juegos = serviceJuego.sortGames(sort);
         }
 
         if (genero != null && !genero.isEmpty()) {

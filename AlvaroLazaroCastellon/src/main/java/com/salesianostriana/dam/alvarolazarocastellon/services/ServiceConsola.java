@@ -12,6 +12,10 @@ import java.util.Optional;
 @Service
 public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryConsola> {
 
+    public Consola getById(Long id) {
+        return repository.findById(id).get();
+    }
+
     public List<Consola> listAll(String S) {
         if (S != null) {
             return repository.findAll(S)

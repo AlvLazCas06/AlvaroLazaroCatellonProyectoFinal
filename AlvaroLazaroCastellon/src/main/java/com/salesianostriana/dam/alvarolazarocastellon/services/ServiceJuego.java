@@ -13,6 +13,10 @@ import java.util.Random;
 @Service
 public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
+    public Juego getById(Long id) {
+        return repository.findById(id).get();
+    }
+
     public List<Juego> listAll(String S) {
         if (S != null) {
             return repository.findAll(S)

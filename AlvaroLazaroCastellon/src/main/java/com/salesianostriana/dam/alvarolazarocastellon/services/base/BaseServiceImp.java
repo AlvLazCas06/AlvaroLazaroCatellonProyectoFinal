@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseServiceImp<T, ID, R extends JpaRepository<T, ID>> implements BaseService<T, ID> {
 
@@ -26,8 +27,8 @@ public abstract class BaseServiceImp<T, ID, R extends JpaRepository<T, ID>> impl
         repository.delete(t);
     }
 
-    public T findById(ID id) {
-        return repository.findById(id).orElse(null);
+    public Optional<T> findById(ID id) {
+        return repository.findById(id);
     }
 
     public void deleteById(ID id) {
