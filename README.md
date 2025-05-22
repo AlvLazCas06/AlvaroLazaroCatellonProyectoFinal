@@ -26,14 +26,12 @@ Retro's Games es una tienda web especializada en la venta de consolas y videojue
    ```
 
 2. **Accede al proyecto:**
-   ```sh
+   
    Abre el programa con un IDE de confianza como Eclipse, Visual Studio Code, IntelliJ IDEA...
-   ```
 
 3. **Ejecuta el programa:**
-   ```sh
+   
    Dale a ejecutar como un programa de Spring Boot
-   ```
 
 4. **Abre tu navegador en:**
    ```
