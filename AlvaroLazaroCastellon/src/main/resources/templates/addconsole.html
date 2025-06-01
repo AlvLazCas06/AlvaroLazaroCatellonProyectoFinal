@@ -37,15 +37,15 @@
 						</div>
 						<div class="form-group mb-3 col-md-3">
 							<label for="precio">Precio</label>
-							<input type="number" th:field="*{precio}" step="0.01" class="form-control" required>
+							<input type="number" th:field="*{precio}" step="0.01" min="0" class="form-control" required>
 						</div>
 						<div class="form-group mb-3 col-md-3">
 							<label for="cantidad">Cantidad</label>
-							<input type="number" th:field="*{cantidad}" class="form-control" required>
+							<input type="number" th:field="*{cantidad}" min="0" class="form-control" required>
 						</div>
 						<div class="form-group mb-3 col-md-3">
 							<label for="ventas">Ventas</label>
-							<input type="number" th:field="*{ventas}" class="form-control" required>
+							<input type="number" th:field="*{ventas}" min="0" class="form-control" required>
 						</div>
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 						</div>
 						<div class="form-group mb-3 col-md-6">
 							<label for="llegadaAlMercado">Llegada a tienda</label>
-							<input type="date" th:field="*{llegadaAlMercado}" class="form-control" required>
+							<input type="date" th:field="*{llegadaAlMercado}" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" class="form-control" required>
 						</div>
 					</div>
 				</div>

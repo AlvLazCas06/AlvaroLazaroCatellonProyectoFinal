@@ -16,7 +16,7 @@ import java.util.List;
 public class Consola {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
@@ -40,6 +40,7 @@ public class Consola {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate llegadaAlMercado;
 
+    @Lob
     private String imagen;
 
     @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER)

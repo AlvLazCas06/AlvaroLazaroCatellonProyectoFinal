@@ -39,7 +39,7 @@ public class ControllerConsola {
 
     @GetMapping("/mostrarconsolas/editar/{id}")
     public String showEditConsole(Model model, @PathVariable Long id) {
-        model.addAttribute("consola", serviceConsola.findById(id));
+        model.addAttribute("consola", serviceConsola.getById(id));
         return "addconsole";
     }
 
@@ -105,7 +105,7 @@ public class ControllerConsola {
 
     @GetMapping({"/catalogoconsolas/venta/{id}", "/novedadesconsolas/venta/{id}"})
     public String showSale(Model model, @PathVariable Long id) {
-        model.addAttribute("consolaAVender", serviceConsola.findById(id));
+        model.addAttribute("consolaAVender", serviceConsola.getById(id));
         model.addAttribute("descuento", serviceConsola.applyDiscount(id));
         return "ventaConsola";
     }

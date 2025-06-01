@@ -49,7 +49,7 @@ public class ControllerJuego {
 
     @GetMapping("/mostrarjuego/editar/{id}")
     public String showEditGame(Model model, @PathVariable Long id) {
-        model.addAttribute("juego", serviceJuego.findById(id));
+        model.addAttribute("juego", serviceJuego.getById(id));
         model.addAttribute("consolas", serviceConsola.findAll());
         return "addgames";
     }
