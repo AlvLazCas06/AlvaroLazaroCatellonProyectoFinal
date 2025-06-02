@@ -4,12 +4,15 @@ import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
+import com.salesianostriana.dam.alvarolazarocastellon.util.JuegoExportPDF;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -175,6 +178,20 @@ public class ControllerJuego {
         redirectAttributes.addAttribute("palabraClave", palabraClave);
         redirectAttributes.addAttribute("genero", genero);
         return "redirect:/catalogo";
+    }
+
+    @GetMapping("/eportarPDF")
+    public void exportGameListInPDF(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+
+        String header = "Content-Disposition";
+        String value = "attachment; filename=\"juegos.pdf\"";
+
+        response.setHeader(header, value);
+
+        List<Juego> juegos = serviceJuego.findAll();
+        JuegoExportPDF exportPDF = new JuegoExportPDF(juegos);
+        exportPDF.exportDocument(response);
     }
 
 }
