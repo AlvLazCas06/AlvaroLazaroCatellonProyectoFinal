@@ -21,7 +21,9 @@ public class Consola {
 
     private String nombre;
 
-    private String modelo;
+    @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<Modelo> modelos = new ArrayList<Modelo>();
 
     @Column(length = 5000)
     private String description;

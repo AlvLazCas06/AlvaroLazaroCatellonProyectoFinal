@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Añade o edita modelos de consolas retro: gestiona precios, stock y detalles técnicos de Wii, PS3, Xbox 360 y más.">
+    <title>Lista de Modelos</title>
+    <link rel="icon" type="image/x-icon" href="../static/img/Logo/New_Retros_Games_Logo.ico" th:href="@{/img/Logo/New_Retros_Games_Logo.ico}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
+</head>
+<body class="bg-dark">
+    <header th:replace="~{fragments/headerconfiguracion::header}"></header>
+    <main>
+        <section class="container-fluid">
+            <a href="../templates/addgames.html" th:href="@{/mostrarjuego/añadirjuego}" class="btn btn-outline-primary my-4">Agregar
+                Juego</a>
+            <h1 class="text-light mb-4">Lista de Juegos</h1>
+        </section>
+        <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
+            <form action="#" th:action="@{/mostrarjuego}">
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        <input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
+                        <input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
+                        <a href="#" th:href="@{/mostrarjuego}" class="btn btn-outline-secondary ms-2">Limpiar</a>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="table-responsive container-fluid">
+            <table class="table table-dark table-striped table-hover">
+                <thead>
+                <tr class="align-middle text-center">
+                    <th class="text-light">Id</th>
+                    <th class="text-light">Nombre</th>
+                    <th class="text-light">Descripción</th>
+                    <th class="text-light">Precio</th>
+                    <th class="text-light">Cantidad</th>
+                    <th class="text-light">Ventas</th>
+                    <th class="text-light">Genero</th>
+                    <th class="text-light">Número de Jug.</th>
+                    <th class="text-light">Plataforma</th>
+                    <th class="text-light">Fecha de Lanzamiento</th>
+                    <th class="text-light">Llegada a tienda</th>
+                    <th class="text-light">Carátula</th>
+                    <th colspan="2" class="text-light">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="model : ${modelo}" class="align-middle text-center">
+                    <td th:text="${model.id}" class="text-light"></td>
+                    <td th:text="${model.nombre}" class="text-light"></td>
+                    <td class="text-light">
+                        <p class="collapse" th:text="${model.description}" th:id="'description_' + ${model.id}"></p>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" th:data-bs-target="'#description_' + ${model.id}">
+                            Ver Descripción
+                        </button>
+                    </td>
+                    <td th:text="${model.precio}" class="text-light"></td>
+                    <td th:text="${model.cantidad}" class="text-light"></td>
+                    <td th:text="${model.ventas}" class="text-light"></td>
+                    <td th:text="${model.consola.nombre}" class="text-light"></td>
+                    <td th:text="${model.fechaLanzamiento}" class="text-light"></td>
+                    <td th:text="${model.llegadaAlMercado}" class="text-light"></td>
+                    <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
+                             th:src="${model.imagen}" alt="Cáratula" width="100px" height="100px"></td>
+                    <td>
+                        <a href="#" th:href="@{/mostrarjuego/editar/{id}(id=${model.id})}"
+                           class="btn btn-outline-success">Editar</a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:data-bs-target="'#eliminar_' + ${model.id}">
+                            Eliminar
+                        </button>
+                        <div class="modal" th:id="'eliminar_' + ${model.id}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" th:text="${model.nombre}"></h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <h1>¿Estás seguro de que quieres eliminar este modelo?</h1>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="#" th:href="@{/mostrarjuego/{id}(id=${model.id})}"
+                                           class="btn btn-outline-danger">Sí</a>
+                                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">No</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer th:replace="~{fragments/footer::footer}"></footer>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

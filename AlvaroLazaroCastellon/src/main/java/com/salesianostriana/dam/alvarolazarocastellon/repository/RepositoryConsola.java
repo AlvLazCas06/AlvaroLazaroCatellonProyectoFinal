@@ -20,7 +20,7 @@ public interface RepositoryConsola extends JpaRepository<Consola, Long> {
     @Query("""
            SELECT C
               FROM Consola C
-                         WHERE concat(C.nombre, C.precio, C.cantidad, C.fabricante, C.description, C.ventas, C.llegadaAlMercado, C.fechaLanzamiento, C.id, C.modelo) ILIKE %?1%
+                         WHERE concat(C.nombre, C.precio, C.cantidad, C.fabricante, C.description, C.ventas, C.llegadaAlMercado, C.fechaLanzamiento, C.id) ILIKE %?1%
            """)
     List<Consola> findAll2(String palabraClave);
 

@@ -11,9 +11,9 @@ import java.time.LocalDate;
 
 @Entity
 @Builder
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Modelo {
 
     @Id
@@ -39,5 +39,19 @@ public class Modelo {
 
     @Lob
     private String imagen;
+
+    @ManyToOne
+    @JoinColumn(name = "console_id")
+    private Consola consola;
+
+    public void setConsola(Consola consola) {
+        if (this.consola != null) {
+            this.consola.getModelos().remove(this);
+        }
+        this.consola = consola;
+        if (consola != null) {
+            consola.getModelos().add(this);
+        }
+    }
 
 }

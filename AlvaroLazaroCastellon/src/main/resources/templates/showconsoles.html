@@ -66,7 +66,14 @@
 							</button>
 						</td>
 						<td th:text="${console.fabricante}" class="text-light"></td>
-						<td th:text="${console.modelo}" class="text-light"></td>
+						<td class="text-light">
+							<div class="collapse" th:each="modelo : ${console.modelos}" th:id="'modelos_' + ${console.id}">
+								<p th:text="${modelo.nombre}"></p>
+							</div>
+							<button type="button" class="btn btn-primary" data-bs-toggle="collapse" th:data-bs-target="'#modelos_' + ${console.id}">
+								Ver modelo/s
+							</button>
+						</td>
 						<td th:text="${console.precio}" class="text-light"></td>
 						<td th:text="${console.cantidad}" class="text-light"></td>
 						<td th:text="${console.ventas}" class="text-light"></td>
