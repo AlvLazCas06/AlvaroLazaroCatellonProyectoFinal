@@ -28,20 +28,6 @@ public class Consola {
     @Column(length = 5000)
     private String description;
 
-    private String fabricante;
-
-    private double precio;
-
-    private int cantidad;
-
-    private int ventas;
-
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate fechaLanzamiento;
-
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate llegadaAlMercado;
-
     @Lob
     private String imagen;
 
@@ -57,6 +43,16 @@ public class Consola {
     public void removeJuego(Juego juego) {
         juegos.remove(juego);
         juego.setConsola(null);
+    }
+
+    public void addModelo(Modelo modelo) {
+        modelos.add(modelo);
+        modelo.setConsola(this);
+    }
+
+    public void removeModelo(Modelo modelo) {
+        modelos.remove(modelo);
+        modelo.setConsola(null);
     }
 
 }

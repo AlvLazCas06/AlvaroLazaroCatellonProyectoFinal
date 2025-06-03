@@ -43,13 +43,7 @@
 						<th class="text-light">Id</th>
 						<th class="text-light">Nombre</th>
 						<th class="text-light">Descripción</th>
-						<th class="text-light">Fabricante</th>
 						<th class="text-light">Módelo</th>
-						<th class="text-light">Precio</th>
-						<th class="text-light">Cantidad</th>
-						<th class="text-light">Ventas</th>
-						<th class="text-light">Fecha de Lanzamiento</th>
-						<th class="text-light">Llegada a tienda</th>
 						<th class="text-light">Consola</th>
 						<th class="text-light">Juegos</th>
 						<th class="text-light">Acciones</th>
@@ -65,7 +59,6 @@
 								Ver Descripción
 							</button>
 						</td>
-						<td th:text="${console.fabricante}" class="text-light"></td>
 						<td class="text-light">
 							<div class="collapse" th:each="modelo : ${console.modelos}" th:id="'modelos_' + ${console.id}">
 								<p th:text="${modelo.nombre}"></p>
@@ -74,11 +67,6 @@
 								Ver modelo/s
 							</button>
 						</td>
-						<td th:text="${console.precio}" class="text-light"></td>
-						<td th:text="${console.cantidad}" class="text-light"></td>
-						<td th:text="${console.ventas}" class="text-light"></td>
-						<td th:text="${console.fechaLanzamiento}" class="text-light"></td>
-						<td th:text="${console.llegadaAlMercado}" class="text-light"></td>
 						<td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
 						         th:src="${console.imagen}" alt="Cáratula" width="100px" height="100px"></td>
 						<td>

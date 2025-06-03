@@ -29,37 +29,6 @@
 					<label for="description">Descripción</label>
 					<textarea th:field="*{description}" cols="30" rows="10" class="form-control" required></textarea>
 				</div>
-				<div class="container">
-					<div class="row">
-						<div class="form-group mb-3 col-md-3">
-							<label for="fabricante">Fabricante</label>
-							<input type="text" th:field="*{fabricante}" class="form-control" placeholder="Fabricante de la consola" required>
-						</div>
-						<div class="form-group mb-3 col-md-3">
-							<label for="precio">Precio</label>
-							<input type="number" th:field="*{precio}" step="0.01" min="0" class="form-control" required>
-						</div>
-						<div class="form-group mb-3 col-md-3">
-							<label for="cantidad">Cantidad</label>
-							<input type="number" th:field="*{cantidad}" min="0" class="form-control" required>
-						</div>
-						<div class="form-group mb-3 col-md-3">
-							<label for="ventas">Ventas</label>
-							<input type="number" th:field="*{ventas}" min="0" class="form-control" required>
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<div class="row">
-						<div class="form-group mb-3 col-md-6">
-							<label for="fechaLanzamiento">Fecha de lanzamiento</label>
-							<input type="date" th:field="*{fechaLanzamiento}" class="form-control" required>
-						</div>
-						<div class="form-group mb-3 col-md-6">
-							<label for="llegadaAlMercado">Llegada a tienda</label>
-							<input type="date" th:field="*{llegadaAlMercado}" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" class="form-control" required>
-						</div>
-					</div>
 				</div>
 				<div class="form-group mb-3">
 					<label for="imagen">Ruta de Carátula</label>

@@ -2,8 +2,10 @@ package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
+import com.salesianostriana.dam.alvarolazarocastellon.model.Modelo;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
+import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceModelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +20,16 @@ public class ControllerIndex {
     @Autowired
     private ServiceConsola serviceConsola;
 
+    @Autowired
+    private ServiceModelo serviceModelo;
+
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("masVendido", serviceJuego.findMaxSell().orElse(new Juego()));
         model.addAttribute("threeMaxSell", serviceJuego.findThreeMaxSell());
         model.addAttribute("newGame", serviceJuego.findNewGame());
-        model.addAttribute("consolaMasVendida", serviceConsola.findMaxSell().orElse(new Consola()));
-        model.addAttribute("threeMaxSellConsole", serviceConsola.findThreeMaxSell());
+        model.addAttribute("consolaMasVendida", serviceModelo.findMaxSell().orElse(new Modelo()));
+        model.addAttribute("threeMaxSellConsole", serviceModelo.findThreeMaxSell());
         return "main";
     }
 

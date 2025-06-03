@@ -25,6 +25,8 @@ public class Modelo {
     @Lob
     private String description;
 
+    private String fabricante;
+
     private double precio;
 
     private int cantidad;

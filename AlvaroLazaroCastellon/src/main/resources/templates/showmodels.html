@@ -20,9 +20,9 @@
     <header th:replace="~{fragments/headerconfiguracion::header}"></header>
     <main>
         <section class="container-fluid">
-            <a href="../templates/addgames.html" th:href="@{/mostrarjuego/añadirjuego}" class="btn btn-outline-primary my-4">Agregar
-                Juego</a>
-            <h1 class="text-light mb-4">Lista de Juegos</h1>
+            <a href="../templates/addmodel.html" th:href="@{/mostrarmodelos/añadirmodelo}" class="btn btn-outline-primary my-4">Agregar
+                Modelo</a>
+            <h1 class="text-light mb-4">Lista de Modelos</h1>
         </section>
         <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
             <form action="#" th:action="@{/mostrarjuego}">
@@ -40,17 +40,15 @@
                 <thead>
                 <tr class="align-middle text-center">
                     <th class="text-light">Id</th>
-                    <th class="text-light">Nombre</th>
+                    <th class="text-light">Modelo</th>
                     <th class="text-light">Descripción</th>
                     <th class="text-light">Precio</th>
                     <th class="text-light">Cantidad</th>
                     <th class="text-light">Ventas</th>
-                    <th class="text-light">Genero</th>
-                    <th class="text-light">Número de Jug.</th>
-                    <th class="text-light">Plataforma</th>
+                    <th class="text-light">Consola</th>
                     <th class="text-light">Fecha de Lanzamiento</th>
                     <th class="text-light">Llegada a tienda</th>
-                    <th class="text-light">Carátula</th>
+                    <th class="text-light">Imagén</th>
                     <th colspan="2" class="text-light">Acciones</th>
                 </tr>
                 </thead>
@@ -73,7 +71,7 @@
                     <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
                              th:src="${model.imagen}" alt="Cáratula" width="100px" height="100px"></td>
                     <td>
-                        <a href="#" th:href="@{/mostrarjuego/editar/{id}(id=${model.id})}"
+                        <a href="#" th:href="@{/mostrarmodelos/editar/{id}(id=${model.id})}"
                            class="btn btn-outline-success">Editar</a>
                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" th:data-bs-target="'#eliminar_' + ${model.id}">
                             Eliminar
@@ -91,7 +89,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <a href="#" th:href="@{/mostrarjuego/{id}(id=${model.id})}"
+                                        <a href="#" th:href="@{/mostrarmodelos/{id}(id=${model.id})}"
                                            class="btn btn-outline-danger">Sí</a>
                                         <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">No</button>
                                     </div>
