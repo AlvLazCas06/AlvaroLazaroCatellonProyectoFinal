@@ -9,11 +9,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@Entity
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Builder
+@Entity
 public class Modelo {
 
     @Id
