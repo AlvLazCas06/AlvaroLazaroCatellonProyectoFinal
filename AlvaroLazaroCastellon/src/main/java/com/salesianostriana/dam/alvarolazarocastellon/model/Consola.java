@@ -25,7 +25,7 @@ public class Consola {
     @Builder.Default
     private List<Modelo> modelos = new ArrayList<Modelo>();
 
-    @Column(length = 5000)
+    @Lob
     private String description;
 
     @Lob
