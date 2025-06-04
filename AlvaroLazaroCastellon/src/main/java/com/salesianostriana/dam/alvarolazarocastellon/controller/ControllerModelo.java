@@ -4,11 +4,14 @@ import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Modelo;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceModelo;
+import com.salesianostriana.dam.alvarolazarocastellon.util.ModeloExportPDF;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -61,7 +64,7 @@ public class ControllerModelo {
 
     @GetMapping("/mostrarmodelos")
     public String showGame(Model model, @ModelAttribute("palabraClave") String palabraClave) {
-        model.addAttribute("modelo", serviceModelo.findAll());
+        model.addAttribute("modelo", serviceModelo.listAll2(palabraClave));
         model.addAttribute("palabraClave", palabraClave);
         return "showmodels";
     }
@@ -114,6 +117,20 @@ public class ControllerModelo {
         model.addAttribute("consolaAVender", serviceModelo.getById(id));
         model.addAttribute("descuento", serviceModelo.applyDiscount(id));
         return "ventaConsola";
+    }
+
+    @GetMapping("/eportarPDFmodelos")
+    public void exportGameListInPDF(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+
+        String header = "Content-Disposition";
+        String value = "attachment; filename=\"modelos.pdf\"";
+
+        response.setHeader(header, value);
+
+        List<Modelo> modelos = serviceModelo.findAll();
+        ModeloExportPDF exportPDF = new ModeloExportPDF(modelos);
+        exportPDF.exportDocument(response);
     }
 
 }

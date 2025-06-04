@@ -30,6 +30,17 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
                 .toList();
     }
 
+    public List<Modelo> listAll2(String S) {
+        if (S != null) {
+            return repository.findAll2(S)
+                    .stream()
+                    .toList();
+        }
+        return repository.findAll()
+                .stream()
+                .toList();
+    }
+
     public List<Modelo> findNotSell(String S) {
         return repository.findAll(S)
                 .stream()

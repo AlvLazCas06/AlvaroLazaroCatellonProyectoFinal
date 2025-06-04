@@ -25,15 +25,20 @@
             <h1 class="text-light mb-4">Lista de Modelos</h1>
         </section>
         <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
-            <form action="#" th:action="@{/mostrarjuego}">
+            <form action="#" th:action="@{/mostrarmodelos}" method="get">
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                         <input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
                         <input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
-                        <a href="#" th:href="@{/mostrarjuego}" class="btn btn-outline-secondary ms-2">Limpiar</a>
+                        <a href="#" th:href="@{/mostrarmodelos}" class="btn btn-outline-secondary ms-2">Limpiar</a>
                     </div>
                 </div>
             </form>
+        </section>
+        <section class="container-fluid">
+            <article>
+                <a href="#" th:href="@{/eportarPDFmodelos}" class="btn btn-secondary">Exportar PDF</a>
+            </article>
         </section>
         <section class="table-responsive container-fluid">
             <table class="table table-dark table-striped table-hover">
@@ -42,6 +47,7 @@
                     <th class="text-light">Id</th>
                     <th class="text-light">Modelo</th>
                     <th class="text-light">Descripción</th>
+                    <th class="text-light">Fabricante</th>
                     <th class="text-light">Precio</th>
                     <th class="text-light">Cantidad</th>
                     <th class="text-light">Ventas</th>
@@ -62,6 +68,7 @@
                             Ver Descripción
                         </button>
                     </td>
+                    <td th:text="${model.fabricante}" class="text-light"></td>
                     <td th:text="${model.precio}" class="text-light"></td>
                     <td th:text="${model.cantidad}" class="text-light"></td>
                     <td th:text="${model.ventas}" class="text-light"></td>
