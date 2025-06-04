@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.alvarolazarocastellon.services;
 
-import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Modelo;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryModelo;
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
@@ -32,13 +31,9 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
 
     public List<Modelo> listAll2(String S) {
         if (S != null) {
-            return repository.findAll2(S)
-                    .stream()
-                    .toList();
+            return repository.findAll2(S);
         }
-        return repository.findAll()
-                .stream()
-                .toList();
+        return repository.findAll();
     }
 
     public List<Modelo> findNotSell(String S) {

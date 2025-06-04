@@ -11,12 +11,12 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{css/style.css}">
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{../css/style.css}">
 </head>
 <body class="bg-dark text-light">
 	<header th:replace="~{fragments/headerconfiguracion::header}"></header>
-	<main class="container d-flex flex-column justify-content-center align-items-center vh-100">
-		<h1 class="p-2 bg-light text-dark rounded text-center">Agregar | Editar Consola</h1>
+	<main class="container d-flex flex-column justify-content-center align-items-center">
+		<h1 class="p-2 bg-light text-dark rounded text-center mt-2">Agregar | Editar Consola</h1>
 		<form action="#" method="POST" th:action="${consola.id != 0} ? @{/mostrarconsolas} : @{/mostrarconsolas/editar/submit}" th:object="${consola}">
 			<fieldset>
 				<div class="form-group mb-3">
@@ -34,7 +34,7 @@
 					<label for="imagen">Ruta de Carátula</label>
 					<input type="url" th:field="*{imagen}" class="form-control" placeholder="Ruta de la imagen" required>
 				</div>
-				<button type="submit" class="btn btn-primary">Enviar</button>
+				<input type="submit" class="btn btn-primary" value="Enviar">
 			</fieldset>
 		</form>
 	</main>
