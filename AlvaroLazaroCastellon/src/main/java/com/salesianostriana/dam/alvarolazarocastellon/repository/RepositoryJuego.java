@@ -52,6 +52,14 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
             """)
     List<Juego> ordenarPorNombreDESC();
 
+    @Query("""
+            select J, J.consola, count (*) as totalVentas
+            from Juego J
+                group by J, J.consola
+                order by totalVentas DESC
+            """)
+    List<Juego> buscarEstadisticasDeVenta();
+
     List<Juego> findJuegoByGeneroIgnoreCase(String genero);
 
 }
