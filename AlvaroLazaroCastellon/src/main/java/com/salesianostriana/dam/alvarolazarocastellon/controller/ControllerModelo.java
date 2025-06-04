@@ -105,7 +105,6 @@ public class ControllerModelo {
         if (fabricante != null) {
             consolasNovedades = serviceModelo.findByFabricanteOnNewConsole(fabricante);
         }
-        System.out.println(consolasNovedades);
         model.addAttribute("consolasNovedades", consolasNovedades);
         model.addAttribute("palabraClave", palabraClave);
         model.addAttribute("fabricante", fabricante);
