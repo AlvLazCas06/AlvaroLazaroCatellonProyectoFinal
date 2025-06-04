@@ -1,16 +1,16 @@
 package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
-import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
+import com.salesianostriana.dam.alvarolazarocastellon.util.ConsolaExportPDF;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ControllerConsola {
@@ -59,6 +59,20 @@ public class ControllerConsola {
             return "showconsoles";
         }
 
+    }
+
+    @GetMapping("/eportarPDFconsolas")
+    public void exportGameListInPDF(HttpServletResponse response) throws IOException {
+        response.setContentType("application/pdf");
+
+        String header = "Content-Disposition";
+        String value = "attachment; filename=\"consolas.pdf\"";
+
+        response.setHeader(header, value);
+
+        List<Consola> modelos = serviceConsola.findAll();
+        ConsolaExportPDF exportPDF = new ConsolaExportPDF(modelos);
+        exportPDF.exportDocument(response);
     }
 
 }

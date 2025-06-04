@@ -2,11 +2,10 @@ package com.salesianostriana.dam.alvarolazarocastellon.util;
 
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
-import com.lowagie.text.Image;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
+import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,9 +18,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JuegoExportPDF {
+public class ConsolaExportPDF {
 
-    private List<Juego> listaJuegos;
+    private List<Consola> listaJuegos;
 
     public void writeHeaderOfTheTable(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
@@ -30,7 +29,7 @@ public class JuegoExportPDF {
 
         cell.setPadding(5);
 
-        Font font = FontFactory.getFont(FontFactory.TIMES);
+        com.lowagie.text.Font font = FontFactory.getFont(FontFactory.TIMES);
         font.setColor(Color.WHITE);
 
         cell.setPhrase(new Phrase("ID", font));
@@ -45,35 +44,11 @@ public class JuegoExportPDF {
 
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Precio", font));
+        cell.setPhrase(new Phrase("Juegos", font));
 
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Consola", font));
-
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Cantidad", font));
-
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Venta", font));
-
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Nº de Jug.", font));
-
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Género", font));
-
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Fecha de Lanzamiento", font));
-
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Llegada al mercado", font));
+        cell.setPhrase(new Phrase("Modelos", font));
 
         table.addCell(cell);
 
@@ -83,21 +58,15 @@ public class JuegoExportPDF {
     }
 
     public void writeDataOfTable(PdfPTable table) {
-        listaJuegos.forEach(juego -> {
-            table.addCell(String.valueOf(juego.getId()));
-            table.addCell(juego.getNombre());
-            table.addCell(juego.getDescription().length() > 75 ? juego.getDescription().substring(0, 75) + "..." : juego.getDescription());
-            table.addCell(String.valueOf(juego.getPrecio()));
-            table.addCell(juego.getConsola() != null ? juego.getConsola().getNombre() : "N/A");
-            table.addCell(String.valueOf(juego.getCantidad()));
-            table.addCell(String.valueOf(juego.getVentas()));
-            table.addCell(String.valueOf(juego.getNumJugadores()));
-            table.addCell(juego.getGenero());
-            table.addCell(juego.getFechaLanzamiento().toString());
-            table.addCell(juego.getLlegadaAlMercado().toString());
+        listaJuegos.forEach(consola -> {
+            table.addCell(String.valueOf(consola.getId()));
+            table.addCell(consola.getNombre());
+            table.addCell(consola.getDescription().length() > 75 ? consola.getDescription().substring(0, 75) + "..." : consola.getDescription());
+            table.addCell(consola.getJuegos().toString());
+            table.addCell(consola.getModelos().toString());
             try {
-                if (juego.getRutaImagen() != null) {
-                    Image img = Image.getInstance(juego.getRutaImagen());
+                if (consola.getImagen() != null) {
+                    com.lowagie.text.Image img = com.lowagie.text.Image.getInstance(consola.getImagen());
                     img.scaleToFit(50, 50); // Ajusta el tamaño de la imagen
                     PdfPCell cell = new PdfPCell(img);
                     table.addCell(cell);
@@ -121,7 +90,7 @@ public class JuegoExportPDF {
         title.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(title);
 
-        PdfPTable table = new PdfPTable(12);
+        PdfPTable table = new PdfPTable(6);
         table.setWidthPercentage(100);
         table.setSpacingBefore(15);
 

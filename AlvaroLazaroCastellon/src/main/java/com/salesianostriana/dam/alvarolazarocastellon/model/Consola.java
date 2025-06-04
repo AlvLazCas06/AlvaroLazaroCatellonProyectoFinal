@@ -2,9 +2,6 @@ package com.salesianostriana.dam.alvarolazarocastellon.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,4 +52,15 @@ public class Consola {
         modelo.setConsola(null);
     }
 
+    @Override
+    public String toString() {
+        return "Consola{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", modelos=" + modelos +
+                ", description='" + description + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", juegos=" + juegos +
+                '}';
+    }
 }
