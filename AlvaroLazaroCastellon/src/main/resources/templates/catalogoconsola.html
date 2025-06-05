@@ -67,7 +67,7 @@
 			</section>
 			<section class="container">
 				<article class="row">
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-light mb-5" th:each="console : ${consolas}" data-aos="fade-right">
+					<div class="col-6 col-md-4 col-lg-3 text-light mb-5" th:each="console : ${consolas}" data-aos="fade-right">
 						<a th:href="@{/catalogoconsolas/venta/{id} (id=${console.id})}" class="btn btn-light d-flex flex-column justify-content-center align-items-center h-100 w-100">
 							<img src="#" alt="Juego" th:src="${console.imagen}" th:alt="${console.nombre}" class="d-block mb-2" width="250px" height="250px">
 							<h2 th:text="${console.consola.nombre}"></h2>

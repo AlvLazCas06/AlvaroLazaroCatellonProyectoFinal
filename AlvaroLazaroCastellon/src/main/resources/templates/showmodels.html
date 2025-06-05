@@ -19,12 +19,12 @@
 <body class="bg-dark">
     <header th:replace="~{fragments/headerconfiguracion::header}"></header>
     <main>
-        <section class="container-fluid">
+        <section class="container">
             <a href="../templates/addmodel.html" th:href="@{/mostrarmodelos/añadirmodelo}" class="btn btn-outline-primary my-4">Agregar
                 Modelo</a>
             <h1 class="text-light mb-4">Lista de Modelos</h1>
         </section>
-        <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
+        <section class="container d-flex justify-content-between align-items-center mb-4">
             <form action="#" th:action="@{/mostrarmodelos}" method="get">
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
@@ -35,12 +35,12 @@
                 </div>
             </form>
         </section>
-        <section class="container-fluid">
+        <section class="container">
             <article>
                 <a href="#" th:href="@{/eportarPDFmodelos}" class="btn btn-secondary mb-2">Exportar PDF</a>
             </article>
         </section>
-        <section class="table-responsive container-fluid">
+        <section class="table-responsive container">
             <table class="table table-bordered table-dark table-striped table-hover">
                 <thead>
                 <tr class="align-middle text-center">
@@ -73,8 +73,8 @@
                     <td th:text="${model.cantidad}" class="text-light"></td>
                     <td th:text="${model.ventas}" class="text-light"></td>
                     <td th:text="${model.consola.nombre}" class="text-light"></td>
-                    <td th:text="${model.fechaLanzamiento}" class="text-light"></td>
-                    <td th:text="${model.llegadaAlMercado}" class="text-light"></td>
+                    <td th:text="${#temporals.format(model.fechaLanzamiento, 'dd-MM-yyyy')}" class="text-light"></td>
+                    <td th:text="${#temporals.format(model.llegadaAlMercado, 'dd-MM-yyyy')}" class="text-light"></td>
                     <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
                              th:src="${model.imagen}" alt="Cáratula" width="100px" height="100px"></td>
                     <td>

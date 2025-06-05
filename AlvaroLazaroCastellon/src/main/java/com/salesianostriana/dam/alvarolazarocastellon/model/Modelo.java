@@ -56,20 +56,4 @@ public class Modelo {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Modelo{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", description='" + description + '\'' +
-                ", fabricante='" + fabricante + '\'' +
-                ", precio=" + precio +
-                ", cantidad=" + cantidad +
-                ", ventas=" + ventas +
-                ", fechaLanzamiento=" + fechaLanzamiento +
-                ", llegadaAlMercado=" + llegadaAlMercado +
-                ", imagen='" + imagen + '\'' +
-                ", consola=" + consola +
-                '}';
-    }
 }

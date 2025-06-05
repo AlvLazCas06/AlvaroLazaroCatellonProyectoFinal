@@ -21,12 +21,12 @@
 <body class="bg-dark text-light">
     <header th:replace="~{fragments/headerconfiguracion::header}"></header>
     <main>
-        <section class="container-fluid">
+        <section class="container">
             <a href="../templates/addgames.html" th:href="@{/mostrarjuego/añadirjuego}" class="btn btn-outline-primary my-4">Agregar
                 Juego</a>
             <h1 class="text-light mb-4">Lista de Juegos</h1>
         </section>
-        <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
+        <section class="container d-flex justify-content-between align-items-center mb-4">
             <form action="#" th:action="@{/mostrarjuego}" method="get">
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
@@ -37,12 +37,12 @@
                 </div>
             </form>
         </section>
-        <section class="container-fluid">
+        <section class="container">
             <article>
                 <a href="#" th:href="@{/eportarPDF}" class="btn btn-secondary mb-2">Exportar PDF</a>
             </article>
         </section>
-        <section class="table-responsive container-fluid">
+        <section class="table-responsive container">
             <table class="table table-bordered table-dark table-striped table-hover">
                 <thead>
                     <tr class="align-middle text-center">
@@ -77,8 +77,8 @@
                         <td th:text="${game.genero}" class="text-light"></td>
                         <td th:text="${game.numJugadores == 4 ? '1-4' : (game.numJugadores == 2 ? '1-2' : '1')}" class="text-light"></td>
                         <td th:text="${game.consola.nombre}" class="text-light"></td>
-                        <td th:text="${game.fechaLanzamiento}" class="text-light"></td>
-                        <td th:text="${game.llegadaAlMercado}" class="text-light"></td>
+                        <td th:text="${#temporals.format(game.fechaLanzamiento, 'dd-MM-yyyy')}" class="text-light"></td>
+                        <td th:text="${#temporals.format(game.llegadaAlMercado, 'dd-MM-yyyy')}" class="text-light"></td>
                         <td><img src="https://art.gametdb.com/wii/cover3D/ES/SMNP01.png?1317736131"
                                  th:src="${game.rutaImagen}" alt="Cáratula" width="100px" height="100px"></td>
                         <td>

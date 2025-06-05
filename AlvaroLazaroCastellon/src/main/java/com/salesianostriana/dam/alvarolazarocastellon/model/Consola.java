@@ -20,6 +20,7 @@ public class Consola {
 
     @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER)
     @Builder.Default
+    @ToString.Exclude
     private List<Modelo> modelos = new ArrayList<Modelo>();
 
     @Lob
@@ -30,6 +31,7 @@ public class Consola {
 
     @OneToMany(mappedBy = "consola", fetch = FetchType.EAGER)
     @Builder.Default
+    @ToString.Exclude
     private List<Juego> juegos = new ArrayList<Juego>();
 
     public void addJuego(Juego juego) {
@@ -52,15 +54,4 @@ public class Consola {
         modelo.setConsola(null);
     }
 
-    @Override
-    public String toString() {
-        return "Consola{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", modelos=" + modelos +
-                ", description='" + description + '\'' +
-                ", imagen='" + imagen + '\'' +
-                ", juegos=" + juegos +
-                '}';
-    }
 }

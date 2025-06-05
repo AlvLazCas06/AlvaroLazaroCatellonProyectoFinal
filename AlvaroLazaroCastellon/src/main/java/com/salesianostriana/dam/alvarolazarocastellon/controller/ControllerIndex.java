@@ -37,4 +37,8 @@ public class ControllerIndex {
     public String ShowWhoAreWe(Model model) {
         return "quienessomos";
     }
+
+    @GetMapping("/ventas")
+    public String showSales() {
+        return "ventas";}
 }

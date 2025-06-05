@@ -37,14 +37,26 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
     }
 
     public List<Modelo> findNotSell(String S) {
-        return repository.findAll(S)
+        if (S != null) {
+            return repository.findAll(S)
+                    .stream()
+                    .filter(m -> m.getLlegadaAlMercado().isAfter(LocalDate.now()))
+                    .toList();
+        }
+        return findAll()
                 .stream()
                 .filter(m -> m.getLlegadaAlMercado().isAfter(LocalDate.now()))
                 .toList();
     }
 
     public List<Modelo> findNewConsoles(String S) {
-        return repository.findAll(S)
+        if (S != null) {
+            return repository.findAll(S)
+                    .stream()
+                    .filter(m -> m.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                    .toList();
+        }
+        return findAll()
                 .stream()
                 .filter(m -> m.getLlegadaAlMercado().isEqual(LocalDate.now()))
                 .toList();

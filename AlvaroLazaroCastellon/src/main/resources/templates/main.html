@@ -47,7 +47,7 @@
 			<article class="row justify-content-center align-items-center">
 				<h1 class="d-flex justify-content-center align-items-center" data-aos="fade-left" th:if="${threeMaxSell.isEmpty() and masVendido.ventas == 0}">No se ha vendido ningún Juego todavía</h1>
 				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right" th:object="${masVendido}" th:if="${masVendido.ventas != 0}">
-					<h1>Juego más vendido</h1>
+					<h1 class="mt-2">Juego más vendido</h1>
 					<div>
 						<img src="../static/img/Consolas/Wii.png" th:src="*{rutaImagen}" alt="mas vendido" th:alt="*{nombre}" class="mb-2 img-fluid">
 					</div>
@@ -99,7 +99,7 @@
 		</section>
 		<section class="container" th:if="${consolaMasVendida.ventas != 0}">
 			<article class="row justify-content-center align-items-center">
-				<h1>Consola más vendida</h1>
+				<h1 class="mt-2">Consola más vendida</h1>
 				<div class="col-12 col-md-4 text-center justify-content-center align-items-center" data-aos="fade-right" th:object="${consolaMasVendida}">
 					<div>
 						<img src="../static/img/Consolas/Wii.png" th:src="*{imagen}" alt="mas vendido" th:alt="*{nombre}" class="mb-2 img-fluid">
