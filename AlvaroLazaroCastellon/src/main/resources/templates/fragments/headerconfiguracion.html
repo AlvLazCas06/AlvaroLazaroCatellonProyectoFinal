@@ -23,8 +23,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../showmodels.html" th:href="@{/mostrarmodelos}">Modelos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../ventas.html" th:href="@{/ventas}">Ventas</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ventas</a>
+                        <ul class="dropdown-menu bg-danger">
+                            <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/ventas/juegos}">Juegos</a></li>
+                            <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/ventas/modelos}">Modelos</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -52,8 +56,12 @@
             <div class="nav-item">
                 <a class="nav-link" href="../showmodels.html" th:href="@{/mostrarmodelos}">Modelos</a>
             </div>
-            <div class="nav-item">
-                <a class="nav-link" href="../ventas.html" th:href="@{/ventas}">Ventas</a>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ventas</a>
+                <ul class="dropdown-menu bg-danger">
+                    <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/ventas/juegos}">Juegos</a></li>
+                    <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/ventas/modelos}">Modelos</a></li>
+                </ul>
             </div>
         </article>
     </section>

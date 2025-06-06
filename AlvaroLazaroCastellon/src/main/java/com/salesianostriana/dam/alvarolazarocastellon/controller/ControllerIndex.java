@@ -38,7 +38,4 @@ public class ControllerIndex {
         return "quienessomos";
     }
 
-    @GetMapping("/ventas")
-    public String showSales() {
-        return "ventas";}
 }

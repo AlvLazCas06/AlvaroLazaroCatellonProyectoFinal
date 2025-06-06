@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ControllerConsola {
@@ -25,7 +25,7 @@ public class ControllerConsola {
     }
 
     @PostMapping("/mostrarconsolas")
-    public String addGame(Model model, @ModelAttribute("consola") Consola consola) {
+    public String addGame(@ModelAttribute("consola") Consola consola) {
         serviceConsola.save(consola);
         return "redirect:/mostrarconsolas";
     }
@@ -73,6 +73,18 @@ public class ControllerConsola {
         List<Consola> modelos = serviceConsola.findAll();
         ConsolaExportPDF exportPDF = new ConsolaExportPDF(modelos);
         exportPDF.exportDocument(response);
+    }
+
+    @GetMapping("/ventas/juegos")
+    public String showSalesOfGames(Model model) {
+        model.addAttribute("sales", serviceConsola.calculateSalesPerGames());
+        return "ventas";
+    }
+
+    @GetMapping("/ventas/modelos")
+    public String showSalesOfModels(Model model) {
+        model.addAttribute("sales", serviceConsola.calculateSalesPerModel());
+        return "ventasModelo";
     }
 
 }

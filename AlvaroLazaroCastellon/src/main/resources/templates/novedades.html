@@ -19,7 +19,7 @@
 <body class="bg-dark">
     <header th:replace="~{fragments/header::header}"></header>
     <main class="container d-flex flex-column justify-content-center align-items-center">
-        <section class="container my-4" th:if="${not novedades.isEmpty()}">
+        <section class="container my-4">
             <article class="row row-cols-2 row-cols-md-5 g-3">
                 <div class="col d-flex">
                     <form action="#" th:action="@{/novedades}" method="get" class="w-100">
@@ -88,7 +88,7 @@
                 </div>
             </article>
         </section>
-        <section class="container-fluid d-flex justify-content-between align-items-center mb-4" th:if="${not novedades.isEmpty()}">
+        <section class="container-fluid d-flex justify-content-between align-items-center mb-4">
             <form action="#" th:action="@{/novedades}" method="get">
                 <div class="d-flex justify-content-around align-items-center">
                     <div class="d-flex align-items-center flex-wrap">
