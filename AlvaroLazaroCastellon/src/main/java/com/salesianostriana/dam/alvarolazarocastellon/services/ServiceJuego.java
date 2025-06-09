@@ -46,6 +46,13 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
                 .max((j1, j2) -> Integer.compare(j1.getVentas(), j2.getVentas()));
     }
 
+    public List<Juego> findNewsForEmail() {
+        return repository.findAll()
+                .stream()
+                .filter(j -> j.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
+    }
+
     public List<Juego> findByGenre(String genero) {
         if (genero != null) {
             return repository.findJuegoByGeneroIgnoreCase(genero)

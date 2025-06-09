@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Explora nuestra lista completa de videojuegos retro disponibles en stock. Filtra, busca, edita y gestiona tus títulos favoritos con facilidad.">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="style.css" th:href="@{../css/style.css}">
+	<style type="text/css">
+        .content {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+
+        .card {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .card-image .image {
+            width: 100px;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .card-content {
+            margin-left: 15px;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .price {
+            font-size: 16px;
+            color: #888;
+        }
+
+        .message h1 {
+            font-size: 20px;
+            color: #444;
+            text-align: center;
+        }
+	</style>
+</head>
+<body>
+	<main class="content">
+		<section class="section novedades" th:if="${not juegos.isEmpty()}">
+			<h1 class="title">Novedades</h1>
+		</section>
+		<section class="section juegos" th:if="${not juegos.isEmpty()}">
+			<article class="card" th:each="juego : ${juegos}">
+				<div class="card-image">
+					<img src="#" th:src="${juego.rutaImagen}" alt="#" class="image">
+				</div>
+				<div class="card-content">
+					<p class="name" th:text="${juego.nombre}"></p>
+					<p class="price" th:text="${juego.precio} + '€'"></p>
+				</div>
+			</article>
+		</section>
+		<section class="section modelos" th:if="${not modelos.isEmpty()}">
+			<article class="card" th:each="modelo : ${modelos}">
+				<div class="card-image">
+					<img src="#" th:src="${modelo.imagen}" alt="#" class="image">
+				</div>
+				<div class="card-content">
+					<p class="name" th:text="${modelo.nombre}"></p>
+					<p class="price" th:text="${modelo.precio} + '€'"></p>
+				</div>
+			</article>
+		</section>
+		<section class="section no-juegos" th:if="${juegos.isEmpty() and not modelos.isEmpty()}">
+			<article class="message">
+				<h1>No han llegado nuevos juegos a tienda hoy</h1>
+			</article>
+		</section>
+		<section class="section no-modelos" th:if="${modelos.isEmpty() and not juegos.isEmpty()}">
+			<article class="message">
+				<h1>No han llegado nuevas consolas a tienda hoy</h1>
+			</article>
+		</section>
+		<section class="section no-novedades" th:if="${juegos.isEmpty() and modelos.isEmpty()}">
+			<article class="message">
+				<h1>No han llegado nuevos juegos ni consolas a tienda hoy</h1>
+			</article>
+		</section>
+	</main>
+</body>
+</html>

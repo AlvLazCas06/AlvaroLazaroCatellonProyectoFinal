@@ -62,6 +62,13 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
                 .toList();
     }
 
+    public List<Modelo> findNewConsolesForEmail() {
+        return findAll()
+                .stream()
+                .filter(m -> m.getLlegadaAlMercado().isEqual(LocalDate.now()))
+                .toList();
+    }
+
     public Optional<Modelo> findMaxSell() {
         return repository.findAll()
                 .stream()
