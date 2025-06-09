@@ -3,7 +3,10 @@ package com.salesianostriana.dam.alvarolazarocastellon.services;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +20,11 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
         return repository.findById(id).get();
     }
 
+    @Transactional(readOnly = true)
+    public Page<Juego> findAllPage(String s, Pageable pageable) {
+        return repository.findAll2(s, pageable);
+    }
+
     public List<Juego> listAll(String S) {
         if (S != null) {
             return repository.findAll(S)
@@ -27,17 +35,6 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
         return repository.findAll()
                 .stream()
                 .filter(j -> j.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
-                .toList();
-    }
-
-    public List<Juego> listAll2(String S) {
-        if (S != null) {
-            return repository.findAll2(S)
-                    .stream()
-                    .toList();
-        }
-        return repository.findAll()
-                .stream()
                 .toList();
     }
 

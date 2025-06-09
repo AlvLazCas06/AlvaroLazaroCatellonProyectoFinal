@@ -62,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="game : ${juego}" class="align-middle text-center">
+                    <tr th:each="game : ${page}" class="align-middle text-center">
                         <td th:text="${game.id}" class="text-light"></td>
                         <td th:text="${game.nombre}" class="text-light"></td>
                         <td class="text-light">
@@ -112,6 +112,11 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
+        <section th:class="container">
+            <article>
+                <nav th:replace="~{fragments/paginatorNav::paginator}"></nav>
+            </article>
         </section>
     </main>
     <footer th:replace="~{fragments/footer::footer}"></footer>
