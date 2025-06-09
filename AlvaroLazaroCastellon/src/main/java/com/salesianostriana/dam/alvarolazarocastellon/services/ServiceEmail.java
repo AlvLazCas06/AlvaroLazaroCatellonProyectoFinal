@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,6 +30,7 @@ public class ServiceEmail {
         final Context ctx = new Context();
         ctx.setVariable("juegos", juegos);
         ctx.setVariable("modelos", modelos);
+        ctx.setVariable("fecha", LocalDate.now());
         final String html = templateEngine.process("mail", ctx);
 
         Email email = new Email();

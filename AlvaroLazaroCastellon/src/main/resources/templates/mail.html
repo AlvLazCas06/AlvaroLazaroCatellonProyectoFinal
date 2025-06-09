@@ -63,7 +63,7 @@
 <body>
 	<main class="content">
 		<section class="section novedades" th:if="${not juegos.isEmpty()}">
-			<h1 class="title">Novedades</h1>
+			<h1 class="title" th:text="|Novedades ${#temporals.format(fecha, 'dd/MM/yyyy')}|"></h1>
 		</section>
 		<section class="section juegos" th:if="${not juegos.isEmpty()}">
 			<article class="card" th:each="juego : ${juegos}">
@@ -82,6 +82,7 @@
 					<img src="#" th:src="${modelo.imagen}" alt="#" class="image">
 				</div>
 				<div class="card-content">
+					<p class="name" th:text="${modelo.consola.nombre}"></p>
 					<p class="name" th:text="${modelo.nombre}"></p>
 					<p class="price" th:text="${modelo.precio} + '€'"></p>
 				</div>
