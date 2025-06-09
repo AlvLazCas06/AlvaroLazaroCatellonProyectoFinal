@@ -3,7 +3,10 @@ package com.salesianostriana.dam.alvarolazarocastellon.services;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Modelo;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryModelo;
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,11 +32,16 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
                 .toList();
     }
 
-    public List<Modelo> listAll2(String S) {
-        if (S != null) {
-            return repository.findAll2(S);
-        }
-        return repository.findAll();
+//    public List<Modelo> listAll2(String S) {
+//        if (S != null) {
+//            return repository.findAll2(S);
+//        }
+//        return repository.findAll();
+//    }
+
+    @Transactional(readOnly = true)
+    public Page<Modelo> findAllPage(String s, Pageable pageable) {
+        return repository.findAll2(s, pageable);
     }
 
     public List<Modelo> findNotSell(String S) {

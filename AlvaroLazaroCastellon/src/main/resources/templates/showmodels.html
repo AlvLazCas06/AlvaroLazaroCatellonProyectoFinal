@@ -62,7 +62,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="model : ${modelo}" class="align-middle text-center">
+                <tr th:each="model : ${page}" class="align-middle text-center">
                     <td th:text="${model.id}" class="text-light"></td>
                     <td th:text="${model.nombre}" class="text-light"></td>
                     <td class="text-light">
@@ -111,6 +111,11 @@
                 </tr>
                 </tbody>
             </table>
+        </section>
+        <section th:class="container">
+            <article>
+                <nav th:replace="~{fragments/paginatorNav::paginator}"></nav>
+            </article>
         </section>
     </main>
     <footer th:replace="~{fragments/footer::footer}"></footer>

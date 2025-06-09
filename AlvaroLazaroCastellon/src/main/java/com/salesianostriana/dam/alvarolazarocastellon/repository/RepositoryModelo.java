@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.alvarolazarocastellon.repository;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Modelo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,7 +24,7 @@ public interface RepositoryModelo extends JpaRepository<Modelo, Long> {
         from Modelo M
             where concat(M.id, M.nombre, M.description, M.fabricante, M.precio, M.cantidad, M.ventas, M.fechaLanzamiento, M.llegadaAlMercado, M.consola.nombre) ilike %?1%
     """)
-    List<Modelo> findAll2(String palabraClave);
+    Page<Modelo> findAll2(String palabraClave, Pageable pageable);
 
     List<Modelo> findModeloByFabricanteIgnoreCase(String fabricante);
 

@@ -1,12 +1,17 @@
 package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
+import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Modelo;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceModelo;
 import com.salesianostriana.dam.alvarolazarocastellon.util.ModeloExportPDF;
+import com.salesianostriana.dam.alvarolazarocastellon.util.PageRender;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,8 +68,14 @@ public class ControllerModelo {
     }
 
     @GetMapping("/mostrarmodelos")
-    public String showGame(Model model, @ModelAttribute("palabraClave") String palabraClave) {
-        model.addAttribute("modelo", serviceModelo.listAll2(palabraClave));
+    public String showGame(Model model,
+                           @RequestParam(name = "page", defaultValue = "0") int page,
+                           @ModelAttribute("palabraClave") String palabraClave) {
+        Pageable pageRequest = PageRequest.of(page, 3);
+        Page<Modelo> modelo = serviceModelo.findAllPage(palabraClave, pageRequest);
+        PageRender<Modelo> pageRender = new PageRender<>("/mostrarmodelos", modelo);
+        model.addAttribute("modelo", pageRender);
+        model.addAttribute("page", modelo);
         model.addAttribute("palabraClave", palabraClave);
         return "showmodels";
     }
