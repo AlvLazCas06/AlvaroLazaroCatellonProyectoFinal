@@ -7,7 +7,6 @@ import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryConso
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -40,14 +39,11 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
     public Map<Consola, Integer> calculateSalesPerGames () {
         Map<Consola, Integer> map = new HashMap<Consola, Integer>();
         repository.findAll()
-                .stream()
                 .forEach(
-                        consola -> {
-                            map.put(consola, consola.getJuegos()
-                                    .stream()
-                                    .mapToInt(Juego::getVentas)
-                                    .sum());
-                        }
+                        consola -> map.put(consola, consola.getJuegos()
+                                .stream()
+                                .mapToInt(Juego::getVentas)
+                                .sum())
                 );
         return map;
     }
@@ -55,14 +51,11 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
     public Map<Consola, Integer> calculateSalesPerModel () {
         Map<Consola, Integer> map = new HashMap<Consola, Integer>();
         repository.findAll()
-                .stream()
                 .forEach(
-                        consola -> {
-                            map.put(consola, consola.getModelos()
-                                    .stream()
-                                    .mapToInt(Modelo::getVentas)
-                                    .sum());
-                        }
+                        consola -> map.put(consola, consola.getModelos()
+                                .stream()
+                                .mapToInt(Modelo::getVentas)
+                                .sum())
                 );
         return map;
     }

@@ -1,9 +1,7 @@
 package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
-import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Modelo;
-import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceModelo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +14,6 @@ public class ControllerIndex {
 
     @Autowired
     private ServiceJuego serviceJuego;
-
-    @Autowired
-    private ServiceConsola serviceConsola;
 
     @Autowired
     private ServiceModelo serviceModelo;

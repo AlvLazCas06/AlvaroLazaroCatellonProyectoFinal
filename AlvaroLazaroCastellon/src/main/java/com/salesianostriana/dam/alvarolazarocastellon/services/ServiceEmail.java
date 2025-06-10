@@ -13,7 +13,6 @@ import org.thymeleaf.context.Context;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class ServiceEmail {
@@ -23,8 +22,6 @@ public class ServiceEmail {
 
     @Autowired
     private TemplateEngine templateEngine;
-
-    private final Locale locale = Locale.getDefault();
 
     public Email generateEmail(List<Juego> juegos, List<Modelo> modelos) {
         final Context ctx = new Context();
