@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
-import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Fabricante;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceFabricante;
 import org.springframework.beans.factory.annotation.Autowired;
