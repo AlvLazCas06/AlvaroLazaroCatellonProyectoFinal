@@ -36,7 +36,11 @@
                     <div class="row">
                         <div class="col-6 col-sm-3 form-group mb-3">
                             <label for="fabricante">Fabricante</label>
-                            <input type="text" th:field="*{fabricante}" class="form-control" placeholder="Fabricante del modelo" required>
+                            <select th:field="*{fabricante}" class="form-control" required>
+                                <th:block th:each="fabricante : ${fabricantes}">
+                                    <option th:value="${fabricante.id}" th:text="${fabricante.nombre}"></option>
+                                </th:block>
+                            </select>
                         </div>
                         <div class="col-6 col-sm-3 form-group mb-3">
                             <label for="precio">Precio</label>

@@ -54,7 +54,7 @@ public class ControllerConsola {
         if (serviceConsola.deleteConsole(id)) {
             return "redirect:/mostrarconsolas";
         } else {
-            model.addAttribute("error", "No se puede eliminar la consola porque tiene juegos asociados.");
+            model.addAttribute("error", "No se puede eliminar la consola porque tiene juegos y/o modelos asociados.");
             model.addAttribute("consolas", serviceConsola.findAll());
             return "showconsoles";
         }

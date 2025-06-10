@@ -27,7 +27,7 @@ public class PageRender<T> {
         this.page = page;
         this.pages = new ArrayList<PageItem>();
 
-        itemsPerPage = 7;
+        itemsPerPage = 4;
         totalPages = page.getTotalPages();
         currentPage = page.getNumber() + 1;
 

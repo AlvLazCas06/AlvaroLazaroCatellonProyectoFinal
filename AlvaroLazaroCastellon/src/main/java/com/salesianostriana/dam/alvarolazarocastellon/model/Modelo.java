@@ -25,7 +25,9 @@ public class Modelo {
     @Lob
     private String description;
 
-    private String fabricante;
+    @ManyToOne
+    @JoinColumn(name = "fabricante_id")
+    private Fabricante fabricante;
 
     private double precio;
 
@@ -53,6 +55,16 @@ public class Modelo {
         this.consola = consola;
         if (consola != null) {
             consola.getModelos().add(this);
+        }
+    }
+
+    public void setFabricante(Fabricante fabricante) {
+        if (this.fabricante != null) {
+            this.fabricante.getModelos().remove(this);
+        }
+        this.fabricante = fabricante;
+        if (fabricante != null) {
+            fabricante.getModelos().add(this);
         }
     }
 

@@ -47,8 +47,10 @@ public class ControllerJuego {
     }
 
     @GetMapping("/mostrarjuego")
-    public String showGame(Model model, @RequestParam(name = "page", defaultValue = "0") int page, @ModelAttribute("palabraClave") String palabraClave) {
-        Pageable pageRequest = PageRequest.of(page, 7);
+    public String showGame(Model model,
+                           @RequestParam(name = "page", defaultValue = "0") int page,
+                           @ModelAttribute("palabraClave") String palabraClave) {
+        Pageable pageRequest = PageRequest.of(page, 5);
         Page<Juego> juego = serviceJuego.findAllPage(palabraClave, pageRequest);
         PageRender<Juego> pageRender = new PageRender<>("/mostrarjuego", juego);
 

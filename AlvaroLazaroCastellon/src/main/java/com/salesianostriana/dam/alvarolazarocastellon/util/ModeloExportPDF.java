@@ -83,7 +83,7 @@ public class ModeloExportPDF {
         listaModelos.forEach(modelo -> {
             table.addCell(String.valueOf(modelo.getId())).setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(modelo.getNombre());
-            table.addCell(modelo.getFabricante());
+            table.addCell(modelo.getFabricante().getNombre());
             table.addCell(String.valueOf(modelo.getPrecio()));
             table.addCell(modelo.getConsola() != null ? modelo.getConsola().getNombre() : "N/A");
             table.addCell(String.valueOf(modelo.getCantidad()));

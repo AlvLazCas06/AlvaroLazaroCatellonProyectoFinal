@@ -211,7 +211,7 @@
 							<div class="d-flex justify-content-around align-items-center">
 								<div>
 									<img src="#" th:src="*{imagen}" alt="Carátula" th:alt="*{nombre}" class="d-block">
-									<p th:text="|Fabricante: *{fabricante}|"></p>
+									<p th:text="|Fabricante: *{fabricante.nombre}|"></p>
 									<p th:text="|Modelo: *{nombre}|"></p>
 									<p th:text="${consolaMasVendida.cantidad > 0 ? 'Precio: ' + #numbers.formatDecimal(consolaMasVendida.precio, 1, 2) + '€' : 'Agotado'}"></p>
 								</div>

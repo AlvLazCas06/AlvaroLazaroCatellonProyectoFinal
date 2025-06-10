@@ -96,21 +96,21 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
     }
 
     public List<Modelo> findByFabricante(String fabricante) {
-        return repository.findModeloByFabricanteIgnoreCase(fabricante)
+        return repository.findModeloByFabricante_Nombre(fabricante)
                 .stream()
                 .filter(m -> m.getLlegadaAlMercado().isBefore(LocalDate.now().plusDays(1)))
                 .toList();
     }
 
     public List<Modelo> findByFabricanteOnNotSell(String fabricante) {
-        return repository.findModeloByFabricanteIgnoreCase(fabricante)
+        return repository.findModeloByFabricante_Nombre(fabricante)
                 .stream()
                 .filter(m -> m.getLlegadaAlMercado().isAfter(LocalDate.now()))
                 .toList();
     }
 
     public List<Modelo> findByFabricanteOnNewConsole(String fabricante) {
-        return repository.findModeloByFabricanteIgnoreCase(fabricante)
+        return repository.findModeloByFabricante_Nombre(fabricante)
                 .stream()
                 .filter(m -> m.getLlegadaAlMercado().isEqual(LocalDate.now()))
                 .toList();
@@ -125,7 +125,7 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
                 .sum()
                 - repository.findById(id)
                 .stream()
-                .filter(c -> c.getFabricante().equalsIgnoreCase(fabricante))
+                .filter(c -> c.getFabricante().getNombre().equalsIgnoreCase(fabricante))
                 .mapToDouble(Modelo::getPrecio)
                 .sum() * (descuento / 100);
     }

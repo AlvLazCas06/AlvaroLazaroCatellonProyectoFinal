@@ -22,10 +22,10 @@ public interface RepositoryModelo extends JpaRepository<Modelo, Long> {
     @Query("""
         select M
         from Modelo M
-            where concat(M.id, M.nombre, M.description, M.fabricante, M.precio, M.cantidad, M.ventas, M.fechaLanzamiento, M.llegadaAlMercado, M.consola.nombre) ilike %?1%
+            where concat(M.id, M.nombre, M.description, M.fabricante.nombre, M.precio, M.cantidad, M.ventas, M.fechaLanzamiento, M.llegadaAlMercado, M.consola.nombre) ilike %?1%
     """)
     Page<Modelo> findAll2(String palabraClave, Pageable pageable);
 
-    List<Modelo> findModeloByFabricanteIgnoreCase(String fabricante);
+    List<Modelo> findModeloByFabricante_Nombre(String fabricante);
 
 }
