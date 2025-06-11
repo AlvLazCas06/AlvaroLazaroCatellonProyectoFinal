@@ -52,7 +52,7 @@ public class ControllerJuego {
     public String showGame(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(value = "palabraClave", required = false) String palabraClave,
-                           @RequestParam(value = "nombre", required = false, defaultValue = "") String nombre) {
+                           @RequestParam(value = "nombre", required = false) String nombre) {
         Pageable pageRequest = PageRequest.of(page, 5);
         Page<Juego> juego = serviceJuego.findAllPage(palabraClave, pageRequest);
         log.info(nombre);
@@ -192,7 +192,10 @@ public class ControllerJuego {
     }
 
     @GetMapping("/sort")
-    public String sendSort(@RequestParam(name = "orden") String sort, @RequestParam(required = false) String palabraClave, @RequestParam(required = false) String genero, RedirectAttributes redirectAttributes) {
+    public String sendSort(@RequestParam(name = "orden") String sort,
+                           @RequestParam(required = false) String palabraClave,
+                           @RequestParam(required = false) String genero,
+                           RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("orden", sort);
         redirectAttributes.addAttribute("palabraClave", palabraClave);
         redirectAttributes.addAttribute("genero", genero);

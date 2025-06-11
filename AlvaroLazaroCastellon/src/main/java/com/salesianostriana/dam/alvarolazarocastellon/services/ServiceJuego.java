@@ -22,7 +22,10 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
     @Transactional(readOnly = true)
     public Page<Juego> findAllPage(String s, Pageable pageable) {
-        return repository.findAll2(s, pageable);
+        if (s != null) {
+            return repository.findAll2(s, pageable);
+        }
+        return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
