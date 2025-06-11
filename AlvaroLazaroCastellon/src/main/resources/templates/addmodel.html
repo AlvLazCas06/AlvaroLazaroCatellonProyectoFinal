@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-6 col-sm-4 form-group mb-3">
                             <label for="llegadaAlMercado">Llegada a tienda</label>
-                            <input type="date" th:field="*{llegadaAlMercado}" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" class="form-control" required>
+                            <input type="date" th:field="*{llegadaAlMercado}" th:min="${modelo.id != null ? #temporals.format(modelo.llegadaAlMercado, 'yyyy-MM-dd') : #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}" class="form-control" required>
                         </div>
                     </div>
                 </div>

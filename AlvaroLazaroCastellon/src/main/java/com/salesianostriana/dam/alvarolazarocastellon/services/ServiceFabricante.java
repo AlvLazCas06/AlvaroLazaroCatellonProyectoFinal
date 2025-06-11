@@ -30,4 +30,8 @@ public class ServiceFabricante extends BaseServiceImp<Fabricante, Long, Reposito
         }
     }
 
+    public boolean nameExists(String name) {
+        return repository.findByNombreIgnoreCase(name).isPresent();
+    }
+
 }

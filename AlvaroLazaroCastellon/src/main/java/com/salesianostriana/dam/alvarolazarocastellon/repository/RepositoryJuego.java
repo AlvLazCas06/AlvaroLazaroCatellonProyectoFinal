@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.alvarolazarocastellon.repository;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
+import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,9 +23,11 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
     @Query("""
                 select J
                 from Juego J
-                    where concat(J.nombre, J.precio, J.numJugadores, J.cantidad, J.consola.nombre, J.ventas, J.genero, J.id) ilike %?1%
+                    where concat(J.nombre, J.precio, J.numJugadores, J.cantidad, J.ventas, J.genero, J.id, J.llegadaAlMercado, J.fechaLanzamiento) ilike %?1%
             """)
     Page<Juego> findAll2(String palabraClave, Pageable pageable);
+
+    Page<Juego> findByConsola_Nombre(String consolaNombre, Pageable pageable);
 
     @Query("""
                 SELECT J

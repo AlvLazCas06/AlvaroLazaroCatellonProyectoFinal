@@ -35,10 +35,10 @@ public class Modelo {
 
     private int ventas;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaLanzamiento;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate llegadaAlMercado;
 
     @Lob

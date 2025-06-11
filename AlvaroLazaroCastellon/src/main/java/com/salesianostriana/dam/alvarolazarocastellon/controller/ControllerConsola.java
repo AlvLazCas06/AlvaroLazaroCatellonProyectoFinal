@@ -75,15 +75,17 @@ public class ControllerConsola {
         exportPDF.exportDocument(response);
     }
 
-    @GetMapping("/ventas/juegos")
+    @GetMapping("/preciomedio/juegos")
     public String showSalesOfGames(Model model) {
-        model.addAttribute("sales", serviceConsola.calculateSalesPerGames());
+        model.addAttribute("sales", serviceConsola.calculateAveragePricePerGames());
+        model.addAttribute("total", serviceConsola.calculateAllAveragesGames());
         return "ventas";
     }
 
-    @GetMapping("/ventas/modelos")
+    @GetMapping("/preciomedio/modelos")
     public String showSalesOfModels(Model model) {
-        model.addAttribute("sales", serviceConsola.calculateSalesPerModel());
+        model.addAttribute("sales", serviceConsola.calculateAveragePricePerModel());
+        model.addAttribute("total", serviceConsola.calculateAllAveragesModels());
         return "ventasModelo";
     }
 

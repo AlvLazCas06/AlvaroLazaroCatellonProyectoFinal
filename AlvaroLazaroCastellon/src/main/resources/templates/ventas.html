@@ -18,7 +18,7 @@
 	<main class="container">
 		<section class="container mt-4">
 			<article>
-				<h1 class="text-light text-center">Ventas totales de Juegos por Consola</h1>
+				<h1 class="text-light text-center">Precio medio por Juegos de cada Consola</h1>
 			</article>
 		</section>
 		<section class="mt-3">
@@ -27,13 +27,17 @@
 					<thead>
 						<tr>
 							<th>Consola</th>
-							<th>Ventas</th>
+							<th>Precio medio</th>
 						</tr>
 					</thead>
 					<tbody>
 					<tr th:each="sale : ${sales}">
 						<td><img src="#" th:src="${sale['key'].imagen}" alt="#" th:alt="${sale['key'].nombre}" width="80px"></td>
-						<td th:text="${sale['value']}"></td>
+						<td th:text="${#numbers.formatDecimal(sale['value'], 1, 2)} + '€'"></td>
+					</tr>
+					<tr>
+						<td><h3>Total</h3></td>
+						<td th:text="${#numbers.formatDecimal(total, 1, 2) + '€'}"></td>
 					</tr>
 					</tbody>
 				</table>

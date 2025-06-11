@@ -28,7 +28,8 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
     }
 
     public boolean deleteConsole(Long id) {
-        if (repository.findById(id).get().getJuegos().isEmpty()) {
+        if (repository.findById(id).get().getJuegos().isEmpty()
+                && repository.findById(id).get().getModelos().isEmpty()) {
             repository.deleteById(id);
             return true;
         } else {
@@ -36,28 +37,44 @@ public class ServiceConsola extends BaseServiceImp<Consola, Long, RepositoryCons
         }
     }
 
-    public Map<Consola, Integer> calculateSalesPerGames () {
-        Map<Consola, Integer> map = new HashMap<Consola, Integer>();
+    public Map<Consola, Double> calculateAveragePricePerGames() {
+        Map<Consola, Double> map = new LinkedHashMap<Consola, Double>();
         repository.findAll()
                 .forEach(
                         consola -> map.put(consola, consola.getJuegos()
                                 .stream()
-                                .mapToInt(Juego::getVentas)
-                                .sum())
+                                .mapToDouble(Juego::getPrecio)
+                                .average()
+                                .getAsDouble())
                 );
         return map;
     }
 
-    public Map<Consola, Integer> calculateSalesPerModel () {
-        Map<Consola, Integer> map = new HashMap<Consola, Integer>();
+    public double calculateAllAveragesGames() {
+        List<Double> calculos = new ArrayList<Double>(calculateAveragePricePerGames().values());
+        return calculos.stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
+    }
+
+    public Map<Consola, Double> calculateAveragePricePerModel() {
+        Map<Consola, Double> map = new LinkedHashMap<Consola, Double>();
         repository.findAll()
                 .forEach(
                         consola -> map.put(consola, consola.getModelos()
                                 .stream()
-                                .mapToInt(Modelo::getVentas)
-                                .sum())
+                                .mapToDouble(Modelo::getPrecio)
+                                .average()
+                                .getAsDouble())
                 );
         return map;
+    }
+
+    public double calculateAllAveragesModels() {
+        List<Double> calculos = new ArrayList<Double>(calculateAveragePricePerModel().values());
+        return calculos.stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
     }
 
 }

@@ -29,12 +29,19 @@
         <section class="container d-flex justify-content-between align-items-center mb-4">
             <form action="#" th:action="@{/mostrarjuego}" method="get">
                 <div class="d-flex align-items-center">
-                    <div class="d-flex align-items-center">
-                        <input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
-                        <input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
-                        <a href="#" th:href="@{/mostrarjuego}" class="btn btn-outline-secondary ms-2">Limpiar</a>
-                    </div>
+                    <input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
+                    <input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
+                    <a href="#" th:href="@{/mostrarjuego}" class="btn btn-outline-secondary mx-2">Limpiar</a>
                 </div>
+            </form>
+            <form action="#" th:action="@{/mostrarjuego}" method="get">
+                <label for="nombre" class="me-2">Plataforma</label>
+                <select name="nombre" id="nombre" class="form-control" onchange="this.form.submit()">
+                    <option th:value="${consolas == null}">---</option>
+                    <th:block th:each="consola : ${consolas}">
+                        <option th:value="${consola.nombre}" th:text="${consola.nombre}"></option>
+                    </th:block>
+                </select>
             </form>
         </section>
         <section class="container">

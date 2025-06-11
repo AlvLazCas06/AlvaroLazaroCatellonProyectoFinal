@@ -7,6 +7,7 @@ import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.util.JuegoExportPDF;
 import com.salesianostriana.dam.alvarolazarocastellon.util.PageRender;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
 
+@Log
 @Controller
 public class ControllerJuego {
 
@@ -49,14 +51,21 @@ public class ControllerJuego {
     @GetMapping("/mostrarjuego")
     public String showGame(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
-                           @ModelAttribute("palabraClave") String palabraClave) {
+                           @RequestParam(value = "palabraClave", required = false) String palabraClave,
+                           @RequestParam(value = "nombre", required = false, defaultValue = "") String nombre) {
         Pageable pageRequest = PageRequest.of(page, 5);
         Page<Juego> juego = serviceJuego.findAllPage(palabraClave, pageRequest);
+        log.info(nombre);
+        if (nombre != null && !nombre.isEmpty()) {
+            juego = serviceJuego.findByConsoleName(nombre, pageRequest);
+        }
         PageRender<Juego> pageRender = new PageRender<>("/mostrarjuego", juego);
 
         model.addAttribute("palabraClave", palabraClave);
+        model.addAttribute("nombre", nombre);
         model.addAttribute("page", juego);
         model.addAttribute("pageRender", pageRender);
+        model.addAttribute("consolas", serviceConsola.findAll());
         return "showgames";
     }
 

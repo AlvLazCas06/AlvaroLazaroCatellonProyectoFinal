@@ -25,6 +25,11 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
         return repository.findAll2(s, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<Juego> findByConsoleName(String nombre, Pageable pageable) {
+        return repository.findByConsola_Nombre(nombre, pageable);
+    }
+
     public List<Juego> listAll(String S) {
         if (S != null) {
             return repository.findAll(S)

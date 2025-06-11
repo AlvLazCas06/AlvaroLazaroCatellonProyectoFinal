@@ -14,37 +14,40 @@ public class ControllerFabricante {
     private ServiceFabricante serviceFabricante;
 
     @GetMapping("/mostrarfabricantes/añadirfabricante")
-    public String showGames(Model model) {
+    public String showManufacturerForm(Model model) {
         model.addAttribute("fabricante", new Fabricante());
         return "addmanufacturer";
     }
 
     @PostMapping("/mostrarfabricantes")
-    public String addGame(@ModelAttribute("fabricante") Fabricante fabricante) {
+    public String addManufacturer(@ModelAttribute("fabricante") Fabricante fabricante) {
+        if (serviceFabricante.nameExists(fabricante.getNombre())) {
+            return "error/400";
+        }
         serviceFabricante.save(fabricante);
         return "redirect:/mostrarfabricantes";
     }
 
     @GetMapping("/mostrarfabricantes")
     public String showManufacturer(Model model, @RequestParam(required = false) String name) {
-        model.addAttribute("fabricantes", serviceFabricante.findByName(name));
+        model.addAttribute("fabricantes", serviceFabricante.findByName(name).stream().sorted());
         return "showmanufacturers";
     }
 
     @GetMapping("/mostrarfabricantes/editar/{id}")
-    public String showEditConsole(Model model, @PathVariable Long id) {
+    public String showEditManufacturer(Model model, @PathVariable Long id) {
         model.addAttribute("fabricante", serviceFabricante.getById(id));
         return "addmanufacturer";
     }
 
     @PostMapping("/mostrarfabricantes/editar/submit")
-    public String editConsole(@ModelAttribute("fabricante") Fabricante fabricante) {
+    public String editManufacturer(@ModelAttribute("fabricante") Fabricante fabricante) {
         serviceFabricante.edit(fabricante);
         return "redirect:/mostrarfabricantes";
     }
 
     @GetMapping("/mostrarfabricantes/{id}")
-    public String deleteConsole(Model model, @PathVariable Long id) {
+    public String deleteManufacturer(Model model, @PathVariable Long id) {
         if (serviceFabricante.deleteFabricante(id)) {
             return "redirect:/mostrarfabricantes";
         } else {

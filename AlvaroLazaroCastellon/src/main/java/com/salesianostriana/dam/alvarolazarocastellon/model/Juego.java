@@ -39,10 +39,10 @@ public class Juego {
     @JoinColumn(name = "console_id")
     private Consola consola;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaLanzamiento;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate llegadaAlMercado;
 
     @Lob
