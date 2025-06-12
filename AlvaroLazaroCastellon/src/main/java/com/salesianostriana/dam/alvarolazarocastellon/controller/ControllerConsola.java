@@ -2,6 +2,7 @@ package com.salesianostriana.dam.alvarolazarocastellon.controller;
 
 import com.salesianostriana.dam.alvarolazarocastellon.model.Consola;
 import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceConsola;
+import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.util.ConsolaExportPDF;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class ControllerConsola {
 
     @Autowired
     private ServiceConsola serviceConsola;
+
+    @Autowired
+    private ServiceJuego serviceJuego;
 
     @GetMapping("/mostrarconsolas/añadirconsola")
     public String showGames(Model model) {
@@ -79,6 +83,7 @@ public class ControllerConsola {
     public String showSalesOfGames(Model model) {
         model.addAttribute("sales", serviceConsola.calculateAveragePricePerGames());
         model.addAttribute("total", serviceConsola.calculateAllAveragesGames());
+        model.addAttribute("pricePerPlayers", serviceJuego.calculatePricePerNumberOfPLayers());
         return "ventas";
     }
 

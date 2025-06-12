@@ -31,14 +31,34 @@
 						</tr>
 					</thead>
 					<tbody>
-					<tr th:each="sale : ${sales}">
-						<td><img src="#" th:src="${sale['key'].imagen}" alt="#" th:alt="${sale['key'].nombre}" width="80px"></td>
-						<td th:text="${#numbers.formatDecimal(sale['value'], 1, 2)} + '€'"></td>
-					</tr>
-					<tr>
-						<td><h3>Total</h3></td>
-						<td th:text="${#numbers.formatDecimal(total, 1, 2) + '€'}"></td>
-					</tr>
+						<tr th:each="sale : ${sales}">
+							<td><img src="#" th:src="${sale['key'].imagen}" alt="#" th:alt="${sale['key'].nombre}" width="80px"></td>
+							<td th:text="${#numbers.formatDecimal(sale['value'], 1, 2)} + '€'"></td>
+						</tr>
+						<tr>
+							<td><h3>Total</h3></td>
+							<td th:text="${#numbers.formatDecimal(total, 1, 2) + '€'}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</article>
+		</section>
+		<section class="mt-3">
+			<article class="container table-responsive">
+				<table class="table table-bordered table-dark table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Juego</th>
+							<th>Precio normal</th>
+							<th>Precio medio por nº de jugadores</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pricePerPlayer : ${pricePerPlayers}">
+							<td><img src="#" th:src="${pricePerPlayer['key'].rutaImagen}" alt="#" th:alt="${pricePerPlayer['key'].nombre}" width="80px"></td>
+							<td th:text="${#numbers.formatDecimal(pricePerPlayer['key'].precio, 1, 2)} + '€'"></td>
+							<td th:text="${#numbers.formatDecimal(pricePerPlayer['value'], 1, 2)} + '€'"></td>
+						</tr>
 					</tbody>
 				</table>
 			</article>

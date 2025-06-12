@@ -227,6 +227,6 @@ public class ControllerJuego {
                                  @RequestParam(required = false, defaultValue = "0") int descuentoLlegada2010,
                                  @RequestParam(required = false, defaultValue = "0") int descuentoLlegadaHoy) {
         serviceJuego.applyDiscountByYear(descuentoNormal, descuentoLlegada2010, descuentoLlegadaHoy);
-        return "redirect:/descuento";
+        return "redirect:/descuento/juego";
     }
 }

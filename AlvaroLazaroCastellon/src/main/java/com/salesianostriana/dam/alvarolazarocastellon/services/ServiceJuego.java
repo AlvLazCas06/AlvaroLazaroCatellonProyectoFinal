@@ -3,18 +3,15 @@ package com.salesianostriana.dam.alvarolazarocastellon.services;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
-@Slf4j
+
 @Service
 public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
@@ -108,7 +105,7 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     public List<Juego> findByConsole(String consola, String palabraClave) {
-        if (palabraClave != null){
+        if (palabraClave != null) {
             return repository.findAll(palabraClave).stream()
                     .filter(j -> j.getConsola() != null
                             && j.getConsola().getNombre().equalsIgnoreCase(consola)
@@ -123,7 +120,7 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     public List<Juego> findByConsoleOnNews(String consola, String palabraClave) {
-        if (palabraClave != null){
+        if (palabraClave != null) {
             return repository.findAll(palabraClave).stream()
                     .filter(j -> j.getConsola() != null
                             && j.getConsola().getNombre().equalsIgnoreCase(consola)
@@ -138,7 +135,7 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     public List<Juego> findByConsoleOnNotSell(String consola, String palabraClave) {
-        if (palabraClave != null){
+        if (palabraClave != null) {
             return repository.findAll(palabraClave).stream()
                     .filter(j -> j.getConsola() != null
                             && j.getConsola().getNombre().equalsIgnoreCase(consola)
@@ -322,19 +319,31 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     public void applyDiscountByYear(int descuentoNormal, int descuentoLlegada2010, int descuentoLlegadaHoy) {
-        repository.findAll().forEach(juego -> {
-            if (juego.getFechaLanzamiento().getYear() < 2010) {
-                juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoNormal / 100.0)));
-                edit(juego);
-            } else if (juego.getFechaLanzamiento().isEqual(LocalDate.now())
-                    && juego.getFechaLanzamiento().getYear() < 2010) {
-                juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoLlegada2010 / 100.0)));
-                edit(juego);
-            } else if (juego.getFechaLanzamiento().isEqual(LocalDate.now())) {
-                juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoLlegadaHoy / 100.0)));
-                edit(juego);
-            }
-        });
+        repository.findAll()
+                .forEach(juego -> {
+                    if (juego.getFechaLanzamiento().getYear() < 2010) {
+                        juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoNormal / 100.0)));
+                        edit(juego);
+                    } else if (juego.getFechaLanzamiento().isEqual(LocalDate.now())
+                            && juego.getFechaLanzamiento().getYear() < 2010) {
+                        juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoLlegada2010 / 100.0)));
+                        edit(juego);
+                    } else if (juego.getFechaLanzamiento().isEqual(LocalDate.now())) {
+                        juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoLlegadaHoy / 100.0)));
+                        edit(juego);
+                    }
+                });
+    }
+
+    public Map<Juego, Double> calculatePricePerNumberOfPLayers() {
+        Map<Juego, Double> precioPorJugadores = new LinkedHashMap<Juego, Double>();
+        repository.findAll()
+                .forEach(
+                        juego -> {
+                            precioPorJugadores.put(juego, juego.getPrecio() / (double) juego.getNumJugadores());
+                        }
+                );
+        return precioPorJugadores;
     }
 
 }

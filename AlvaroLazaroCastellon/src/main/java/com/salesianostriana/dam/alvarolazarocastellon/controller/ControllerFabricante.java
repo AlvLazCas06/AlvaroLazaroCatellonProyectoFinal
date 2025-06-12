@@ -20,9 +20,9 @@ public class ControllerFabricante {
     }
 
     @PostMapping("/mostrarfabricantes")
-    public String addManufacturer(@ModelAttribute("fabricante") Fabricante fabricante) {
+    public String addManufacturer(Model model,@ModelAttribute("fabricante") Fabricante fabricante) {
         if (serviceFabricante.nameExists(fabricante.getNombre())) {
-            return "error/400";
+            return "redirect:/mostrarfabricantes/añadirfabricante?error=exists";
         }
         serviceFabricante.save(fabricante);
         return "redirect:/mostrarfabricantes";
@@ -37,6 +37,7 @@ public class ControllerFabricante {
     @GetMapping("/mostrarfabricantes/editar/{id}")
     public String showEditManufacturer(Model model, @PathVariable Long id) {
         model.addAttribute("fabricante", serviceFabricante.getById(id));
+        model.addAttribute("error", "No se puede eliminar la consola porque tiene juegos y/o modelos asociados.");
         return "addmanufacturer";
     }
 

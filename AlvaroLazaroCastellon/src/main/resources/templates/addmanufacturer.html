@@ -14,19 +14,21 @@
 <body class="bg-dark text-light">
   <header th:replace="~{fragments/headerconfiguracion::header}"></header>
   <main class="container d-flex flex-column justify-content-center align-items-center">
-    <h1 class="p-2 bg-light text-dark rounded text-center mt-2">Agregar | Editar Consola</h1>
-    <form action="#" method="POST" th:action="${fabricante.id != 0} ? @{/mostrarfabricantes} : @{/mostrarfabricantes/editar/submit}" th:object="${fabricante}">
-      <fieldset>
-        <div class="form-group mb-3">
-          <label for="id" hidden="hidden">Id</label>
-          <input th:if="${fabricante.id != 0}" type="hidden" th:field="*{id}" class="form-control">
-          <label for="nombre">Nombre</label>
-          <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre de la consola" required>
-        </div>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Enviar">
-      </fieldset>
-    </form>
+      <div th:if="${param.error} == 'exists'" class="alert alert-danger" role="alert">
+          Ya existe un fabricante con ese nombre.
+      </div>
+      <h1 class="p-2 bg-light text-dark rounded text-center mt-2">Agregar | Editar Consola</h1>
+      <form action="#" method="POST" th:action="${fabricante.id != 0} ? @{/mostrarfabricantes} : @{/mostrarfabricantes/editar/submit}" th:object="${fabricante}">
+          <fieldset>
+              <div class="form-group mb-3">
+                <label for="id" hidden="hidden">Id</label>
+                <input th:if="${fabricante.id != 0}" type="hidden" th:field="*{id}" class="form-control">
+                <label for="nombre">Nombre</label>
+                <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre de la consola" required>
+              </div>
+              <input type="submit" class="btn btn-primary" value="Enviar">
+          </fieldset>
+      </form>
   </main>
   <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>
