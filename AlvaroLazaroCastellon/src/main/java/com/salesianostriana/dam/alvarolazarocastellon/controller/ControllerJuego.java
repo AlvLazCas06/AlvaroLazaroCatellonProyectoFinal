@@ -7,7 +7,6 @@ import com.salesianostriana.dam.alvarolazarocastellon.services.ServiceJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.util.JuegoExportPDF;
 import com.salesianostriana.dam.alvarolazarocastellon.util.PageRender;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
 
-@Log
+
 @Controller
 public class ControllerJuego {
 
