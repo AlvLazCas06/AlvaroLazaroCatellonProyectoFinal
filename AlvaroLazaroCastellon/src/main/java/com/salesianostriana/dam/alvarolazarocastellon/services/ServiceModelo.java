@@ -32,16 +32,17 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
                 .toList();
     }
 
-//    public List<Modelo> listAll2(String S) {
-//        if (S != null) {
-//            return repository.findAll2(S);
-//        }
-//        return repository.findAll();
-//    }
-
     @Transactional(readOnly = true)
-    public Page<Modelo> findAllPage(String s, Pageable pageable) {
-        return repository.findAll2(s, pageable);
+    public Page<Modelo> findAllPage(String s, String nombre, Pageable pageable) {
+        if (s != null && nombre.isBlank()) {
+            return repository.findAll2(s, pageable);
+        } else if ((s == null || s.isBlank()) && nombre != null) {
+            return repository.findByConsola_Nombre(nombre, pageable);
+        } else if (s != null && nombre != null && !nombre.isBlank()) {
+            return repository.findModeloByNombreIgnoreCaseAndConsola_Nombre(s, nombre, pageable);
+        } else {
+            return repository.findAll(pageable);
+        }
     }
 
     public List<Modelo> findNotSell(String S) {
@@ -116,18 +117,13 @@ public class ServiceModelo extends BaseServiceImp<Modelo, Long, RepositoryModelo
                 .toList();
     }
 
-    public double applyDiscount(Long id) {
-        double descuento = 10;
-        String fabricante = "Nintendo";
-        return repository.findById(id)
-                .stream()
-                .mapToDouble(Modelo::getPrecio)
-                .sum()
-                - repository.findById(id)
-                .stream()
-                .filter(c -> c.getFabricante().getNombre().equalsIgnoreCase(fabricante))
-                .mapToDouble(Modelo::getPrecio)
-                .sum() * (descuento / 100);
+    public void applyDiscount(int descuento, String fabricante) {
+        repository.findAll().forEach(modelo -> {
+            if (modelo.getFabricante().getNombre().equalsIgnoreCase(fabricante)) {
+                modelo.setPrecio(modelo.getPrecio() - (modelo.getPrecio() * (descuento / 100.0)));
+                edit(modelo);
+            }
+        });
     }
 
 }

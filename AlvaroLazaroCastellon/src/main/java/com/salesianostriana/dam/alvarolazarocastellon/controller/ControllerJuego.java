@@ -54,11 +54,7 @@ public class ControllerJuego {
                            @RequestParam(value = "palabraClave", required = false) String palabraClave,
                            @RequestParam(value = "nombre", required = false) String nombre) {
         Pageable pageRequest = PageRequest.of(page, 5);
-        Page<Juego> juego = serviceJuego.findAllPage(palabraClave, pageRequest);
-        log.info(nombre);
-        if (nombre != null && !nombre.isEmpty()) {
-            juego = serviceJuego.findByConsoleName(nombre, pageRequest);
-        }
+        Page<Juego> juego = serviceJuego.findAllPage(palabraClave, nombre, pageRequest);
         PageRender<Juego> pageRender = new PageRender<>("/mostrarjuego", juego);
 
         model.addAttribute("palabraClave", palabraClave);
@@ -187,7 +183,6 @@ public class ControllerJuego {
     @GetMapping({"/catalogo/venta/{id}", "/novedades/venta/{id}", "/proximamente/reserva/{id}"})
     public String showSale(Model model, @PathVariable Long id) {
         model.addAttribute("juegoAVender", serviceJuego.getById(id));
-        model.addAttribute("descuento", serviceJuego.applyDiscountByYear(id));
         return "ventajuego";
     }
 
@@ -216,4 +211,22 @@ public class ControllerJuego {
         exportPDF.exportDocument(response);
     }
 
+    @GetMapping("/descuento/juego")
+    public String setDiscount(Model model,
+                              @RequestParam(required = false, defaultValue = "0") int descuentoNormal,
+                              @RequestParam(required = false, defaultValue = "0") int descuentoLlegada2010,
+                              @RequestParam(required = false, defaultValue = "0") int descuentoLlegadaHoy) {
+        model.addAttribute("descuentoNormal", descuentoNormal);
+        model.addAttribute("descuentoLlegada2010", descuentoLlegada2010);
+        model.addAttribute("descuentoLlegadaHoy", descuentoLlegadaHoy);
+        return "descuento";
+    }
+
+    @PostMapping("/descuento/juego")
+    public String submitDiscount(@RequestParam(required = false, defaultValue = "0") int descuentoNormal,
+                                 @RequestParam(required = false, defaultValue = "0") int descuentoLlegada2010,
+                                 @RequestParam(required = false, defaultValue = "0") int descuentoLlegadaHoy) {
+        serviceJuego.applyDiscountByYear(descuentoNormal, descuentoLlegada2010, descuentoLlegadaHoy);
+        return "redirect:/descuento";
+    }
 }

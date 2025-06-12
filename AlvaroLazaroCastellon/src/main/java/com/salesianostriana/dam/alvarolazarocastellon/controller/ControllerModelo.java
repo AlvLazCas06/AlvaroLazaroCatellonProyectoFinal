@@ -77,15 +77,17 @@ public class ControllerModelo {
 
     @GetMapping("/mostrarmodelos")
     public String showModel(Model model,
-                           @RequestParam(name = "page", defaultValue = "0") int page,
-                           @ModelAttribute("palabraClave") String palabraClave) {
+                            @RequestParam(name = "page", defaultValue = "0") int page,
+                            @RequestParam(value = "palabraClave", required = false) String palabraClave,
+                            @RequestParam(value = "nombre", required = false) String nombre) {
         Pageable pageRequest = PageRequest.of(page, 4);
-        Page<Modelo> modelos = serviceModelo.findAllPage(palabraClave, pageRequest);
+        Page<Modelo> modelos = serviceModelo.findAllPage(palabraClave, nombre, pageRequest);
         PageRender<Modelo> pageRender = new PageRender<>("/mostrarmodelos", modelos);
 
         model.addAttribute("palabraClave", palabraClave);
         model.addAttribute("page", modelos);
         model.addAttribute("pageRender", pageRender);
+        model.addAttribute("consolas", serviceConsola.findAll());
         return "showmodels";
     }
 
@@ -134,7 +136,6 @@ public class ControllerModelo {
     @GetMapping({"/catalogoconsolas/venta/{id}", "/novedadesconsolas/venta/{id}", "/proximamenteconsolas/reserva/{id}"})
     public String showSale(Model model, @PathVariable Long id) {
         model.addAttribute("consolaAVender", serviceModelo.getById(id));
-        model.addAttribute("descuento", serviceModelo.applyDiscount(id));
         return "ventaConsola";
     }
 
@@ -150,6 +151,22 @@ public class ControllerModelo {
         List<Modelo> modelos = serviceModelo.findAll();
         ModeloExportPDF exportPDF = new ModeloExportPDF(modelos);
         exportPDF.exportDocument(response);
+    }
+
+    @GetMapping("/descuento/modelo")
+    public String setDiscount(Model model,
+                              @RequestParam(required = false, defaultValue = "0") int descuento,
+                              @RequestParam(required = false) String fabricante) {
+        model.addAttribute("descuento", descuento);
+        model.addAttribute("fabricante", fabricante);
+        return "descuentoModelo";
+    }
+
+    @PostMapping("/descuento/modelo")
+    public String submitDiscount(@RequestParam(required = false, defaultValue = "0") int descuento,
+                                 @RequestParam(required = false) String fabricante) {
+        serviceModelo.applyDiscount(descuento, fabricante);
+        return "redirect:/descuento/modelo";
     }
 
 }

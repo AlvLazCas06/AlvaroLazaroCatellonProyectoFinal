@@ -28,4 +28,8 @@ public interface RepositoryModelo extends JpaRepository<Modelo, Long> {
 
     List<Modelo> findModeloByFabricante_Nombre(String fabricante);
 
+    Page<Modelo> findModeloByNombreIgnoreCaseAndConsola_Nombre(String nombre, String consolaNombre, Pageable pageable);
+
+    Page<Modelo> findByConsola_Nombre(String consolaNombre, Pageable pageable);
+
 }

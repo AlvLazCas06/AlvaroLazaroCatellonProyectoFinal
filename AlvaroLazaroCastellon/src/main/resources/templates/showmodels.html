@@ -30,7 +30,14 @@
                     <div class="d-flex align-items-center">
                         <input type="text" class="form-control" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Buscar...">
                         <input type="submit" class="btn btn-outline-light ms-2" value="Buscar">
-                        <a href="#" th:href="@{/mostrarmodelos}" class="btn btn-outline-secondary ms-2">Limpiar</a>
+                        <a href="#" th:href="@{/mostrarmodelos}" class="btn btn-outline-secondary mx-2">Limpiar</a>
+                        <label for="nombre" class="me-2 text-light">Plataforma</label>
+                        <select name="nombre" id="nombre" class="form-control" onchange="this.form.submit()">
+                            <option value="">---</option>
+                            <th:block th:each="consola : ${consolas}">
+                                <option th:value="${consola.nombre}" th:text="${consola.nombre}"></option>
+                            </th:block>
+                        </select>
                     </div>
                 </div>
             </form>
@@ -72,7 +79,7 @@
                         </button>
                     </td>
                     <td th:text="${model.fabricante.nombre}" class="text-light"></td>
-                    <td th:text="${model.precio}" class="text-light"></td>
+                    <td th:text="${#numbers.formatDecimal(model.precio, 1, 2)}" class="text-light"></td>
                     <td th:text="${model.cantidad}" class="text-light"></td>
                     <td th:text="${model.ventas}" class="text-light"></td>
                     <td th:text="${model.consola.nombre}" class="text-light"></td>

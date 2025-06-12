@@ -79,7 +79,7 @@
                                 Ver Descripción
                             </button>
                         </td>
-                        <td th:text="${game.precio}" class="text-light"></td>
+                        <td th:text="${#numbers.formatDecimal(game.precio, 1, 2)}" class="text-light"></td>
                         <td th:text="${game.cantidad}" class="text-light"></td>
                         <td th:text="${game.ventas}" class="text-light"></td>
                         <td th:text="${game.genero}" class="text-light"></td>

@@ -27,10 +27,17 @@
                         <a class="nav-link" href="../showmodels.html" th:href="@{/mostrarfabricantes}">Fabricante</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ventas</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Estadística</a>
                         <ul class="dropdown-menu bg-danger">
                             <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/preciomedio/juegos}">Juegos</a></li>
                             <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/preciomedio/modelos}">Modelos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Descuento</a>
+                        <ul class="dropdown-menu bg-danger">
+                            <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/descuento/juego}">Juegos</a></li>
+                            <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/descuento/modelo}">Modelos</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -60,10 +67,17 @@
                 <a class="nav-link" href="../showmodels.html" th:href="@{/mostrarmodelos}">Modelos</a>
             </div>
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Ventas</a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Estadística</a>
                 <ul class="dropdown-menu bg-danger">
                     <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/preciomedio/juegos}">Juegos</a></li>
                     <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/preciomedio/modelos}">Modelos</a></li>
+                </ul>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Descuento</a>
+                <ul class="dropdown-menu bg-danger">
+                    <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/descuento/juego}">Juegos</a></li>
+                    <li><a class="dropdown-item bg-danger text-light" href="#" th:href="@{/descuento/modelo}">Modelos</a></li>
                 </ul>
             </div>
         </article>

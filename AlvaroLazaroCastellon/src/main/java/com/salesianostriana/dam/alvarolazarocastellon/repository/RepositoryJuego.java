@@ -27,6 +27,8 @@ public interface RepositoryJuego extends JpaRepository<Juego, Long> {
             """)
     Page<Juego> findAll2(String palabraClave, Pageable pageable);
 
+    Page<Juego> findJuegoByNombreIgnoreCaseAndConsola_Nombre(String nombre, String consolaNombre, Pageable pageable);
+
     Page<Juego> findByConsola_Nombre(String consolaNombre, Pageable pageable);
 
     @Query("""

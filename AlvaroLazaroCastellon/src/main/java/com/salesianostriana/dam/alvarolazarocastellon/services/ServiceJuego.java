@@ -3,6 +3,7 @@ package com.salesianostriana.dam.alvarolazarocastellon.services;
 import com.salesianostriana.dam.alvarolazarocastellon.model.Juego;
 import com.salesianostriana.dam.alvarolazarocastellon.repository.RepositoryJuego;
 import com.salesianostriana.dam.alvarolazarocastellon.services.base.BaseServiceImp;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+@Slf4j
 @Service
 public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
 
@@ -21,11 +23,16 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
     }
 
     @Transactional(readOnly = true)
-    public Page<Juego> findAllPage(String s, Pageable pageable) {
-        if (s != null) {
+    public Page<Juego> findAllPage(String s, String nombre, Pageable pageable) {
+        if (s != null && nombre.isBlank()) {
             return repository.findAll2(s, pageable);
+        } else if ((s == null || s.isBlank()) && nombre != null) {
+            return repository.findByConsola_Nombre(nombre, pageable);
+        } else if (s != null && nombre != null && !nombre.isBlank()) {
+            return repository.findJuegoByNombreIgnoreCaseAndConsola_Nombre(s, nombre, pageable);
+        } else {
+            return repository.findAll(pageable);
         }
-        return repository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
@@ -314,45 +321,20 @@ public class ServiceJuego extends BaseServiceImp<Juego, Long, RepositoryJuego> {
         return juegos;
     }
 
-    public double applyDiscountByYear(Long id) {
-        double descuentoNormal = 10, descuentoLlegada2010 = 20, descuentoLlegadaHoy = 15;
-
-        if (repository.findById(id).get().getLlegadaAlMercado().isEqual(LocalDate.now())
-                && repository.findById(id).get().getFechaLanzamiento().getYear() < 2010) {
-            return repository.findById(id)
-                    .stream()
-                    .mapToDouble(Juego::getPrecio)
-                    .sum()
-                    -
-                    repository.findById(id)
-                            .stream()
-                            .mapToDouble(Juego::getPrecio)
-                            .sum() * (descuentoLlegada2010 / 100);
-        }
-
-        if (repository.findById(id).get().getLlegadaAlMercado().isEqual(LocalDate.now())
-                && repository.findById(id).get().getFechaLanzamiento().getYear() >= 2010) {
-            return repository.findById(id)
-                    .stream()
-                    .mapToDouble(Juego::getPrecio)
-                    .sum()
-                    -
-                    repository.findById(id)
-                            .stream()
-                            .mapToDouble(Juego::getPrecio)
-                            .sum() * (descuentoLlegadaHoy / 100);
-        }
-
-        return repository.findById(id)
-                .stream()
-                .mapToDouble(Juego::getPrecio)
-                .sum()
-                -
-                repository.findById(id)
-                        .stream()
-                        .filter(j -> j.getFechaLanzamiento().getYear() < 2010)
-                        .mapToDouble(Juego::getPrecio)
-                        .sum() * (descuentoNormal / 100);
+    public void applyDiscountByYear(int descuentoNormal, int descuentoLlegada2010, int descuentoLlegadaHoy) {
+        repository.findAll().forEach(juego -> {
+            if (juego.getFechaLanzamiento().getYear() < 2010) {
+                juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoNormal / 100.0)));
+                edit(juego);
+            } else if (juego.getFechaLanzamiento().isEqual(LocalDate.now())
+                    && juego.getFechaLanzamiento().getYear() < 2010) {
+                juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoLlegada2010 / 100.0)));
+                edit(juego);
+            } else if (juego.getFechaLanzamiento().isEqual(LocalDate.now())) {
+                juego.setPrecio(juego.getPrecio() - (juego.getPrecio() * (descuentoLlegadaHoy / 100.0)));
+                edit(juego);
+            }
+        });
     }
 
 }
