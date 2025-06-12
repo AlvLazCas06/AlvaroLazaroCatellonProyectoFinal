@@ -37,7 +37,6 @@ public class ControllerFabricante {
     @GetMapping("/mostrarfabricantes/editar/{id}")
     public String showEditManufacturer(Model model, @PathVariable Long id) {
         model.addAttribute("fabricante", serviceFabricante.getById(id));
-        model.addAttribute("error", "No se puede eliminar la consola porque tiene juegos y/o modelos asociados.");
         return "addmanufacturer";
     }
 
